@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.NewsViewModel>
+@{
+    Layout = MVC.Shared.Views._Layout;
+}
+
+<h3 class="heading_a mb-15">@ViewBag.Title</h3>
+
+<div id="news-list-container" style="border: 1px solid rgba(0,0,0,.12); box-shadow: 0 0 6px #eee;">
+    @{Html.RenderPartial(MVC.News.Views._NewsList);}
+</div>

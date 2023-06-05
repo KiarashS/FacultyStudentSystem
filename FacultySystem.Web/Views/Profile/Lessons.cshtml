@@ -1,0 +1,66 @@
+﻿@model ContentManagementSystem.Models.ViewModels.LessonsIndexViewModel
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = MVC.Shared.Views._LayoutProfessorNew;
+}
+
+@{
+    Html.RenderAction(MVC.Profile.TopMenu());
+}
+
+<div id="page_content">
+    <div id="page_content_inner" style="padding-bottom: 0;">
+        <div class="uk-grid" data-uk-grid-margin="">
+            <div class="uk-width-1-1 uk-container uk-container-center mt-90">
+                <div class="md-card">
+                    <div class="md-card-content uk-overflow-container">
+                        <div class="heading_a uk-text-center"><span class="uk-badge heading_a persian-number">@($"دروس ارائه شده توسط {Model.Fullname}")</span></div>
+                        <table class="uk-table mt-25 mb-30">
+                            <thead>
+                                <tr>
+                                    <th class="table-header heading_a">عنوان درس</th>
+                                    <th class="uk-text-center table-header heading_a">دوره</th>
+                                    <th class="uk-text-center table-header heading_a">رشته</th>
+                                    <th class="uk-text-center table-header heading_a">گرایش</th>
+                                    <th class="uk-text-center table-header heading_a">سال تحصیلی</th>
+                                    <th class="uk-text-center table-header heading_a">ترم تحصیلی</th>
+                                    <th class="uk-text-center table-header heading_a"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var lesson in Model.UserLessons)
+                                {
+                                    <text>
+                                        <tr class="uk-table-middle">
+                                            <td class="uk-width-3-10">
+                                                @*@if (!string.IsNullOrEmpty(lesson.Link))
+                                                {
+                                                    <span class="cl-effect-1"><a href="@lesson.Link" target="_blank" rel="nofollow"><span class="persian-number">@lesson.LessonName</span></a></span>
+                                                }
+                                                else
+                                                {*@
+                                                <span class="cl-effect-1"><a href="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.Lesson, id = lesson.LessonId, title = lesson.UrlSlug })"><span class="persian-number">@lesson.LessonName</span></a></span>
+                                                @*}*@
+                                                <div class="uk-text-muted professor-sub-detail pr-30"><span class="black" style="border-bottom: 1px dotted #000;">تاریخ ایجاد:</span>&nbsp;<span class="persian-number">@lesson.CreateDateText</span></div>
+                                                @*@if (!string.IsNullOrEmpty(lesson.Description))
+                                                {
+                                                    <div class="uk-text-muted professor-sub-detail pr-30"><span class="black" style="border-bottom: 1px dotted #000;">توضیحات:</span>&nbsp;@lesson.Description</div>
+                                                }*@
+                                            </td>
+                                            <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@(lesson.LessonGradeText ?? "")</td>
+                                            <td class="uk-width-2-10 uk-text-center persian-number fs-09e">@(lesson.Field ?? "")</td>
+                                            <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@(lesson.Trend ?? "")</td>
+                                            <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@(lesson.AcademicYear != null ? lesson.AcademicYear.ToString() : "")</td>
+                                            <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@(lesson.Semester ?? "")</td>
+                                            <td class="uk-width-1-10 uk-text-center fs-09e"><a href="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.Lesson, id = lesson.LessonId, title = lesson.UrlSlug })" class="md-btn md-btn-success md-btn-block waves-effect waves-button waves-red" title="ورود به صفحه درس" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}">ورود <i class="material-icons" style="font-size: 15px; vertical-align: -5px;">chevron_left</i></a></td>
+                                        </tr>
+                                    </text>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

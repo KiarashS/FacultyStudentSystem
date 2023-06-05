@@ -1,0 +1,983 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B17E16C7-B892-4728-B244-199D7E9F1ABB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FacultySystem.Web</RootNamespace>
+    <AssemblyName>FacultySystem.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>true</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.2</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.0.9.9\lib\net45\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DNTProfiler.Common, Version=1.8.1129.0, Culture=neutral, PublicKeyToken=60fcf710de822a54, processorArchitecture=MSIL">
+      <HintPath>..\packages\DNTProfiler.EntityFramework.Core.1.8.1129.0\lib\net45\DNTProfiler.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DNTProfiler.EntityFramework.Core, Version=1.8.1129.0, Culture=neutral, PublicKeyToken=d53bce80735621b2, processorArchitecture=MSIL">
+      <HintPath>..\packages\DNTProfiler.EntityFramework.Core.1.8.1129.0\lib\net45\DNTProfiler.EntityFramework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlSanitizer, Version=3.0.0.0, Culture=neutral, PublicKeyToken=61c49a1a9e79cc28, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlSanitizer.3.4.156\lib\net45\HtmlSanitizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.4.1.9\lib\net45\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="InteractivePreGeneratedViews, Version=1.0.0.0, Culture=neutral, PublicKeyToken=46c4868af4307d2c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EFInteractiveViews.1.0.1\lib\net45\InteractivePreGeneratedViews.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib.Web.Mvc, Version=6.8.2.0, Culture=neutral, PublicKeyToken=92212eec0425916e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Web.Mvc.6.8.2\lib\net46\Lib.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Postal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
+      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Exceptional, Version=1.0.130.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Exceptional.1.0.130\lib\net40\StackExchange.Exceptional.dll</HintPath>
+    </Reference>
+    <Reference Include="StackifyHttpTracer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93c44ce23f2048dd, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackifyHttpModule.1.0.28.0\lib\net45\StackifyHttpTracer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StructureMap.4.5.1\lib\net45\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.web.4.0.0.315\lib\net40\StructureMap.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="T4MVCExtensions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\T4MVCExtensions.4.0.0\lib\net45\T4MVCExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Z.ExtensionMethods, Version=2.0.12.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.ExtensionMethods.2.0.12\lib\net45\Z.ExtensionMethods.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\ActivityLogController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\ExternalSeminarController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\InternalSeminarController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\InternalResearchController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\ExternalResearchController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\WeeklyProgramController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\CitationController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\AdminMessageController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\GalleryController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\MembershipController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\DefaultFreeFieldController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\LessonController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\LanguageController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\ProfessorController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\StudingController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\PublicationController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\WorkshopController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\ThesisController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\HonorController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\TrainingController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\ResearchController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\AdministrationController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\AddressController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\EducationalGroupController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\AcademicRankController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\CollegeController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\EducationalDegreeController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\FreeFieldController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\UserController.cs" />
+    <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
+    <Compile Include="BaseController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ByController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaptchaController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ByController.cs" />
+    <Compile Include="Controllers\CaptchaController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
+    <Compile Include="Controllers\ForgottenPasswordController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\SerialController.cs" />
+    <Compile Include="Dashboard.AcademicRankController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.ActivityLogController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.AddressController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.AdminController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.AdministrationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.AdminMessageController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.BaseController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.CitationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.CollegeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.DefaultFreeFieldController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.EducationalDegreeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.EducationalGroupController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.ExternalResearchController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.ExternalSeminarController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.FreeFieldController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.GalleryController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.HonorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.InternalResearchController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.InternalSeminarController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.LanguageController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.LessonController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.MembershipController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.NewsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.ProfessorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.PublicationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.ResearchController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.StudingController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.ThesisController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.TrainingController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.UserController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.WeeklyProgramController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.WorkshopController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FeedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ForgottenPasswordController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\ArticlesFetcher.cs" />
+    <Compile Include="Infrastructure\ExternalResearchRecordsFetcher.cs" />
+    <Compile Include="LoginController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ConstantsUtil.cs" />
+    <Compile Include="Utils\FilenameToFilePath.cs" />
+    <Compile Include="Utils\StaticUtils.cs" />
+    <Compile Include="Utils\ValidatePageIdAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Dashboard\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\_ProfessorMasterLayout.cshtml" />
+    <Content Include="Content\admin\assets\img\spinners\spinner.html" />
+    <Content Include="Content\admin\css\codemirror_themes.min.css" />
+    <Content Include="Content\admin\css\colors.css" />
+    <Content Include="Content\admin\css\error_page.min.css" />
+    <Content Include="Content\admin\css\login_page.min.css" />
+    <Content Include="Content\admin\css\main.css" />
+    <Content Include="Content\admin\css\main.min.css" />
+    <Content Include="Content\admin\css\style_switcher.min.css" />
+    <Content Include="Content\admin\css\themes\themes_combined.min.css" />
+    <Content Include="Content\admin\css\uikit.rtl.css" />
+    <Content Include="Content\admin\custom.css" />
+    <Content Include="Content\admin\fonts.css" />
+    <Content Include="Content\admin\icons\flags\flags%402x.png" />
+    <Content Include="Content\admin\icons\flags\flags.min.css" />
+    <Content Include="Content\admin\icons\flags\flags.png" />
+    <Content Include="Content\admin\ie.css" />
+    <Content Include="Content\admin\img\avatar.png" />
+    <Content Include="Content\admin\img\avatars\user%402x.png" />
+    <Content Include="Content\admin\img\avatars\user.png" />
+    <Content Include="Content\admin\img\blank.png" />
+    <Content Include="Content\admin\img\favicon-16x16.png" />
+    <Content Include="Content\admin\img\favicon-32x32.png" />
+    <Content Include="Content\admin\img\logo.png" />
+    <Content Include="Content\admin\img\logo1.png" />
+    <Content Include="Content\admin\img\man.png" />
+    <Content Include="Content\admin\img\md-images\ic_place_black.png" />
+    <Content Include="Content\admin\img\sidebar_head_bg%402x.png" />
+    <Content Include="Content\admin\img\sidebar_head_bg.png" />
+    <Content Include="Content\admin\img\sidebar_head_bg_dark%402x.png" />
+    <Content Include="Content\admin\img\sidebar_head_bg_dark.png" />
+    <Content Include="Content\admin\img\spinners\spinner.gif" />
+    <Content Include="Content\admin\img\spinners\spinner_danger.gif" />
+    <Content Include="Content\admin\img\spinners\spinner_large.gif" />
+    <Content Include="Content\admin\img\spinners\spinner_medium.gif" />
+    <Content Include="Content\admin\img\spinners\spinner_small.gif" />
+    <Content Include="Content\admin\img\spinners\spinner_success.gif" />
+    <Content Include="Content\admin\img\spinners\spinner_warning.gif" />
+    <Content Include="Content\admin\img\woman.png" />
+    <Content Include="Content\admin\iziModal.css" />
+    <Content Include="Content\admin\js\altair_admin_common.js" />
+    <Content Include="Content\admin\js\altair_admin_common.min.js" />
+    <Content Include="Content\admin\js\common.js" />
+    <Content Include="Content\admin\js\custom\codemirror_fullscreen.min.js" />
+    <Content Include="Content\admin\js\custom\datatables\buttons.uikit.js" />
+    <Content Include="Content\admin\js\custom\datatables\datatables.uikit.min.js" />
+    <Content Include="Content\admin\js\custom\dropify\dist\js\dropify.js" />
+    <Content Include="Content\admin\js\custom\gantt_chart.min.js" />
+    <Content Include="Content\admin\js\custom\handlebars_helpers.min.js" />
+    <Content Include="Content\admin\js\custom\uikit_fileinput.min.js" />
+    <Content Include="Content\admin\js\custom\wizard_steps.min.js" />
+    <Content Include="Content\admin\js\kendoui_custom.min.js" />
+    <Content Include="Content\admin\js\pages\components_cards.min.js" />
+    <Content Include="Content\admin\js\pages\components_nestable.min.js" />
+    <Content Include="Content\admin\js\pages\components_notifications.min.js" />
+    <Content Include="Content\admin\js\pages\components_preloaders.min.js" />
+    <Content Include="Content\admin\js\pages\components_sortable.min.js" />
+    <Content Include="Content\admin\js\pages\dashboard.js" />
+    <Content Include="Content\admin\js\pages\dashboard.min.js" />
+    <Content Include="Content\admin\js\pages\ecommerce_product_edit.min.js" />
+    <Content Include="Content\admin\js\pages\forms_advanced.min.js" />
+    <Content Include="Content\admin\js\pages\forms_file_input.min.js" />
+    <Content Include="Content\admin\js\pages\forms_file_upload.min.js" />
+    <Content Include="Content\admin\js\pages\forms_validation.min.js" />
+    <Content Include="Content\admin\js\pages\forms_wizard.min.js" />
+    <Content Include="Content\admin\js\pages\forms_wysiwyg.min.js" />
+    <Content Include="Content\admin\js\pages\kendoui.min.js" />
+    <Content Include="Content\admin\js\pages\login.min.js" />
+    <Content Include="Content\admin\js\pages\pages_issues.min.js" />
+    <Content Include="Content\admin\js\pages\page_chat.min.js" />
+    <Content Include="Content\admin\js\pages\page_chat_small.min.js" />
+    <Content Include="Content\admin\js\pages\page_contact_list.min.js" />
+    <Content Include="Content\admin\js\pages\page_help.min.js" />
+    <Content Include="Content\admin\js\pages\page_invoices.min.js" />
+    <Content Include="Content\admin\js\pages\page_mailbox.min.js" />
+    <Content Include="Content\admin\js\pages\page_notes.min.js" />
+    <Content Include="Content\admin\js\pages\page_scrum_board.min.js" />
+    <Content Include="Content\admin\js\pages\page_search.min.js" />
+    <Content Include="Content\admin\js\pages\page_settings.min.js" />
+    <Content Include="Content\admin\js\pages\page_snippets.min.js" />
+    <Content Include="Content\admin\js\pages\page_sticky_notes.min.js" />
+    <Content Include="Content\admin\js\pages\page_todo.min.js" />
+    <Content Include="Content\admin\js\pages\page_user_edit.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_charts.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_code_editor.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_context_menu.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_crud_table.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_datatables.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_diff.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_filemanager.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_fullcalendar.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_gantt_chart.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_google_maps.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_idle_timeout.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_image_cropper.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_push_notifications.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_tablesorter.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_tour.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_tree.min.js" />
+    <Content Include="Content\admin\js\pages\plugins_vector_maps.min.js" />
+    <Content Include="Content\admin\js\uikit_custom.min.js" />
+    <Content Include="Content\admin\js\uikit_htmleditor_custom.min.js" />
+    <Content Include="Content\admin\skins\dropify\css\dropify.css" />
+    <Content Include="Content\admin\skins\dropify\fonts\dropify.svg" />
+    <Content Include="Content\admin\skins\jquery-ui\material\images\ui-icons_212121_256x240.png" />
+    <Content Include="Content\admin\skins\jquery-ui\material\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\admin\skins\jquery-ui\material\images\ui-icons_727272_256x240.png" />
+    <Content Include="Content\admin\skins\jquery-ui\material\images\ui-icons_e53935_256x240.png" />
+    <Content Include="Content\admin\skins\jquery-ui\material\jquery-ui.min.css" />
+    <Content Include="Content\admin\skins\jquery.fancytree\icons.png" />
+    <Content Include="Content\admin\skins\jquery.fancytree\ui.fancytree.min.css" />
+    <Content Include="Content\admin\skins\jtable\close.png" />
+    <Content Include="Content\admin\skins\jtable\column-asc.png" />
+    <Content Include="Content\admin\skins\jtable\column-desc.png" />
+    <Content Include="Content\admin\skins\jtable\column-sortable.png" />
+    <Content Include="Content\admin\skins\jtable\delete.png" />
+    <Content Include="Content\admin\skins\jtable\edit.png" />
+    <Content Include="Content\admin\skins\jtable\jtable.min.css" />
+    <Content Include="Content\admin\skins\jtable\spinner.gif" />
+    <Content Include="Content\images\audio.png" />
+    <Content Include="Content\images\chart-loading.gif" />
+    <Content Include="Content\images\chart.png" />
+    <Content Include="Content\images\document.png" />
+    <Content Include="Content\images\gallery-file.png" />
+    <Content Include="Content\images\galleryitem.png" />
+    <Content Include="Content\images\video.gif" />
+    <Content Include="Content\images\videos.png" />
+    <Content Include="Content\jcrop\cropper.min.css" />
+    <Content Include="Content\link.css" />
+    <Content Include="Content\error\materialize.min.css" />
+    <Content Include="Content\error\page-center.css" />
+    <Content Include="Content\error\style.min.css" />
+    <Content Include="Content\flags.css" />
+    <Content Include="Content\images\class.png" />
+    <Content Include="Content\images\file.png" />
+    <Content Include="Content\images\flags%402x.png" />
+    <Content Include="Content\images\forgot.jpg" />
+    <Content Include="Content\images\Glowing-Ring.gif" />
+    <Content Include="Content\images\icons\bio.png" />
+    <Content Include="Content\images\importantdate.png" />
+    <Content Include="Content\images\login.jpg" />
+    <Content Include="Content\images\news.png" />
+    <Content Include="Content\images\practice.png" />
+    <Content Include="Content\images\practiceclass.png" />
+    <Content Include="Content\images\score.png" />
+    <Content Include="Content\responsive.css" />
+    <Content Include="Content\trumbow\langs\fa.min.js" />
+    <Content Include="Content\trumbow\plugins\base64\trumbowyg.base64.js" />
+    <Content Include="Content\trumbow\plugins\base64\trumbowyg.base64.min.js" />
+    <Content Include="Content\trumbow\plugins\cleanpaste\trumbowyg.cleanpaste.js" />
+    <Content Include="Content\trumbow\plugins\cleanpaste\trumbowyg.cleanpaste.min.js" />
+    <Content Include="Content\trumbow\plugins\colors\Gulpfile.js" />
+    <Content Include="Content\trumbow\plugins\colors\Gulpfile.min.js" />
+    <Content Include="Content\trumbow\plugins\colors\trumbowyg.colors.js" />
+    <Content Include="Content\trumbow\plugins\colors\trumbowyg.colors.min.js" />
+    <Content Include="Content\trumbow\plugins\colors\ui\trumbowyg.colors.css" />
+    <Content Include="Content\trumbow\plugins\colors\ui\trumbowyg.colors.min.css" />
+    <Content Include="Content\trumbow\plugins\emoji\trumbowyg.emoji.js" />
+    <Content Include="Content\trumbow\plugins\emoji\trumbowyg.emoji.min.js" />
+    <Content Include="Content\trumbow\plugins\insertaudio\trumbowyg.insertaudio.js" />
+    <Content Include="Content\trumbow\plugins\insertaudio\trumbowyg.insertaudio.min.js" />
+    <Content Include="Content\trumbow\plugins\noembed\trumbowyg.noembed.js" />
+    <Content Include="Content\trumbow\plugins\noembed\trumbowyg.noembed.min.js" />
+    <Content Include="Content\trumbow\plugins\pasteimage\trumbowyg.pasteimage.js" />
+    <Content Include="Content\trumbow\plugins\pasteimage\trumbowyg.pasteimage.min.js" />
+    <Content Include="Content\trumbow\plugins\preformatted\trumbowyg.preformatted.js" />
+    <Content Include="Content\trumbow\plugins\preformatted\trumbowyg.preformatted.min.js" />
+    <Content Include="Content\trumbow\plugins\table\trumbowyg.table.js" />
+    <Content Include="Content\trumbow\plugins\table\trumbowyg.table.min.js" />
+    <Content Include="Content\trumbow\plugins\template\trumbowyg.template.js" />
+    <Content Include="Content\trumbow\plugins\template\trumbowyg.template.min.js" />
+    <Content Include="Content\trumbow\plugins\upload\trumbowyg.upload.js" />
+    <Content Include="Content\trumbow\plugins\upload\trumbowyg.upload.min.js" />
+    <Content Include="Content\trumbow\trumbowyg.js" />
+    <Content Include="Content\trumbow\trumbowyg.min.js" />
+    <Content Include="Content\trumbow\ui\icons.svg" />
+    <Content Include="Content\trumbow\ui\trumbowyg.css" />
+    <Content Include="Content\trumbow\ui\trumbowyg.min.css" />
+    <Content Include="Content\uikit-addon-grid.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
+    <Content Include="readme.txt" />
+    <Content Include="Scripts\admin\c3js-chart\c3.min.css" />
+    <Content Include="Scripts\admin\c3js-chart\c3.min.js" />
+    <Content Include="Scripts\admin\chartist\dist\chartist.min.css" />
+    <Content Include="Scripts\admin\chartist\dist\chartist.min.js" />
+    <Content Include="Scripts\admin\ckeditor\adapters\jquery.js" />
+    <Content Include="Scripts\admin\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\admin\ckeditor\lang\ar.js" />
+    <Content Include="Scripts\admin\clndr\clndr.min.js" />
+    <Content Include="Scripts\admin\codemirror\addon\edit\matchbrackets.js" />
+    <Content Include="Scripts\admin\codemirror\addon\edit\matchtags.js" />
+    <Content Include="Scripts\admin\codemirror\addon\fold\xml-fold.js" />
+    <Content Include="Scripts\admin\codemirror\lib\codemirror.css" />
+    <Content Include="Scripts\admin\codemirror\lib\codemirror.js" />
+    <Content Include="Scripts\admin\codemirror\mode\clike\clike.js" />
+    <Content Include="Scripts\admin\codemirror\mode\htmlmixed\htmlmixed.js" />
+    <Content Include="Scripts\admin\codemirror\mode\javascript\javascript.js" />
+    <Content Include="Scripts\admin\codemirror\mode\php\php.js" />
+    <Content Include="Scripts\admin\codemirror\mode\xml\xml.js" />
+    <Content Include="Scripts\admin\countUp.js\dist\countUp.js" />
+    <Content Include="Scripts\admin\countUp.js\dist\countUp.min.js" />
+    <Content Include="Scripts\admin\cropper\dist\cropper.min.css" />
+    <Content Include="Scripts\admin\cropper\dist\cropper.min.js" />
+    <Content Include="Scripts\admin\custom.js" />
+    <Content Include="Scripts\admin\d3\d3.min.js" />
+    <Content Include="Scripts\admin\datatables-buttons\js\buttons.colVis.js" />
+    <Content Include="Scripts\admin\datatables-buttons\js\buttons.html5.js" />
+    <Content Include="Scripts\admin\datatables-buttons\js\buttons.print.js" />
+    <Content Include="Scripts\admin\datatables-buttons\js\dataTables.buttons.js" />
+    <Content Include="Scripts\admin\datatables\media\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\admin\dense\src\dense.html" />
+    <Content Include="Scripts\admin\dragula.js\dist\dragula.min.js" />
+    <Content Include="Scripts\admin\enjoyhint\enjoyhint.js" />
+    <Content Include="Scripts\admin\fullcalendar\dist\fullcalendar.min.css" />
+    <Content Include="Scripts\admin\fullcalendar\dist\fullcalendar.min.js" />
+    <Content Include="Scripts\admin\handlebars\handlebars.min.js" />
+    <Content Include="Scripts\admin\ion.rangeslider\js\ion.rangeSlider.min.js" />
+    <Content Include="Scripts\admin\iziModal.js" />
+    <Content Include="Scripts\admin\jQuery-contextMenu\dist\jquery.contextMenu.min.css" />
+    <Content Include="Scripts\admin\jQuery-contextMenu\dist\jquery.contextMenu.min.js" />
+    <Content Include="Scripts\admin\jQuery-contextMenu\dist\jquery.ui.position.min.js" />
+    <Content Include="Scripts\admin\jquery-idletimer\dist\idle-timer.min.js" />
+    <Content Include="Scripts\admin\jquery-mapael\js\jquery.mapael.js" />
+    <Content Include="Scripts\admin\jquery-mapael\js\maps\usa_states.js" />
+    <Content Include="Scripts\admin\jquery-mapael\js\maps\world_countries.js" />
+    <Content Include="Scripts\admin\jquery-ui.min.js" />
+    <Content Include="Scripts\admin\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\admin\jquery-ui\themes\smoothness\jquery-ui.min.css" />
+    <Content Include="Scripts\admin\jquery.easy-pie-chart\dist\jquery.easypiechart.min.js" />
+    <Content Include="Scripts\admin\jquery.fancytree\dist\jquery.fancytree-all.min.js" />
+    <Content Include="Scripts\admin\jquery.form.min.js" />
+    <Content Include="Scripts\admin\jquery.inputmask\dist\jquery.inputmask.bundle.js" />
+    <Content Include="Scripts\admin\jquery.jtable.min.js" />
+    <Content Include="Scripts\admin\jsdiff\diff.min.js" />
+    <Content Include="Scripts\admin\jszip\dist\jszip.min.js" />
+    <Content Include="Scripts\admin\jtable\lib\jquery.jtable.min.js" />
+    <Content Include="Scripts\admin\kendo-ui\styles\kendo.common-material.min.css" />
+    <Content Include="Scripts\admin\kendo-ui\styles\kendo.material.min.css" />
+    <Content Include="Scripts\admin\kendo-ui\styles\kendo.materialblack.min.css" />
+    <Content Include="Scripts\admin\kendo-ui\styles\kendo.rtl.min.html" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\imagebrowser.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\indeterminate.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\loading-image.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\loading.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\markers.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\markers_2x.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\slider-h.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\slider-v.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\sprite.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\sprite_2x.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\sprite_kpi.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\MaterialBlack\sprite_kpi_2x.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\imagebrowser.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\indeterminate.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\loading-image.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\loading.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\markers.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\markers_2x.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\slider-h.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\slider-v.gif" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\sprite.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\sprite_2x.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\sprite_kpi.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\Material\sprite_kpi_2x.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\textures\hue.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\textures\transparency.png" />
+    <Content Include="Scripts\admin\kendo-ui\styles\textures\transtexture.png" />
+    <Content Include="Scripts\admin\maplace-js\dist\maplace.min.js" />
+    <Content Include="Scripts\admin\metrics-graphics\dist\metricsgraphics.css" />
+    <Content Include="Scripts\admin\metrics-graphics\dist\metricsgraphics.min.js" />
+    <Content Include="Scripts\admin\parsleyjs\dist\parsley.min.js" />
+    <Content Include="Scripts\admin\pdfmake\build\pdfmake.min.js" />
+    <Content Include="Scripts\admin\pdfmake\build\vfs_fonts.js" />
+    <Content Include="Scripts\admin\peity\jquery.peity.min.js" />
+    <Content Include="Scripts\admin\plugins_crud_table.js" />
+    <Content Include="Scripts\admin\push.js\push.min.js" />
+    <Content Include="Scripts\admin\raphael\raphael.min.js" />
+    <Content Include="Scripts\admin\tablesorter\dist\js\extras\jquery.tablesorter.pager.min.js" />
+    <Content Include="Scripts\admin\tablesorter\dist\js\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\admin\tablesorter\dist\js\jquery.tablesorter.widgets.min.js" />
+    <Content Include="Scripts\admin\tablesorter\dist\js\widgets\widget-alignChar.min.js" />
+    <Content Include="Scripts\admin\tablesorter\dist\js\widgets\widget-columnSelector.min.js" />
+    <Content Include="Scripts\admin\tablesorter\dist\js\widgets\widget-print.min.js" />
+    <Content Include="Scripts\admin\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\admin\weather-icons\css\weather-icons.min.css" />
+    <Content Include="Scripts\admin\weather-icons\font\weathericons-regular-webfont.svg" />
+    <Content Include="Content\images\flags.png" />
+    <Content Include="Content\ltr.css" />
+    <Content Include="Content\login\normalize.css" />
+    <Content Include="Content\rtl.css" />
+    <Content Include="Content\site\material-scrolltop.css" />
+    <Content Include="Content\site\materialize.css" />
+    <Content Include="Content\site\materialize.rtl.css" />
+    <Content Include="Content\site\semantic.rtl.css" />
+    <Content Include="Content\site\semantic.rtl.min.css" />
+    <Content Include="Content\login\login.css" />
+    <Content Include="fonts\icons.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\icons.eot" />
+    <Content Include="fonts\icons.ttf" />
+    <Content Include="fonts\icons.woff" />
+    <Content Include="fonts\icons.woff2" />
+    <Content Include="bower.json" />
+    <Content Include="gulpfile.js" />
+    <Content Include="Scripts\jcrop\cropper.min.js" />
+    <Content Include="Scripts\error\jquery-1.11.2.min.js" />
+    <Content Include="Scripts\error\materialize.min.js" />
+    <Content Include="Scripts\error\plugins.js" />
+    <Content Include="Scripts\jquery.yeke.js" />
+    <Content Include="Scripts\login\login.js" />
+    <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\jquery.InfiniteScroll.js" />
+    <Content Include="Scripts\site\highcharts-localization.js" />
+    <Content Include="Scripts\site\jalali.js" />
+    <Content Include="Scripts\site\material-scrolltop.js" />
+    <Content Include="Scripts\site\material.js" />
+    <Content Include="Scripts\site\materialize.js" />
+    <Content Include="Scripts\site\path.js" />
+    <Content Include="Scripts\site\persianjs.min.js" />
+    <Content Include="Scripts\site\semantic.js" />
+    <Content Include="Scripts\site\semantic.min.js" />
+    <Content Include="Scripts\universalCssGenerator.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="package.json" />
+    <Content Include="build\**" />
+    <!--<Content Include="build\**\*.min.js" />
+    <Content Include="build\**\*.png" />
+    <Content Include="build\**\*.jpg" />
+    <Content Include="build\**\*.jpeg" />
+    <Content Include="build\fonts\fontawesome-webfont.svg" />
+    <Content Include="build\fonts\icons.svg" />
+    <Content Include="build\fonts\fontawesome-webfont.eot" />
+    <Content Include="build\fonts\icons.eot" />
+    <Content Include="build\fonts\fontawesome-webfont.ttf" />
+    <Content Include="build\fonts\icons.ttf" />
+    <Content Include="build\fonts\fontawesome-webfont.woff" />
+    <Content Include="build\fonts\icons.woff" />
+    <Content Include="build\fonts\fontawesome-webfont.woff2" />
+    <Content Include="build\fonts\icons.woff2" />-->
+    <Content Include="Scripts\admin\jQuery-contextMenu\dist\font\context-menu-iconsda23.eot" />
+    <Content Include="Scripts\admin\jQuery-contextMenu\dist\font\context-menu-iconsda23.ttf" />
+    <Content Include="Scripts\admin\jQuery-contextMenu\dist\font\context-menu-iconsda23.woff" />
+    <Content Include="Scripts\admin\jQuery-contextMenu\dist\font\context-menu-iconsda23.woff2" />
+    <Content Include="Scripts\admin\weather-icons\font\weathericons-regular-webfont.eot" />
+    <Content Include="Scripts\admin\weather-icons\font\weathericons-regular-webfont.ttf" />
+    <Content Include="Scripts\admin\weather-icons\font\weathericons-regular-webfont.woff" />
+    <Content Include="Scripts\admin\weather-icons\font\weathericons-regular-webfont.woff2" />
+    <Content Include="Scripts\admin\weather-icons\font\weathericons-regular-webfontd41d.eot" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\admin\icons\material-design-icons\MaterialIcons-Regular.eot" />
+    <Content Include="Content\admin\icons\material-design-icons\MaterialIcons-Regular.ttf" />
+    <Content Include="Content\admin\icons\material-design-icons\MaterialIcons-Regular.woff" />
+    <Content Include="Content\admin\icons\material-design-icons\MaterialIcons-Regular.woff2" />
+    <Content Include="Content\admin\skins\dropify\fonts\dropify.eot" />
+    <Content Include="Content\admin\skins\dropify\fonts\dropify.ttf" />
+    <Content Include="Content\admin\skins\dropify\fonts\dropify.woff" />
+    <Content Include="Areas\Dashboard\Views\web.config" />
+    <Content Include="Areas\Dashboard\Views\Home\_ProfessorDashboardNotifications.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\_NoteForm.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\_TopMenu.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\_SideMenu.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\ChangePassword.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Bio.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Avatar.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\EducationalDegree.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\College.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\EducationalGroup.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\AcademicRank.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\FreeField.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Administration.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Studing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Training.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Research.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\DefaultFreeField.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\ActivityLog.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\AdminMessage.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\CitationManagement.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Admin\News.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\SectionsOrder.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Honor.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Workshop.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Publication.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Thesis.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Language.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Lesson.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Professor\Resume.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Professor\Membership.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\FreePage.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Professor\Gallery.cshtml" />
+    <Content Include="Content\trumbow\plugins\colors\ui\sass\trumbowyg.colors.scss" />
+    <Content Include="Content\trumbow\ui\sass\trumbowyg.scss" />
+    <Content Include="Areas\Dashboard\Views\Professor\AdminMessage.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\_AdminDashboardStatistics.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Professor\Settings.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Professor\WeeklyProgram.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\_ProfessorDashboardStatistics.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Professor\InternalArticles.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Professor\ExternalSeminars.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Professor\InternalSeminars.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Professor\ExternalArticles.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Address.cshtml" />
+    <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Professors System.pubxml" />
+    <None Include="Properties\PublishProfiles\Pub.pubxml" />
+    <None Include="T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+    <None Include="T4MVC.tt.hooks.t4" />
+    <None Include="T4MVC.tt.settings.xml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutProfessor.cshtml" />
+    <Content Include="Views\Login\Index-v1.cshtml" />
+    <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Emails\_Layout.cshtml" />
+    <Content Include="Views\Emails\ForgottenPassword.cshtml" />
+    <Content Include="Views\Emails\NewPassword.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutProfessorNew.cshtml" />
+    <Content Include="Views\Profile\_Addresses.cshtml" />
+    <Content Include="Views\Emails\CreateUser.cshtml" />
+    <Content Include="Views\Home\_UsersList.cshtml" />
+    <Content Include="ImageGenerator.ashx" />
+    <Content Include="Views\Profile\_FreeFields.cshtml" />
+    <Content Include="Views\Profile\_Trainings.cshtml" />
+    <Content Include="Views\Profile\_Researchs.cshtml" />
+    <Content Include="Views\Profile\_Studings.cshtml" />
+    <Content Include="Views\Profile\_Honors.cshtml" />
+    <Content Include="Views\Profile\_Workshops.cshtml" />
+    <Content Include="Views\Profile\_Publications.cshtml" />
+    <Content Include="Views\Profile\_Theses.cshtml" />
+    <Content Include="Views\Profile\_Administrations.cshtml" />
+    <Content Include="Views\Profile\_Languages.cshtml" />
+    <Content Include="Views\Error\Demo.cshtml" />
+    <Content Include="Views\Profile\Lessons.cshtml" />
+    <Content Include="Views\Profile\_TopMenu.cshtml" />
+    <Content Include="Views\Profile\Lesson.cshtml" />
+    <Content Include="Views\Profile\_ClassInfo.cshtml" />
+    <Content Include="Views\Profile\_PracticeClass.cshtml" />
+    <Content Include="Views\Profile\_LessonImportantDate.cshtml" />
+    <Content Include="Views\Profile\_LessonNews.cshtml" />
+    <Content Include="Views\Profile\_LessonScore.cshtml" />
+    <Content Include="Views\Profile\_LessonPractice.cshtml" />
+    <Content Include="Views\Profile\_LessonFile.cshtml" />
+    <Content Include="Views\Profile\_ExternalResearchs.cshtml" />
+    <Content Include="Views\Profile\_Memberships.cshtml" />
+    <Content Include="Views\Profile\FreePage.cshtml" />
+    <Content Include="Views\Profile\GalleryList.cshtml" />
+    <Content Include="Views\Profile\Gallery.cshtml" />
+    <Content Include="Views\Profile\_GalleryItem.cshtml" />
+    <Content Include="Views\Profile\WeeklyProgram.cshtml" />
+    <Content Include="Views\Profile\_ExternalSeminars.cshtml" />
+    <Content Include="Views\Profile\_InternalSeminars.cshtml" />
+    <Content Include="Views\Profile\_InternalArticles.cshtml" />
+    <Content Include="Views\Home\_GetNewsTicker.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\_NewsList.cshtml" />
+    <Content Include="Views\News\Detail.cshtml" />
+    <Content Include="Views\Registration\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\ForgottenPassword\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\Avatars\" />
+    <Folder Include="App_Data\Errors\" />
+    <Folder Include="App_Data\UsersFiles\" />
+    <Folder Include="Areas\Dashboard\Models\" />
+    <Folder Include="Areas\Dashboard\Views\Address\" />
+    <Folder Include="Areas\Dashboard\Views\Base\" />
+    <Folder Include="Areas\Dashboard\Views\EducationalDegree\" />
+    <Folder Include="Areas\Dashboard\Views\FreeField\" />
+    <Folder Include="Areas\Dashboard\Views\User\" />
+    <Folder Include="build\images\icons\" />
+    <Folder Include="Content\admin\img\ecommerce\" />
+    <Folder Include="Content\admin\img\gallery\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\By\" />
+    <Folder Include="Views\Feed\" />
+    <Folder Include="Views\Serial\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FacultySystem.Commons\FacultySystem.Commons.csproj">
+      <Project>{b35b1089-fa87-4298-9179-c4fcf7d5813a}</Project>
+      <Name>FacultySystem.Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacultySystem.DataLayer\FacultySystem.DataLayer.csproj">
+      <Project>{E2C825F4-98C6-4B88-BEB7-5BF9BC9F0114}</Project>
+      <Name>FacultySystem.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacultySystem.DomainClasses\FacultySystem.DomainClasses.csproj">
+      <Project>{BE2D0B69-1F40-41B0-AF1D-F76C7356BE74}</Project>
+      <Name>FacultySystem.DomainClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacultySystem.IocConfig\FacultySystem.IocConfig.csproj">
+      <Project>{a2c53082-36f0-4a31-96b5-c6d6b5c0d38d}</Project>
+      <Name>FacultySystem.IocConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacultySystem.Models\FacultySystem.Models.csproj">
+      <Project>{4F56C887-0F97-405F-BE08-23147A2CE0C8}</Project>
+      <Name>FacultySystem.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacultySystem.Resources\FacultySystem.Resources.csproj">
+      <Project>{96589b12-5e81-4f92-bfe7-23c971079724}</Project>
+      <Name>FacultySystem.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacultySystem.ServiceLayer\FacultySystem.ServiceLayer.csproj">
+      <Project>{AD16FF82-4486-477D-82ED-9B3AED85A529}</Project>
+      <Name>FacultySystem.ServiceLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>11710</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:11710/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="SpicNSpan" AfterTargets="Clean">
+    <!-- common vars https://msdn.microsoft.com/en-us/library/c02as0cs.aspx?f=255&MSPPError=-2147217396 -->
+    <RemoveDir Directories="$(TargetDir)" />
+    <!-- bin -->
+    <RemoveDir Directories="$(ProjectDir)$(BaseIntermediateOutputPath)" />
+    <!-- obj -->
+  </Target>
+</Project>

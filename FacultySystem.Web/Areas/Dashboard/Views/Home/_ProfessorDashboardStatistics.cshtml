@@ -1,0 +1,48 @@
+﻿@model ContentManagementSystem.Models.ViewModels.ProfessorDashboardStatisticViewModel
+
+<div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+    <div>
+        <div class="md-card">
+            <div class="md-card-content">
+                <a href="@Url.Action(MVC.Dashboard.Home.Lesson())">
+                    <div class="uk-float-right uk-margin-top uk-margin-small-right"><i class="fa fa-object-group orange" style="font-size: 38px !important;"></i></div>
+                    <span class="uk-text-muted uk-text-small">تعداد دروس</span>
+                    <h2 class="uk-margin-remove"><span class="countUpMe">0<noscript>@Model.NumberOfLessons</noscript></span></h2>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="md-card">
+            <div class="md-card-content">
+                <a href="@Url.Action(MVC.Dashboard.Professor.Gallery())">
+                    <div class="uk-float-right uk-margin-top uk-margin-small-right"><i class="material-icons md-48 fuchsia">perm_media</i></div>
+                    <span class="uk-text-muted uk-text-small">تعداد گالری ها</span>
+                    <h2 class="uk-margin-remove"><span class="countUpMe">0<noscript>@Model.NumberOfGalleries</noscript></span></h2>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="md-card">
+            <div class="md-card-content">
+                <a href="@Url.Action(MVC.Dashboard.Professor.ExternalArticles())">
+                    <div class="uk-float-right uk-margin-top uk-margin-small-right"><i class="fa fa-star-o yellow" style="font-size: 38px !important;"></i></div>
+                    <span class="uk-text-muted uk-text-small">تعداد مقالات خارجی</span>
+                    <h2 class="uk-margin-remove"><span class="countUpMe">0<noscript>@Model.NumberOfExternalArticles</noscript></span></h2>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="md-card">
+            <div class="md-card-content">
+                <a href="@Url.Action(MVC.Dashboard.Professor.ExternalSeminars())">
+                    <div class="uk-float-right uk-margin-top uk-margin-small-right"><i class="fa fa-connectdevelop lime" style="font-size: 38px !important;"></i></div>
+                    <span class="uk-text-muted uk-text-small">تعداد کنگره ها و سمینارهای خارجی</span>
+                    <h2 class="uk-margin-remove"><span class="countUpMe">0<noscript>@Model.NumberOfExternalSeminars</noscript></span></h2>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

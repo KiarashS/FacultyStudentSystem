@@ -1,0 +1,15 @@
+﻿@model IList<ContentManagementSystem.Models.ViewModels.NewsViewModel>
+
+<div class="uk-grid uk-grid-collapse" style="border-bottom: 1px solid #2196f3;">
+    <div class="uk-width-1-10 uk-hidden-small">
+        <a class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-width-1-1" data-uk-tooltip="{pos:'bottom', cls:'fs-16p'}" title="جهت مشاهده اخبار کلیک نمائید" style="border-radius: 0 !important;" href="/news"><i class="material-icons">chat</i><span id="news-link"> مشاهده اخبار</span></a>
+    </div>
+    <div id="newsticker" class="uk-width-9-10 mt-5" style="display: none;">
+        <ul class="uk-width-1-1">
+            @foreach (var news in Model)
+            {
+                <li>@news.Title.Truncate(60, "...") &nbsp;<a href="@Url.RouteUrl("Default", new { controller = MVC.News.Name, action = MVC.News.ActionNames.Detail, id = news.Id, title = news.Title })">[مشاهده متن خبر]</a></li>
+            }
+        </ul>
+    </div>
+</div>

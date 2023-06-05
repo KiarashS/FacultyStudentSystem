@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "دروس ارائه شده";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+}
+
+
+<div id="page_content">
+    <div id="page_content_inner">
+
+        <h3 class="heading_b uk-margin-bottom">دروس ارائه شده</h3>
+
+        <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+            <div style="width: 100%;">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <ul class="md-list md-list-addon md-list-right">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">توجه</span>
+                                    <span class="uk-text-medium uk-text-muted">لطفاً دروس ارائه شده در هر ترم تحصیلی را پس از اتمام آن ترم حتماً حذف نمائید.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card">
+            <div class="md-card-content">
+                <div id="lessons_crud">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="md-fab-wrapper mb-30">
+    <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="#" id="recordAdd" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="اضافه کردن درس جدید">
+        <i class="material-icons"></i>
+    </a>
+</div>
+
+<span id="variables" class="display-hidden" data-list-url="@Url.Action(MVC.Dashboard.Lesson.List())"
+                             data-create-url="@Url.Action(MVC.Dashboard.Lesson.Create())"
+                             data-update-url="@Url.Action(MVC.Dashboard.Lesson.Update())"
+                             data-delete-url="@Url.Action(MVC.Dashboard.Lesson.Delete())"
+                             data-list-class-url="@Url.Action(MVC.Dashboard.Lesson.ListClass())"
+                             data-create-class-url="@Url.Action(MVC.Dashboard.Lesson.CreateClass())"
+                             data-update-class-url="@Url.Action(MVC.Dashboard.Lesson.UpdateClass())"
+                             data-delete-class-url="@Url.Action(MVC.Dashboard.Lesson.DeleteClass())"
+                             data-list-practiceclass-url="@Url.Action(MVC.Dashboard.Lesson.ListPracticeClass())"
+                             data-create-practiceclass-url="@Url.Action(MVC.Dashboard.Lesson.CreatePracticeClass())"
+                             data-update-practiceclass-url="@Url.Action(MVC.Dashboard.Lesson.UpdatePracticeClass())"
+                             data-delete-practiceclass-url="@Url.Action(MVC.Dashboard.Lesson.DeletePracticeClass())"
+                             data-list-news-url="@Url.Action(MVC.Dashboard.Lesson.ListNews())"
+                             data-create-news-url="@Url.Action(MVC.Dashboard.Lesson.CreateNews())"
+                             data-update-news-url="@Url.Action(MVC.Dashboard.Lesson.UpdateNews())"
+                             data-delete-news-url="@Url.Action(MVC.Dashboard.Lesson.DeleteNews())"
+                             data-list-date-url="@Url.Action(MVC.Dashboard.Lesson.ListDate())"
+                             data-create-date-url="@Url.Action(MVC.Dashboard.Lesson.CreateDate())"
+                             data-update-date-url="@Url.Action(MVC.Dashboard.Lesson.UpdateDate())"
+                             data-delete-date-url="@Url.Action(MVC.Dashboard.Lesson.DeleteDate())"
+                             data-list-practice-url="@Url.Action(MVC.Dashboard.Lesson.ListPractice())"
+                             data-create-practice-url="@Url.Action(MVC.Dashboard.Lesson.CreatePractice())"
+                             data-update-practice-url="@Url.Action(MVC.Dashboard.Lesson.UpdatePractice())"
+                             data-delete-practice-url="@Url.Action(MVC.Dashboard.Lesson.DeletePractice())"
+                             data-list-score-url="@Url.Action(MVC.Dashboard.Lesson.ListScore())"
+                             data-create-score-url="@Url.Action(MVC.Dashboard.Lesson.CreateScore())"
+                             data-update-score-url="@Url.Action(MVC.Dashboard.Lesson.UpdateScore())"
+                             data-delete-score-url="@Url.Action(MVC.Dashboard.Lesson.DeleteScore())"
+                             data-list-file-url="@Url.Action(MVC.Dashboard.Lesson.ListFile())"
+                             data-create-file-url="@Url.Action(MVC.Dashboard.Lesson.CreateFile())"
+                             data-update-file-url="@Url.Action(MVC.Dashboard.Lesson.UpdateFile())"
+                             data-delete-file-url="@Url.Action(MVC.Dashboard.Lesson.DeleteFile())"
+                             data-getfile-url="@Url.Action(MVC.Home.GetFile())"></span>

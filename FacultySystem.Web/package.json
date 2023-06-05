@@ -1,0 +1,25 @@
+{
+  "author": "Kiarash Soleimanzadeh",
+  "description": "CMS",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-changed": "^1.1.1",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-concat": "^2.4.3",
+    "gulp-less": "^3.1.0",
+    "gulp-minify": "0.0.14",
+    "gulp-rtlcss": "^1.0.0",
+    "gulp-uglify": "^2.1.0",
+    "gulp-util": "^3.0.3",
+    "gulp-watch": "^4.3.9"
+  },
+  "license": "ISC",
+  "main": "gulpfile.js",
+  "name": "contentmanagementsystem",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

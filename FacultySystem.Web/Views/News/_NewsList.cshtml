@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.NewsViewModel>
+
+<div class="uk-grid uk-grid-divider" data-uk-grid-margin="">
+    <div class="uk-width-large-1-1 uk-width-medium-1-1">
+        <ul class="md-list">
+            @foreach (var news in Model)
+            {
+                <li>
+                    <div class="md-list-content" style="padding-right: 10px;">
+                        <span class="md-list-heading"><strong><a href="@Url.RouteUrl("Default", new { action = MVC.News.ActionNames.Detail, id = news.Id, title = news.Title })" title="مشاهده متن کامل خبر" data-uk-tooltip="{pos:'left', cls:'fs-16p'}">@news.Title<i class="material-icons">navigate_before</i></a></strong></span>
+                        <span class="uk-text-small uk-text-muted" style="padding-right: 10px;">@news.Content.Truncate(80, "...")</span>
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <ul id="pagination" class="uk-pagination" style="margin: 50px 10px 10px;">
+            @if ((string)ViewBag.PreviousPageLink != null)
+            {
+                <li class="uk-pagination-previous"><a id="pagination-previous" data-call-ajax="true" data-url="@ViewBag.PreviousPageLink" data-container-id="#news-list-container" href="#" class="fs-17p"><i class="material-icons">navigate_next</i>&nbsp;صفحه قبل</a></li>
+            }
+            @if ((string)ViewBag.NextPageLink != null)
+            {
+                <li class="uk-pagination-next"><a id="pagination-next" data-call-ajax="true" data-url="@ViewBag.NextPageLink" data-container-id="#news-list-container" href="#" class="fs-17p">صفحه بعد&nbsp;<i class="material-icons">navigate_before</i></a></li>
+            }
+        </ul>
+    </div>
+</div>

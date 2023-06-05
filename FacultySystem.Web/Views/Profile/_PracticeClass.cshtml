@@ -1,0 +1,49 @@
+﻿@model IList<ContentManagementSystem.Models.ViewModels.PracticeClassInfoViewModel>
+
+<div class="heading_a uk-text-center"><span class="uk-badge uk-badge-success heading_a">کلاس حل تمرین</span></div>
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <table class="uk-table mt-25 mb-30">
+            <thead>
+                <tr>
+                    <th class="table-header heading_a">مکان</th>
+                    <th class="uk-text-center table-header heading_a">روز</th>
+                    <th class="uk-text-center table-header heading_a">شروع</th>
+                    <th class="uk-text-center table-header heading_a">پایان</th>
+                    <th class="uk-text-center table-header heading_a">مدرس</th>
+                    <th class="uk-text-center table-header heading_a">توضیحات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <text>
+                        <tr class="uk-table-middle">
+                            <td class="uk-width-3-10">
+                                @if (!string.IsNullOrEmpty(item.Link))
+                                {
+                                    <span class="cl-effect-1"><a href="@item.Link" target="_blank" rel="nofollow"><span class="persian-number">@(item.Place ?? "")</span></a></span>
+                                }
+                                else
+                                {
+                                    <span class="persian-number">@(item.Place ?? "")</span>
+                                }
+                                @*<div class="uk-text-muted professor-sub-detail pr-30"><span class="black" style="border-bottom: 1px dotted #000;">تاریخ ایجاد:</span>&nbsp;<span class="persian-number">@item.CreateDateText</span></div>*@
+                            </td>
+                            <td class="uk-width-1-10 uk-text-center fs-09e">@item.PracticeClassDayText</td>
+                            <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@(item.StartHour ?? "")</td>
+                            <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@(item.EndHour ?? "")</td>
+                            <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@(item.TeacherName ?? "")</td>
+                            <td class="uk-width-4-10 uk-text-left fs-09e">
+                                @if (!string.IsNullOrEmpty(item.Description))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail pr-30 persian-number">@item.Description</div>
+                                }
+                            </td>
+                        </tr>
+                    </text>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.HonorViewModel>
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="جوایز و افتخارات">
+            <i class="material-icons md-48" style="padding-top: 25%;color: rgb(255, 23, 68);">card_giftcard</i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">جوایز و افتخارات</h3>
+                <div class="uk-overflow-container pb-15 pt-30">
+                    <ul class="professor-details-list">
+                        @foreach (var honor in Model)
+                        {
+                            <li>
+                                @if (!string.IsNullOrEmpty(honor.Link))
+                                {
+                                    if (honor.FullTime != null)
+                                    {
+                                        <a href="@honor.Link" target="_blank" rel="nofollow"><strong class="persian-number">@honor.Title</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@honor.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@honor.Link" target="_blank" rel="nofollow"><strong class="persian-number">@honor.Title</strong></a>
+                                    }
+                                }
+                                else
+                                {
+                                    if (honor.FullTime != null)
+                                    {
+                                        <strong class="persian-number">@(honor.Title)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@honor.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <strong class="persian-number">@(honor.Title)</strong>
+                                    }
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

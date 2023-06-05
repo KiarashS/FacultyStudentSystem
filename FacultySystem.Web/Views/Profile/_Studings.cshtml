@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.StudingViewModel>
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top'، cls:'fs-16p'}" title="سوابق تحصیلی">
+            <i class="fa fa-bank fa-35 lime" style="padding-top: 25%;"></i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">سوابق تحصیلی</h3>
+                <div class="uk-overflow-container pb-15 pt-30">
+                    <ul class="professor-details-list">
+                        @foreach (var studing in Model)
+                        {
+                            <li>
+                                @if (!string.IsNullOrEmpty(studing.Link))
+                                {
+                                    if (studing.FullTime != null)
+                                    {
+                                        <a href="@studing.Link" target="_blank" rel="nofollow"><strong>@(studing.Grade)، @(studing.Field)@(studing.Trend != null ? "، " + studing.Trend : string.Empty)، @(studing.University)</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@studing.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@studing.Link" target="_blank" rel="nofollow"><strong>@(studing.Grade)، @(studing.Field)@(studing.Trend != null ? "، " + studing.Trend : string.Empty)، @(studing.University)</strong></a>
+                                    }
+                                }
+                                else
+                                {
+                                    if (studing.FullTime != null)
+                                    {
+                                        <strong>@(studing.Grade)، @(studing.Field)@(studing.Trend != null ? "، " + studing.Trend : string.Empty)، @(studing.University)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@studing.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <strong>@(studing.Grade)، @(studing.Field)@(studing.Trend != null ? "، " + studing.Trend : string.Empty)، @(studing.University)</strong>
+                                    }
+                                }
+                                @if (!string.IsNullOrEmpty(studing.ThesisTitle))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">عنوان تز:</span>&nbsp;<span class="persian-number">@studing.ThesisTitle</span></div>
+                                }
+                                @if (!string.IsNullOrEmpty(studing.ThesisSupervisors))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">استادهای راهنما:</span>&nbsp;@studing.ThesisSupervisors</div>
+                                }
+                                @if (!string.IsNullOrEmpty(studing.ThesisAdvisors))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">استادهای مشاور:</span>&nbsp;@studing.ThesisAdvisors</div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

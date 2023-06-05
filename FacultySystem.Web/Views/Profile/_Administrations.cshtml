@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.AdministrationViewModel>
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="سوابق اجرایی و مدیریتی">
+            <i class="material-icons md-48 red" style="padding-top: 25%;">functions</i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">سوابق اجرایی و مدیریتی</h3>
+                <div class="uk-overflow-container pb-15 pt-30">
+                    <ul class="professor-details-list">
+                        @foreach (var adminstration in Model)
+                        {
+                            <li>
+                                @if (!string.IsNullOrEmpty(adminstration.Link))
+                                {
+                                    if (adminstration.FullTime != null)
+                                    {
+                                        <a href="@adminstration.Link" target="_blank" rel="nofollow"><strong class="persian-number">@adminstration.Post</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@adminstration.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@adminstration.Link" target="_blank" rel="nofollow"><strong class="persian-number">@adminstration.Post</strong></a>
+                                    }
+                                }
+                                else
+                                {
+                                    if (adminstration.FullTime != null)
+                                    {
+                                        <strong class="persian-number">@(adminstration.Post)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@adminstration.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <strong class="persian-number">@(adminstration.Post)</strong>
+                                    }
+                                }
+                                @if (!string.IsNullOrEmpty(adminstration.Place))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">مکان:</span>&nbsp;<span class="persian-number">@adminstration.Place</span></div>
+                                }
+                                @if (!string.IsNullOrEmpty(adminstration.Description))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">توضیحات:</span>&nbsp;<span class="persian-number">@adminstration.Description</span></div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

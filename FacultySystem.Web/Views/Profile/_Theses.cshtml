@@ -1,0 +1,189 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.ThesisViewModel>
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="پایان نامه ها">
+            <i class="material-icons md-48" style="padding-top: 25%;color: rgb(118, 255, 3);">school</i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">پایان نامه ها</h3>
+                <div class="uk-overflow-container pb-15 pt-30">
+                    @if (Model.Count(t => t.ThesisState == ContentManagementSystem.DomainClasses.ThesisState.Doing) > 0)
+                    {
+                    <div class="uk-text-center uk-text-warning">
+                        <span style="border-bottom: 1px solid #ffa000;">پایان نامه های در حال انجام</span>
+                    </div>
+                    }
+                    <ul class="professor-details-list">
+                        @foreach (var thesis in Model)
+                        {
+                            if (thesis.ThesisState == ContentManagementSystem.DomainClasses.ThesisState.Doing)
+                            {
+                                <li>
+                                    @if (!string.IsNullOrEmpty(thesis.Link))
+                                    {
+                                        if (thesis.FullTime != null)
+                                        {
+                                            if (thesis.ThesisPost == ContentManagementSystem.DomainClasses.ThesisPost.NotDefined)
+                                            {
+                                                <a href="@thesis.Link" target="_blank" rel="nofollow"><strong class="persian-number">@thesis.Title</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@thesis.FullTime)</span>
+                                        }
+                                            else
+                                            {
+                                                <a href="@thesis.Link" target="_blank" rel="nofollow"><strong class="persian-number">@thesis.Title</strong></a>@:&nbsp;[@thesis.ThesisPostText]&nbsp;&nbsp;<span class="persian-number">(@thesis.FullTime)</span>
+                                        }
+                                        }
+                                        else
+                                        {
+                                            if (thesis.ThesisPost == ContentManagementSystem.DomainClasses.ThesisPost.NotDefined)
+                                            {
+                                                <a href="@thesis.Link" target="_blank" rel="nofollow"><strong class="persian-number">@thesis.Title</strong></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@thesis.Link" target="_blank" rel="nofollow"><strong class="persian-number">@thesis.Title</strong></a>@:&nbsp;[@thesis.ThesisPostText]
+                                    }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (thesis.FullTime != null)
+                                        {
+                                            if (thesis.ThesisPost == ContentManagementSystem.DomainClasses.ThesisPost.NotDefined)
+                                            {
+                                                <strong class="persian-number">@(thesis.Title)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@thesis.FullTime)</span>
+                                        }
+                                            else
+                                            {
+                                                <strong class="persian-number">@thesis.Title&nbsp;[@thesis.ThesisPostText]</strong>@:&nbsp;&nbsp;<span class="persian-number">(@thesis.FullTime)</span>
+                                        }
+                                        }
+                                        else
+                                        {
+                                            if (thesis.ThesisPost == ContentManagementSystem.DomainClasses.ThesisPost.NotDefined)
+                                            {
+                                                <strong class="persian-number">@(thesis.Title)</strong>
+                                            }
+                                            else
+                                            {
+                                                <strong class="persian-number">@thesis.Title&nbsp;[@thesis.ThesisPostText]</strong>
+                                            }
+                                        }
+                                    }
+                                    @if (thesis.ThesisGrade != ContentManagementSystem.DomainClasses.ThesisGrade.NotDefined)
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">دوره:</span>&nbsp;@thesis.ThesisGradeText</div>
+                                    }
+                                    @if (thesis.ThesisType != ContentManagementSystem.DomainClasses.ThesisType.NotDefined)
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">نوع پایان نامه:</span>&nbsp;@thesis.ThesisTypeText</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(thesis.Executers))
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">مجریان:</span>&nbsp;@thesis.Executers</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(thesis.University))
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">دانشگاه:</span>&nbsp;@thesis.University</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(thesis.Description))
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">توضیحات:</span>&nbsp;<span class="persian-number">@thesis.Description</span></div>
+                                    }
+                                </li>
+                            }
+                        }
+                    </ul>
+                    @if (Model.Count(t => t.ThesisState == ContentManagementSystem.DomainClasses.ThesisState.Finished) > 0)
+                    {
+                    <div class="uk-text-center uk-text-success">
+                        <span style="border-bottom: 1px solid #7cb342;">پایان نامه های پایان یافته</span>
+                    </div>
+                    }
+                    <ul class="professor-details-list">
+                        @foreach (var thesis in Model)
+                        {
+                            if (thesis.ThesisState == ContentManagementSystem.DomainClasses.ThesisState.Finished)
+                            {
+                                <li>
+                                    @if (!string.IsNullOrEmpty(thesis.Link))
+                                    {
+                                        if (thesis.FullTime != null)
+                                        {
+                                            if (thesis.ThesisPost == ContentManagementSystem.DomainClasses.ThesisPost.NotDefined)
+                                            {
+                                                <a href="@thesis.Link" target="_blank" rel="nofollow"><strong class="persian-number">@thesis.Title</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@thesis.FullTime)</span>
+                                        }
+                                            else
+                                            {
+                                                <a href="@thesis.Link" target="_blank" rel="nofollow"><strong class="persian-number">@thesis.Title</strong></a>@:&nbsp;[@thesis.ThesisPostText]&nbsp;&nbsp;<span class="persian-number">(@thesis.FullTime)</span>
+                                        }
+                                        }
+                                        else
+                                        {
+                                            if (thesis.ThesisPost == ContentManagementSystem.DomainClasses.ThesisPost.NotDefined)
+                                            {
+                                                <a href="@thesis.Link" target="_blank" rel="nofollow"><strong class="persian-number">@thesis.Title</strong></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@thesis.Link" target="_blank" rel="nofollow"><strong class="persian-number">@thesis.Title</strong></a>@:&nbsp;[@thesis.ThesisPostText]
+                                    }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (thesis.FullTime != null)
+                                        {
+                                            if (thesis.ThesisPost == ContentManagementSystem.DomainClasses.ThesisPost.NotDefined)
+                                            {
+                                                <strong class="persian-number">@(thesis.Title)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@thesis.FullTime)</span>
+                                        }
+                                            else
+                                            {
+                                                <strong class="persian-number">@thesis.Title&nbsp;[@thesis.ThesisPostText]</strong>@:&nbsp;&nbsp;<span class="persian-number">(@thesis.FullTime)</span>
+                                        }
+                                        }
+                                        else
+                                        {
+                                            if (thesis.ThesisPost == ContentManagementSystem.DomainClasses.ThesisPost.NotDefined)
+                                            {
+                                                <strong class="persian-number">@(thesis.Title)</strong>
+                                            }
+                                            else
+                                            {
+                                                <strong class="persian-number">@thesis.Title&nbsp;[@thesis.ThesisPostText]</strong>
+                                            }
+                                        }
+                                    }
+                                    @if (thesis.ThesisGrade != ContentManagementSystem.DomainClasses.ThesisGrade.NotDefined)
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">دوره:</span>&nbsp;@thesis.ThesisGradeText</div>
+                                    }
+                                    @if (thesis.ThesisType != ContentManagementSystem.DomainClasses.ThesisType.NotDefined)
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">نوع پایان نامه:</span>&nbsp;@thesis.ThesisTypeText</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(thesis.Executers))
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">مجریان:</span>&nbsp;@thesis.Executers</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(thesis.University))
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">دانشگاه:</span>&nbsp;@thesis.University</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(thesis.Description))
+                                    {
+                                        <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">توضیحات:</span>&nbsp;<span class="persian-number">@thesis.Description</span></div>
+                                    }
+                                </li>
+                            }
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+﻿@model IList<ContentManagementSystem.Models.ViewModels.GalleryItemViewModel>
+
+@{ 
+    var html5SupportedVideoFormats = new[] { "video/mp4", "video/webm", "video/ogg" };
+    var html5SupportedAudioFormats = new[] { "audio/mpeg", "audio/ogg", "audio/wav" };
+}
+
+@*<div class="heading_a uk-text-center"><span class="uk-badge uk-badge-success heading_a">آیتم های گالری</span></div>*@
+<div class="gallery_grid uk-grid-width-medium-1-4 uk-grid-width-large-1-5" data-uk-grid="{gutter: 10}">
+    @foreach (var item in Model)
+    {
+        <div>
+            <div class="md-card md-card-hover">
+                <div class="gallery_grid_item md-card-content">
+                    @if (item.MediaType == ContentManagementSystem.DomainClasses.MediaType.Image)
+                    {
+                        <a href="@Url.Action(MVC.Home.GetFile(item.FileText, 5))" data-lightbox-type="image" title="@item.Title" data-uk-lightbox="{group:'gallery'}">
+                            <img src="@Url.Action(MVC.Home.GetFile(item.FileText, 5))" style="width: 100%;" alt="@item.Title">
+                        </a>
+                    }
+                    else if (item.MediaType == ContentManagementSystem.DomainClasses.MediaType.Video)
+                    {
+                        if (html5SupportedVideoFormats.Contains(MimeMapping.GetMimeMapping(item.MediaFilename).ToLowerInvariant()))
+                        {
+                            <a href="@Url.Action(MVC.Home.GetFile(item.FileText, 5))" data-lightbox-type="video" data-uk-lightbox="{group:'gallery'}">
+                                @*<img src="~/build/images/videos.png" style="width: 100%;" alt="@item.Title" />*@
+                                <img src="data:image/jpeg;base64,@ContentManagementSystem.Commons.Web.VideoThumb.CreateThumb(ContentManagementSystem.Web.Utils.FilenameToFilePath.GetGalleryVideoPath(item.UserId, item.MediaFilename, item.GalleryId))" alt="@item.Title" />
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action(MVC.Home.GetFile(item.FileText, 5))">
+                                @*<img src="~/build/images/videos.png" style="width: 100%;" alt="@item.Title" />*@
+                                <img src="data:image/jpeg;base64,@ContentManagementSystem.Commons.Web.VideoThumb.CreateThumb(ContentManagementSystem.Web.Utils.FilenameToFilePath.GetGalleryVideoPath(item.UserId, item.MediaFilename, item.GalleryId))" alt="@item.Title" />
+                            </a>
+                        }
+                    }
+                    else if (item.MediaType == ContentManagementSystem.DomainClasses.MediaType.Audio)
+                    {
+                        <a href="@Url.Action(MVC.Home.GetFile(item.FileText, 5))" class="pb-20">
+                            <img src="~/build/images/audio.png" style="width: 100%;" alt="@item.Title" />
+                        </a>
+                        if (html5SupportedAudioFormats.Contains(MimeMapping.GetMimeMapping(item.MediaFilename).ToLowerInvariant()))
+                        {
+                            <audio controls>
+                                <source src="@Url.Action(MVC.Home.GetFile(item.FileText, 5))" type="@MimeMapping.GetMimeMapping(item.MediaFilename)">
+                                مرورگر شما منسوخ شده است، لطفاً آن را بروز نمائید و یا این فایل را دریافت نمائید.
+                            </audio>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@Url.Action(MVC.Home.GetFile(item.FileText, 5))">
+                            <img src="~/build/images/gallery-file.png" style="width: 100%;" alt="@item.Title" />
+                        </a>
+                    }
+                    <div class="gallery_grid_image_caption">
+                        <div class="gallery_grid_image_menu" data-uk-dropdown="{pos:'top-left'}">
+                            <i class="md-icon material-icons">&#xE5D4;</i>
+                            <div class="uk-dropdown uk-dropdown-small">
+                                <ul class="uk-nav">
+                                    <li><a href="@Url.Action(MVC.Home.GetFile(item.FileText, 5))"><i class="material-icons uk-margin-small-right green">cloud_download</i> دریافت</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        @if (item.MediaType == ContentManagementSystem.DomainClasses.MediaType.Image)
+                        {
+                            <div class="uk-text-center mb-5 pr-40"><span class="uk-badge uk-badge-warning fs-15">تصویر</span></div>
+                        }
+                        else if (item.MediaType == ContentManagementSystem.DomainClasses.MediaType.Video)
+                        {
+                            <div class="uk-text-center mb-5 pr-40"><span class="uk-badge uk-badge-warning fs-15">ویدئو</span></div>
+                        }
+                        else if (item.MediaType == ContentManagementSystem.DomainClasses.MediaType.Audio)
+                        {
+                            <div class="uk-text-center mb-5 pr-40"><span class="uk-badge uk-badge-warning fs-15">فایل صوتی</span></div>
+                        }
+                        else
+                        {
+                            <div class="uk-text-center mb-5 pr-40"><span class="uk-badge uk-badge-warning fs-15">فایل</span></div>
+                        }
+                        @if (!string.IsNullOrEmpty(item.Link))
+                        {
+                            <div class="gallery_image_title uk-text-center mb-5 pr-40"><a href="@item.Link" target="_blank" rel="nofollow"><span class="persian-number">@item.Title</span></a></div>
+                        }
+                        else
+                        {
+                            <div class="gallery_image_title uk-text-center mb-5 pr-40 persian-number">@item.Title</div>
+                        }
+                        <div class="uk-text-muted uk-text-small uk-text-center persian-number mb-5">@item.CreateDateText</div>
+                        @if (!string.IsNullOrEmpty(item.Description))
+                        {
+                            <hr />
+                            <div class="gallery_image_title">@Html.Raw(item.Description.Replace("\n", "<br />").Replace("\r\n", "<br />"))</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

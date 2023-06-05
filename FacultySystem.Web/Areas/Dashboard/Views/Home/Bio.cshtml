@@ -1,0 +1,61 @@
+﻿@model ContentManagementSystem.Models.ViewModels.BioViewModel
+@{
+    ViewBag.Title = "بیوگرافی";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+}
+
+<!-- editor -->
+<link rel="stylesheet" href="~/Content/trumbow/ui/trumbowyg.min.css" media="all">
+<link rel="stylesheet" href="~/Content/trumbow/plugins/colors/ui/trumbowyg.colors.min.css" />
+
+<div id="page_content">
+    <div id="page_content_inner">
+        <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+            <div style="width: 100%;">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <ul class="md-list md-list-addon md-list-right">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">توجه</span>
+                                    <span class="uk-text-medium uk-text-muted">جهت فعالسازی/غیر فعالسازی بیوگرافی خود به بخش تنظیمات مراجعه نمائید.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card">
+            <div class="md-card-toolbar" style="padding-bottom: 7px;">
+                <div class="md-card-toolbar-actions">
+                    <button type="button" class="md-btn md-btn-success waves-button waves-effect waves-light editorsubmit" data-editor-id="biotext" data-isactive-id="IsActiveBio" data-submit-url="@Url.Action(MVC.Dashboard.Home.Bio())"><i class="material-icons">save</i> ذخیره</button>
+                </div>
+                <h3 class="md-card-toolbar-heading-text uk-text-primary">
+                    در این قسمت می توانید بیوگرافی خودتان را شرح دهید.
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="mGraph-wrapper">
+                    <div id="biotext" style="margin-bottom: 8px;" placeholder="بیوگرافی خود را در این قسمت شرح دهید ..."></div>
+                    <span name="message" class="uk-text-success"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dataBioHtml" class="uk-hidden">@Html.Raw(Model.BioText)</div>
+
+@section Scripts{
+    <!--  editor -->
+    <script src="~/Content/trumbow/trumbowyg.js"></script>
+    <script src="~/Content/trumbow/plugins/colors/trumbowyg.colors.js"></script>
+    <script src="~/Content/trumbow/langs/fa.min.js"></script>
+    @*<script src="~/Content/trumbow/plugins/base64/trumbowyg.base64.min.js"></script>*@
+    <script src="~/Content/trumbow/plugins/pasteimage/trumbowyg.pasteimage.min.js"></script>
+    <script src="~/Content/trumbow/plugins/table/trumbowyg.table.js"></script>
+}

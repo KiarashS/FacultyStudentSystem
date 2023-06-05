@@ -1,0 +1,68 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="@ConfigurationManager.AppSettings["SystemNameFa"]">
+    <meta name="keywords" content="@ConfigurationManager.AppSettings["SystemNameFa"]">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/error/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="~/Content/error/style.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="~/Content/error/page-center.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link rel="icon" type="image/png" href="~/favicon.png" sizes="32x32">
+</head>
+
+<body class="cyan">
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <div id="error-page">
+        <div class="row">
+            <div class="col s12">
+                <div class="browser-window">
+                    <div class="top-bar">
+                        <div class="circles">
+                            <div id="close-circle" class="circle"></div>
+                            <div id="minimize-circle" class="circle"></div>
+                            <div id="maximize-circle" class="circle"></div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div id="site-layout-example-top" class="col s12">
+                                <p class="center white-text" dir="rtl" style="line-height:1.2 !important;margin-top:5px;">@Html.Raw(ViewBag.Description)</p>
+                            </div>
+                            <div id="site-layout-example-right" class="col s12 m12 l12">
+                                <div class="row center">
+                                    <h1 class="text-long-shadow col s12" style="margin: 35px auto !important;">@ViewBag.StatusCode</h1>
+                                </div>
+                                <div class="row center">
+                                    <p class="center s12" dir="rtl"><button onclick="goBack()" style="position: absolute; bottom: 150px;right:30%;" class="btn waves-effect waves-light">برگشت به صفحه قبلی</button> <a href="/" style="position: absolute; bottom: 150px; left:30%;" class="btn waves-effect waves-light">برگشت به صفحه اصلی</a>
+                                    <p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Scripts/error/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/error/materialize.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/error/plugins.js"></script>
+    <script type="text/javascript">
+        function goBack() {window.history.back();}
+    </script>
+</body>
+</html>

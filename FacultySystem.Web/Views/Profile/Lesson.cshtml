@@ -1,0 +1,489 @@
+﻿@model ContentManagementSystem.Models.ViewModels.LessonIndexViewModel
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = MVC.Shared.Views._LayoutProfessorNew;
+}
+
+@{
+    Html.RenderAction(MVC.Profile.TopMenu());
+}
+
+<div id="page_content">
+    <div id="page_content_inner" style="padding-bottom: 0;">
+        <div class="uk-grid" data-uk-grid-margin="">
+            <div class="uk-width-1-1 uk-container uk-container-center mt-90">
+                <div class="md-card">
+                    <div class="md-card-content large-padding uk-overflow-container">
+                        <div class="heading_a uk-text-center"><span class="uk-badge heading_a persian-number">@Model.LessonName</span></div>
+                        <div class="uk-grid uk-grid-width-large-1-2 uk-grid-width-medium-1-2 uk-grid-divider uk-grid-medium">
+                            @*<div class="uk-width-large-1-2 uk-width-medium-1-2">*@
+                                @if (!string.IsNullOrEmpty(Model.LessonName))
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">نام درس</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle">
+                                                @if (string.IsNullOrEmpty(Model.Link))
+                                                {
+                                                    <span class="persian-number">@Model.LessonName</span>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Model.Link" target="_blank" rel="nofollow"><span class="persian-number">@Model.LessonName</span></a>
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (Model.GroupNumber != null)
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">شماره گروه</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle persian-number">@Model.GroupNumber</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (Model.LessonGrade != ContentManagementSystem.DomainClasses.LessonGrade.NotDefined)
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">دوره</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle">@Model.LessonGradeText</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (!string.IsNullOrEmpty(Model.Trend))
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">گرایش</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle persian-number">@Model.Trend</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (!string.IsNullOrEmpty(Model.Semester))
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">ترم تحصیلی</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle persian-number">@Model.Semester</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (Model.LessonState != ContentManagementSystem.DomainClasses.LessonState.NotDefined)
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">وضعیت درس</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle">@Model.LessonStateText</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                
+                            @*</div>*@
+                            @*<div class="uk-width-large-1-2 uk-width-medium-1-2">
+                                <ul class="md-list">
+                                    @if (!string.IsNullOrEmpty(Model.LessonName))
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">
+                                                    @if (string.IsNullOrEmpty(Model.Link))
+                                                    {
+                                                        <span class="persian-number">@Model.LessonName</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="@Model.Link" target="_blank" rel="nofollow"><span class="persian-number">@Model.LessonName</span></a>
+                                                    }
+                                                </span>
+                                                <span class="uk-text-small uk-text-muted">نام درس</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (Model.GroupNumber != null)
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading persian-number">@Model.GroupNumber</span>
+                                                <span class="uk-text-small uk-text-muted">شماره گروه</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (Model.LessonGrade != ContentManagementSystem.DomainClasses.LessonGrade.NotDefined)
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">@Model.LessonGradeText</span>
+                                                <span class="uk-text-small uk-text-muted">دوره</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.Trend))
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading persian-number">@Model.Trend</span>
+                                                <span class="uk-text-small uk-text-muted">گرایش</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.Semester))
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading persian-number">@Model.Semester</span>
+                                                <span class="uk-text-small uk-text-muted">ترم تحصیلی</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (Model.LessonState != ContentManagementSystem.DomainClasses.LessonState.NotDefined)
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">@Model.LessonStateText</span>
+                                                <span class="uk-text-small uk-text-muted">وضعیت درس</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.Description))
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">@Html.Raw(Model.Description.Replace("\n", "<br />").Replace("\r\n", "<br />"))</span>
+                                                <span class="uk-text-small uk-text-muted">توضیحات</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.ProjectDescription))
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">@Html.Raw(Model.ProjectDescription.Replace("\n", "<br />").Replace("\r\n", "<br />"))</span>
+                                                <span class="uk-text-small uk-text-muted">توضیحات پروژه</span>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>*@
+                            @*<div class="uk-width-large-1-2 uk-width-medium-1-2">*@
+                                @if (!string.IsNullOrEmpty(Model.LessonCode))
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">شماره درس</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle persian-number">@Model.LessonCode</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (Model.UnitNumber != null)
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">تعداد واحد</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle persian-number">@Model.UnitNumber</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (!string.IsNullOrEmpty(Model.Field))
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">رشته</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle">@Model.Field</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (Model.AcademicYear != null)
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">سال تحصیلی</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle persian-number">@Model.AcademicYear</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (Model.LessonType != ContentManagementSystem.DomainClasses.LessonType.NotDefined)
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">نوع درس</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle">@Model.LessonTypeText</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @if (Model.UnitState != ContentManagementSystem.DomainClasses.UnitState.NotDefined)
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">وضعیت واحد</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle">@Model.UnitStateText</span>
+                                        </div>
+                                    </div>
+                                    @*<hr class="uk-grid-divider">*@
+                                }
+                                @*<ul class="md-list">
+                                    @if (!string.IsNullOrEmpty(Model.LessonCode))
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading persian-number">@Model.LessonCode</span>
+                                                <span class="uk-text-small uk-text-muted">شماره درس</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (Model.UnitNumber != null)
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading persian-number">@Model.UnitNumber</span>
+                                                <span class="uk-text-small uk-text-muted">تعداد واحد</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.Field))
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">@Model.Field</span>
+                                                <span class="uk-text-small uk-text-muted">رشته</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (Model.AcademicYear != null)
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading persian-number">@Model.AcademicYear</span>
+                                                <span class="uk-text-small uk-text-muted">سال تحصیلی</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (Model.LessonType != ContentManagementSystem.DomainClasses.LessonType.NotDefined)
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">@Model.LessonTypeText</span>
+                                                <span class="uk-text-small uk-text-muted">نوع درس</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (Model.UnitState != ContentManagementSystem.DomainClasses.UnitState.NotDefined)
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">@Model.UnitStateText</span>
+                                                <span class="uk-text-small uk-text-muted">وضعیت واحد</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.ScoringDescription))
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">@Html.Raw(Model.ScoringDescription.Replace("\n", "<br />").Replace("\r\n", "<br />"))</span>
+                                                <span class="uk-text-small uk-text-muted">توضیحات شیوه نمره دهی</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.Reference))
+                                    {
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading">@Html.Raw(Model.Reference.Replace("\n", "<br />").Replace("\r\n", "<br />"))</span>
+                                                <span class="uk-text-small uk-text-muted">مراجع</span>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>*@
+                            @*</div>*@
+                        </div>
+                        <div class="uk-grid" data-uk-grid-margin="">
+                            @if (!string.IsNullOrEmpty(Model.Description))
+                            {
+                                <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                                    <div class="uk-grid uk-grid-small">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">توضیحات</span>
+                                            @Html.Raw(Model.Description.Replace("\n", "<br />").Replace("\r\n", "<br />"))
+                                        </p>
+                                    </div>
+                                </div>
+                                @*<hr class="uk-grid-divider">*@
+                            }
+                            @if (!string.IsNullOrEmpty(Model.ProjectDescription))
+                            {
+                                <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                                    <div class="uk-grid uk-grid-small">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">توضیحات پروژه</span>
+                                            @Html.Raw(Model.ProjectDescription.Replace("\n", "<br />").Replace("\r\n", "<br />"))
+                                        </p>
+                                    </div>
+                                </div>
+                                @*<hr class="uk-grid-divider uk-hidden-large">*@
+                            }
+                            @if (!string.IsNullOrEmpty(Model.ScoringDescription))
+                            {
+                                <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                                    <div class="uk-grid uk-grid-small">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">توضیحات شیوه نمره دهی</span>
+                                            @Html.Raw(Model.ScoringDescription.Replace("\n", "<br />").Replace("\r\n", "<br />"))
+                                        </p>
+                                    </div>
+                                </div>
+                                @*<hr class="uk-grid-divider">*@
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Reference))
+                            {
+                                <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                                    <div class="uk-grid uk-grid-small">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">مراجع</span>
+                                            @Html.Raw(Model.Reference.Replace("\n", "<br />").Replace("\r\n", "<br />"))
+                                        </p>
+                                    </div>
+                                </div>
+                                @*<hr class="uk-grid-divider uk-hidden-large">*@
+                            }
+                        </div>
+                        <div class="uk-grid pt-30 uk-grid-small" data-uk-grid-margin="">
+                            @if (Model.HasLessonClassInfo)
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button fs-15" data-getinfo-fullurl="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.ClassInfo, id = Model.LessonId.ToString(), title = (UrlParameter)null })" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="اطلاعات تشکیل کلاس" href="javascript:void(0)"><img width="20" src="~/build/images/class.png" alt="class" /> اطلاعات تشکیل کلاس</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat disabled" href="javascript:void(0)"><img width="20" src="~/build/images/class.png" alt="class" /> اطلاعات تشکیل کلاس</a>
+                                </div>
+                            }
+                            @if (Model.HasPracticeClassInfo)
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button fs-15" data-getinfo-fullurl="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.PracticeClassInfo, id = Model.LessonId.ToString(), title = (UrlParameter)null })" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="کلاس حل تمرین" href="javascript:void(0)"><img width="20" src="~/build/images/practiceclass.png" alt="practice class" /> کلاس حل تمرین</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat disabled" href="javascript:void(0)"><img width="20" src="~/build/images/practiceclass.png" alt="practice class" /> کلاس حل تمرین</a>
+                                </div>
+                            }
+                            @if (Model.HasImportantDate)
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button fs-15" data-getinfo-fullurl="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.ClassImportantDate, id = Model.LessonId.ToString(), title = (UrlParameter)null })" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="تاریخ های مهم" href="javascript:void(0)"><img width="20" src="~/build/images/importantdate.png" alt="important date" /> تاریخ های مهم</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat disabled" href="javascript:void(0)"><img width="20" src="~/build/images/importantdate.png" alt="important date" /> تاریخ های مهم</a>
+                                </div>
+                            }
+                            @if (Model.HasLessonNews)
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button fs-15" data-getinfo-fullurl="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.ClassNews, id = Model.LessonId.ToString(), title = (UrlParameter)null })" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="اخبار درس" href="javascript:void(0)"><img width="20" src="~/build/images/news.png" alt="news" /> اخبار</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat disabled" href="javascript:void(0)"><img width="20" src="~/build/images/news.png" alt="news" /> اخبار</a>
+                                </div>
+                            }
+                            @if (Model.HasLessonFile)
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button fs-15" data-getinfo-fullurl="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.ClassFile, id = Model.LessonId.ToString(), title = (UrlParameter)null })" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="فایل های درس" href="javascript:void(0)"><img width="20" src="~/build/images/file.png" alt="file" /> فایل ها</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat disabled" href="javascript:void(0)"><img width="20" src="~/build/images/file.png" alt="file" /> فایل ها</a>
+                                </div>
+                            }
+                            @if (Model.HasLessonPractice)
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button fs-15" data-getinfo-fullurl="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.ClassPractice, id = Model.LessonId.ToString(), title = (UrlParameter)null })" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="تمرین های درس" href="javascript:void(0)"><img width="20" src="~/build/images/practice.png" alt="practice" /> تمرین ها</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat disabled" href="javascript:void(0)"><img width="20" src="~/build/images/practice.png" alt="practice" /> تمرین ها</a>
+                                </div>
+                            }
+                            @if (Model.HasLessonScore)
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button fs-15" data-getinfo-fullurl="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.ClassScore, id = Model.LessonId.ToString(), title = (UrlParameter)null })" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="نمرات درس" href="javascript:void(0)"><img width="20" src="~/build/images/score.png" alt="score" /> نمرات</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="uk-grid-width-1-8">
+                                    <a class="md-btn md-btn-flat disabled" href="javascript:void(0)"><img width="20" src="~/build/images/score.png" alt="score" /> نمرات</a>
+                                </div>
+                            }
+                            <div class="uk-grid-width-1-8">
+                                <a class="md-btn md-btn-flat md-btn-flat-warning md-btn-wave waves-effect waves-button fs-15" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="دروس ارائه شده" href="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.Lessons, id = (UrlParameter)null, title = (UrlParameter)null })"><i class="material-icons fs-15" style="vertical-align: -5px;">arrow_forward</i> لیست دروس</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ajax-container" class="uk-grid" style="display: none;" data-uk-grid-margin="">
+            <div class="uk-width-1-1 uk-container uk-container-center">
+                <div class="md-card">
+                    <div id="ajax-result" class="md-card-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

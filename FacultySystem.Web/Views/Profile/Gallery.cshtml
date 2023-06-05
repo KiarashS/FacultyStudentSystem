@@ -1,0 +1,88 @@
+﻿@model ContentManagementSystem.Models.ViewModels.GalleryIndexViewModel
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = MVC.Shared.Views._LayoutProfessorNew;
+}
+
+@{
+    Html.RenderAction(MVC.Profile.TopMenu());
+}
+
+<div id="page_content">
+    <div id="page_content_inner" style="padding-bottom: 0;">
+        <div class="uk-grid" data-uk-grid-margin="">
+            <div class="uk-width-1-1 uk-container uk-container-center mt-90">
+                <div class="md-card">
+                    <div class="md-card-content large-padding uk-overflow-container">
+                        <div class="heading_a uk-text-center"><span class="uk-badge heading_a persian-number">@Model.Title</span></div>
+                        <div class="uk-grid uk-grid-divider uk-grid-medium">
+                            <div class="uk-width-large-1-2 uk-width-medium-1-2">
+                                @if (!string.IsNullOrEmpty(Model.Title))
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <div class="uk-width-large-1-3">
+                                            <span class="uk-text-muted uk-text-small">نام گالری</span>
+                                        </div>
+                                        <div class="uk-width-large-2-3">
+                                            <span class="uk-text-large uk-text-middle">
+                                                @if (string.IsNullOrEmpty(Model.Link))
+                                                {
+                                                    <span class="persian-number">@Model.Title</span>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Model.Link" target="_blank" rel="nofollow"><span class="persian-number">@Model.Title</span></a>
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <hr class="uk-grid-divider uk-hidden-large">
+                                }
+                                @*@if (!string.IsNullOrEmpty(Model.Description))
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">توضیحات</span>
+                                            @Html.Raw(Model.Description.Replace("\n", "<br />").Replace("\r\n", "<br />"))
+                                        </p>
+                                    </div>
+                                    <hr class="uk-grid-divider uk-hidden-large">
+                                }*@
+                            </div>
+                            <div class="uk-width-large-1-2 uk-width-medium-1-2">
+                                <div class="uk-grid uk-grid-small">
+                                    <div class="uk-width-large-1-3">
+                                        <span class="uk-text-muted uk-text-small">تاریخ ایجاد گالری</span>
+                                    </div>
+                                    <div class="uk-width-large-2-3">
+                                        <span class="uk-text-large uk-text-middle persian-number">@Model.CreateDateText</span>
+                                    </div>
+                                </div>
+                                <hr class="uk-grid-divider uk-hidden-large">
+                            </div>
+                            <div class="uk-width-large-1-1 uk-width-medium-1-1 mt-25">
+                                @if (!string.IsNullOrEmpty(Model.Description))
+                                {
+                                    <div class="uk-grid uk-grid-small">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">توضیحات</span>
+                                            @Html.Raw(Model.Description.Replace("\n", "<br />").Replace("\r\n", "<br />"))
+                                        </p>
+                                    </div>
+                                    <hr class="uk-grid-divider uk-hidden-large">
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-grid" data-uk-grid-margin="">
+            <div class="uk-width-1-1 uk-container uk-container-center">
+                @{
+                    Html.RenderAction(MVC.Profile.GalleryItems((string)ViewBag.PageId, Model.GalleryId));
+                }
+            </div>
+        </div>
+    </div>
+</div>

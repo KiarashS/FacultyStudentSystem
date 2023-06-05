@@ -1,0 +1,75 @@
+﻿@{ 
+    var adminEmail = ConfigurationManager.AppSettings["AdminEmail"].Trim().Length > 0 ? ConfigurationManager.AppSettings["AdminEmail"] : null;
+    var showAdminEmailInDashboard = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowAdminEmailInDashboard"]);
+}
+<div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+    <div style="width: 100%;">
+        <div class="md-card">
+            <div class="md-card-content">
+                <ul class="md-list md-list-addon md-list-right">
+                    @if (showAdminEmailInDashboard && adminEmail != null)
+                    {
+                        <text>
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">email</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">توجه</span>
+                                    <span class="uk-text-medium uk-text-muted">جهت تماس با مدیر سامانه می توانید با آدرس ایمیل <a href="mailto:@adminEmail">@adminEmail</a> نیز تماس برقرار نمائید.</span>
+                                </div>
+                            </li>
+                        </text>
+                    }
+                    <li>
+                        <div class="md-list-addon-element">
+                            <i class="md-list-addon-icon material-icons uk-text-warning">warning</i>
+                        </div>
+                        <div class="md-list-content">
+                            <span class="md-list-heading">هشدار</span>
+                            <span class="uk-text-medium uk-text-muted">در نگه داری رمز عبور خود دقت فرمائید، و از ورود به سامانه در کامپیوترهای عمومی خودداری نمائید.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="md-list-addon-element">
+                            <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                        </div>
+                        <div class="md-list-content">
+                            <span class="md-list-heading">توجه</span>
+                            <span class="uk-text-medium uk-text-muted">در صورت برخورد با هر گونه مشکل، آن را به مدیر سامانه اطلاع دهید.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="md-list-addon-element">
+                            <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                        </div>
+                        <div class="md-list-content">
+                            <span class="md-list-heading">توجه</span>
+                            <span class="uk-text-medium uk-text-muted">جهت تغییر ترتیب قرارگیری آیتم ها در تمامی قسمت ها می توانید اولویت قرار گیری آیتم ها را تغییر دهید. با افزایش اولویت قرارگیری، آیتم مورد نظر اولویت بیشتری پیدا کرده و در پروفایل شما بالاتر از بقیه آیتم ها قرار می گیرد.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+    <div style="width: 100%;">
+        <div class="md-card">
+            <div class="md-card-content">
+                <ul class="md-list md-list-addon md-list-right">
+                    <li>
+                        <div class="md-list-addon-element">
+                            <i class="md-list-addon-icon material-icons uk-text-success">beenhere</i>
+                        </div>
+                        <div class="md-list-content">
+                            <span class="md-list-heading">جهت استفاده مناسب از سامانه از مرورگر کروم یا فایرفاکس استفاده نمائید:&nbsp;&nbsp;<a href="https://dl.google.com/chrome/install/standalonesetup.exe" target="_blank" rel="nofollow" class="yellow"><i title="دریافت مرورگر کروم" data-uk-tooltip="{pos:'top', cls: 'fs-16p'}" class="fa fa-chrome fa-2x"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://download.mozilla.org/?product=firefox-latest&os=win&lang=en-US" target="_blank" rel="nofollow" class="orange"><i title="دریافت مرورگر فایرفاکس" data-uk-tooltip="{pos:'top', cls: 'fs-16p'}" class="fa fa-firefox fa-2x"></i></a></span>
+                            @*<span class="uk-text-medium uk-text-muted"></span>*@
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

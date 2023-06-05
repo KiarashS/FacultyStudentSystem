@@ -1,0 +1,111 @@
+﻿@model IList<ContentManagementSystem.Models.ViewModels.ExternalSeminarRecordViewModel>
+@if ((!Request.IsAjaxRequest()) && ViewContext.Controller.ControllerContext.IsChildAction)
+{
+<text><div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+        <div class="uk-width-1-1 uk-container uk-container-center">
+            <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="سمینارهای خارجی">
+                <i class="fa fa-connectdevelop fa-35 yellow" style="padding-top: 25%;"></i>
+            </div>
+            <div class="md-card">
+                <div class="md-card-content pt-70">
+                    <h3 class="heading_c head uk-text-center uk-text-muted">مقالات ارائه شده در کنگره و سمینارهای خارجی</h3>
+                    <div class="uk-overflow-container pb-15 pt-30" data-loadmore-container>
+                        <ul class="professor-details-list" data-loadmore-result>
+</text>
+}
+@foreach (var externalSeminar in Model)
+{
+    <li>
+        @if (!string.IsNullOrEmpty(externalSeminar.Link))
+        {
+            //if (externalResearch.Title.ContainsFarsi())
+            //{
+            @*<a href="@honor.Link" target="_blank" rel="nofollow"><strong>@honor.Title</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@honor.FullTime)</span>*@
+            <a href="@externalSeminar.Link" target="_blank" rel="nofollow" class="uk-display-block"><strong>@externalSeminar.Title</strong></a>
+            //}
+            //else
+            //{
+            //    <a dir="ltr" class="uk-text-right" href="@externalResearch.Link" target="_blank" rel="nofollow"><strong>@externalResearch.Title</strong></a>
+            //}
+        }
+        else
+        {
+            //if (externalResearch.Title.ContainsFarsi())
+            //{
+            @*<strong>@(honor.Title)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@honor.FullTime)</span>*@
+            <strong class="uk-display-block">@(externalSeminar.Title)</strong>
+            @*}
+                else
+                {
+                    <strong dir="ltr" class="uk-text-right">@(externalResearch.Title)</strong>
+                }*@
+        }
+        @if (!string.IsNullOrEmpty(externalSeminar.Doi))
+        {
+            if (externalSeminar.Doi.StartsWith("10."))
+            {
+                @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">شناسه دیجیتال:</span> <span class="direction-ltr display-inlineblock"><a href="http://dx.doi.org/@externalSeminar.Doi" target="_blank" rel="nofollow">@externalSeminar.Doi</a></span>
+            }
+            else
+            {
+                @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">شناسه:</span> <span class="direction-ltr display-inlineblock">@externalSeminar.Doi</span>
+            }
+        }
+        @if (!string.IsNullOrEmpty(externalSeminar.Authors))
+        {
+            @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">نویسندگان:</span> <span class="direction-ltr display-inlineblock">@externalSeminar.Authors</span>
+        }
+        @if (!string.IsNullOrEmpty(externalSeminar.Conference))
+        {
+            @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">کنفرانس:</span> <span class="direction-ltr display-inlineblock">@externalSeminar.Conference</span>
+        }
+        @if (!string.IsNullOrEmpty(externalSeminar.Date))
+        {
+            @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">زمان:</span> <span class="persian-number">@externalSeminar.Date</span>
+        }
+        @if (!string.IsNullOrEmpty(externalSeminar.Filename))
+        {
+            @:&nbsp;&nbsp;<a class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" href="@Url.Action(MVC.Home.GetFile(type: 6, fileText: externalSeminar.FileText))"><i class="material-icons">file_download</i> دریافت</a>
+        }
+        @if (!string.IsNullOrEmpty(externalSeminar.Abstract) || !string.IsNullOrEmpty(externalSeminar.Description))
+        {
+            <div class="uk-accordion mt-15" data-uk-accordion="{ showfirst: false }">
+                @if (!string.IsNullOrEmpty(externalSeminar.Abstract))
+                {
+                    <h3 class="uk-accordion-title uk-accordion-title">چکیده</h3>
+                    <div data-wrapper="true" style="height: 0px; position: relative; overflow: hidden;" aria-expanded="false">
+                        <div class="uk-accordion-content">
+                            <p class="uk-text-right direction-ltr">@Html.Raw(externalSeminar.Abstract.Replace("\n", "<br />").Replace("\r\n", "<br />"))</p>
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(externalSeminar.Description))
+                {
+                    <h3 class="uk-accordion-title uk-accordion-title">توضیحات</h3>
+                    <div data-wrapper="true" style="height: 0px; position: relative; overflow: hidden;" aria-expanded="false">
+                        <div class="uk-accordion-content">
+                            <p>@Html.Raw(externalSeminar.Description.Replace("\n", "<br />").Replace("\r\n", "<br />"))</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        @*@if (!string.IsNullOrEmpty(externalResearch.Description))
+            {
+                <blockquote class="uk-text-muted" style="border-left: none;">
+                    <p>@Html.Raw(externalResearch.Description.Replace("\n", "<br />").Replace("\r\n", "<br />"))</p>
+                </blockquote>
+            }*@
+    </li>
+}
+@if ((!Request.IsAjaxRequest()) && ViewContext.Controller.ControllerContext.IsChildAction)
+{
+                        @:</ul>
+                        @:<div class="uk-text-center"><a href="javascript:void(0)" style="width:150px;" class="md-btn md-btn-success md-btn-large waves-effect waves-button waves-light" data-loadmore-button data-list-url="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.ExternalSeminars, id = (UrlParameter)null })" data-current-page="1">بیشتر</a></div>
+                        @:<div data-loadmore-loading class="uk-text-center" style="display:none;"><span class="uk-badge uk-badge-warning fs-16p" style="padding: 5px !important;">در حال بارگذاری ...</span></div>
+                    @:</div>
+                @:</div>
+            @:</div>
+        @:</div>
+    @:</div>
+}

@@ -1,0 +1,91 @@
+﻿@using ContentManagementSystem.Commons.Web;
+@model IList<ContentManagementSystem.Models.ViewModels.IndexUsersListViewModel>
+
+@foreach (var user in Model)
+{
+    <div class="card-number zero-opacity">
+        <div class="md-card md-card-hover">
+            <div class="md-card-head md-bg-cyan-600">
+                @*<div class="md-card-head-menu" data-uk-dropdown="{pos:'bottom-left'}">
+                        <i class="md-icon material-icons">&#xE5D4;</i>
+                        <div class="uk-dropdown uk-dropdown-small">
+                            <ul class="uk-nav">
+                                <li><a href="#">ایمیل</a></li>
+                                <li><a href="#">صفحه شخصی</a></li>
+                            </ul>
+                        </div>
+                    </div>*@
+                <div class="uk-text-center">
+                    <a href="/@user.PageId"><img class="md-card-head-avatar" src="@Url.Action(MVC.Home.UserAvatar(RijndaelManagedEncryption.EncryptRijndael(user.AvatarName ?? "empty avatar")))" alt="@user.Fullname" /></a>
+                </div>
+                <h3 class="md-card-head-text uk-text-center md-color-white">
+                    @user.Fullname
+                    @if (user.EducationalDegree != "--")
+                    {
+                        <span class="line-height-2em fs-16p">@user.EducationalDegree</span>
+                    }
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <ul class="md-list">
+                    @if (user.College != "--")
+                    {
+                        <li>
+                            <div class="md-list-content">
+                                <span class="md-list-heading">دانشکده</span>
+                                <span class="uk-text-small uk-text-muted">@user.College</span>
+                            </div>
+                        </li>
+                    }
+                    @if (user.EducationalGroup != "--")
+                    {
+                        <li>
+                            <div class="md-list-content">
+                                <span class="md-list-heading">گروه آموزشی</span>
+                                <span class="uk-text-small uk-text-muted">@user.EducationalGroup</span>
+                            </div>
+                        </li>
+                    }
+                    <li>
+                        <div class="md-list-content">
+                            <span class="md-list-heading">آدرس ایمیل</span>
+                            <span class="uk-text-small uk-text-muted uk-text-truncate"><img src="~/ImageGenerator.ashx?Code=@RijndaelManagedEncryption.EncryptRijndael(user.Email)&FontFamily=Calibri&FontSize=13&TextColor=Gray&BackgroundColor=Transparent&UsePng=True" class="cursor-pointer" alt="ایمیل @user.Fullname" /></span>
+                        </div>
+                    </li>
+                    @if (user.LastUpdateTime != null)
+                    {
+                        <li>
+                            <div class="md-list-content">
+                                <span class="md-list-heading">آخرین بروز رسانی</span>
+                                <span class="uk-text-small uk-text-muted persian-number" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="@user.JalaiLastUpdateTime">@user.GetRelativeLastUpdateTime</span>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <a href="/@user.PageId" class="md-btn md-btn-success md-btn-large md-btn-block waves-effect waves-button waves-light mt-10" style="font-size: 18px !important;">صفحه شخصی <i class="material-icons" style="font-size:24px; vertical-align: -10px;">chevron_left</i></a>
+            </div>
+        </div>
+    </div>
+}
+
+@if (!Request.IsAjaxRequest())
+{
+    <script>
+        window.onload = function () {
+            $('#mainNonAjaxContent > div').each(function (i) {
+                $(this).delay((i++) * 200).fadeTo(1000, 1);
+            });
+        };
+    </script>    
+}
+else
+{
+    <script>
+        currentPage = '@ViewBag.CurrentPageIndex';
+        filterFirstname = '@ViewBag.FilterFirstname';
+        filterLastname = '@ViewBag.FilterLastname';
+        filterEmail = '@ViewBag.FilterEmail';
+        filterCollege = '@ViewBag.FilterCollege';
+        filterEducationalGroup = '@ViewBag.FilterEducationalGroup';
+    </script> 
+}

@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "ویرایش اطلاعات شخصی";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+}
+
+<form action="@Url.Action(MVC.Dashboard.Admin.Details())" class="dovalidate ajaxsubmit" method="post">
+    <div id="page_content">
+        <div id="page_content_inner">
+            <div class="md-card">
+                <div class="md-card-content" id="admin-details">
+                    <div class="uk-grid">
+                        <div class="uk-width-1-5">
+                            <div class="md-input-wrapper"><label>نام</label><input type="text" data-parsley-required="true" class="md-input" id="firstname" name="firstname" value="@Model.FirstName"><span class="md-input-bar "></span></div>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-1-5">
+                            <div class="md-input-wrapper"><label>نام خانوادگی</label><input type="text" data-parsley-required="true" class="md-input" id="lastname" name="lastname" value="@Model.LastName"><span class="md-input-bar "></span></div>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-1-5">
+                            <div class="uk-form-row"><label>ایمیل اصلی</label><input dir="ltr" data-inputmask="'alias': 'email'" data-parsley-required="true" data-parsley-type="email" type="text" class="md-input" id="email" name="email" style="font-family: Arial, Tahoma;" value="@Model.Email"><span class="md-input-bar "></span><span class="uk-form-help-block uk-text-primary" style="font-size: 15px !important;">ایمیل اصلی در درجه اول ایمیلی جهت تعامل با سامانه می باشد، لذا در انتخاب آن دقت فرمائید.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="md-fab-wrapper mb-30">
+        <button type="submit" class="md-fab md-fab-primary waves-button waves-effect waves-light" id="details-submit" title="ذخیره اطلاعات" data-uk-tooltip="{pos:'right', cls: 'fs-16p'}">
+            <i class="material-icons"></i>
+        </button>
+    </div>
+
+</form>
+
+@section Scripts{
+    <script src="~/bower_components/jquery.inputmask/dist/jquery.inputmask.bundle.js"></script>
+}

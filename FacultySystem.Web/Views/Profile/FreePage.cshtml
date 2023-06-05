@@ -1,0 +1,45 @@
+﻿@model ContentManagementSystem.Models.ViewModels.FreePageViewModel
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = MVC.Shared.Views._LayoutProfessorNew;
+}
+
+<div id="page_content">
+    <div id="page_content_inner" style="padding-bottom: 0;">
+        <div class="uk-grid" data-uk-grid-margin="">
+            <div class="uk-width-1-1 uk-container uk-container-center">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <div class="uk-grid">
+                            <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-text-left uk-text-primary">
+                                <span>@ViewBag.Title</span>
+                            </div>
+                            <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-text-center uk-text-muted">
+                                @if (Model.FreePageLastUpdateTime != null)
+                                {
+                                    @:<span>آخرین بروزرسانی این صفحه:</span>
+                                    @:<div class="">@Html.Raw(Model.LastUpdateTimeText)</div>
+                                }
+                            </div>
+                            <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-text-right">
+                                <a class="md-btn md-btn-flat md-btn-flat-warning md-btn-wave waves-effect waves-button fs-15" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="بازگشت به صفحه اصلی" href="/"><i class="material-icons fs-15" style="vertical-align: -5px;">home</i> صفحه اصلی</a>
+                                <a class="md-btn md-btn-flat md-btn-flat-warning md-btn-wave waves-effect waves-button fs-15" data-uk-tooltip="{pos: 'top', cls: 'fs-16p'}" title="بازگشت به صفحه شخصی" href="/@ViewBag.PageId">صفحه شخصی <i class="material-icons fs-15" style="vertical-align: -5px;">arrow_back</i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1 uk-container uk-container-center">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <div class="uk-grid">
+                            <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                                @Html.Raw(Model.FreePageText)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4F56C887-0F97-405F-BE08-23147A2CE0C8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FacultySystem.Models</RootNamespace>
+    <AssemblyName>FacultySystem.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Persia, Version=3.0.4727.38582, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Persia.NET.3.0.4727\lib\Persia.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Z.ExtensionMethods, Version=2.0.12.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.ExtensionMethods.2.0.12\lib\net45\Z.ExtensionMethods.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Utils\EnumExtensions.cs" />
+    <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="Utils\RijndaelManagedEncryption.cs" />
+    <Compile Include="ViewModels\AcademicRankViewModel.cs" />
+    <Compile Include="ViewModels\ActivityLogViewModel.cs" />
+    <Compile Include="ViewModels\NewsFeedViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\NewsViewModel.cs" />
+    <Compile Include="ViewModels\ExternalResearchRecordViewModel.cs" />
+    <Compile Include="ViewModels\ExternalSeminarRecordViewModel.cs" />
+    <Compile Include="ViewModels\InternalResearchRecordViewModel.cs" />
+    <Compile Include="ViewModels\InternalSeminarRecordViewModel.cs" />
+    <Compile Include="ViewModels\ProfessorDashboardStatisticViewModel.cs" />
+    <Compile Include="ViewModels\ChartViewModel.cs" />
+    <Compile Include="ViewModels\ScopusHIndexViewModel.cs" />
+    <Compile Include="ViewModels\GoogleHIndexViewModel.cs" />
+    <Compile Include="ViewModels\AdminDashboardStatisticViewModel.cs" />
+    <Compile Include="ViewModels\DocumentCitationViewModel.cs" />
+    <Compile Include="ViewModels\HIndexManagementViewModel.cs" />
+    <Compile Include="ViewModels\UserSettingsViewModel.cs" />
+    <Compile Include="ViewModels\AdminMessageViewModel.cs" />
+    <Compile Include="ViewModels\FreePageViewModel.cs" />
+    <Compile Include="ViewModels\GalleryViewModel.cs" />
+    <Compile Include="ViewModels\GalleryItemViewModel.cs" />
+    <Compile Include="ViewModels\GalleryIndexViewModel.cs" />
+    <Compile Include="ViewModels\LessonIndexViewModel.cs" />
+    <Compile Include="ViewModels\GalleriesIndexViewModel.cs" />
+    <Compile Include="ViewModels\LessonsIndexViewModel.cs" />
+    <Compile Include="ViewModels\ProfessorMembershipViewModel.cs" />
+    <Compile Include="ViewModels\ProfessorNameAndIdViewModel.cs" />
+    <Compile Include="ViewModels\ProfileTopMenuViewModel.cs" />
+    <Compile Include="ViewModels\DefaultFreeFieldListViewModel.cs" />
+    <Compile Include="ViewModels\LanguageViewModel.cs" />
+    <Compile Include="ViewModels\AdministrationViewModel.cs" />
+    <Compile Include="ViewModels\CollegeViewModel.cs" />
+    <Compile Include="ViewModels\EducationalGroupViewModel.cs" />
+    <Compile Include="ViewModels\EducationalDegreeViewModel.cs" />
+    <Compile Include="ViewModels\FreeFieldListViewModel.cs" />
+    <Compile Include="ViewModels\IndexUsersListViewModel.cs" />
+    <Compile Include="ViewModels\LessonClassInfoViewModel.cs" />
+    <Compile Include="ViewModels\LessonFilesViewModel.cs" />
+    <Compile Include="ViewModels\LessonImportantDateViewModel.cs" />
+    <Compile Include="ViewModels\LessonNewsViewModel.cs" />
+    <Compile Include="ViewModels\LessonPracticesViewModel.cs" />
+    <Compile Include="ViewModels\LessonScoresViewModel.cs" />
+    <Compile Include="ViewModels\LessonViewModel.cs" />
+    <Compile Include="ViewModels\PracticeClassInfoViewModel.cs" />
+    <Compile Include="ViewModels\ResearchViewModel.cs" />
+    <Compile Include="ViewModels\SectionsOrderViewModel.cs" />
+    <Compile Include="ViewModels\StudingViewModel.cs" />
+    <Compile Include="ViewModels\PublicationViewModel.cs" />
+    <Compile Include="ViewModels\WeeklyProgramIndexViewModel.cs" />
+    <Compile Include="ViewModels\WeeklyProgramViewModel.cs" />
+    <Compile Include="ViewModels\WeeklyProgramDetailsViewModel.cs" />
+    <Compile Include="ViewModels\WorkshopViewModel.cs" />
+    <Compile Include="ViewModels\ThesisViewModel.cs" />
+    <Compile Include="ViewModels\HonorViewModel.cs" />
+    <Compile Include="ViewModels\TrainingViewModel.cs" />
+    <Compile Include="ViewModels\UserListViewModel.cs" />
+    <Compile Include="ViewModels\AddressListViewModel.cs" />
+    <Compile Include="ViewModels\BanInfoViewModel.cs" />
+    <Compile Include="ViewModels\BioViewModel.cs" />
+    <Compile Include="ViewModels\DetailsViewModel.cs" />
+    <Compile Include="ViewModels\EmailViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\LogonViewModel.cs" />
+    <Compile Include="ViewModels\ProfileIntroViewModel.cs" />
+    <Compile Include="ViewModels\ProfileValidationViewModel.cs" />
+    <Compile Include="ViewModels\UserTopMenuViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FacultySystem.DomainClasses\FacultySystem.DomainClasses.csproj">
+      <Project>{BE2D0B69-1F40-41B0-AF1D-F76C7356BE74}</Project>
+      <Name>FacultySystem.DomainClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacultySystem.Resources\FacultySystem.Resources.csproj">
+      <Project>{96589b12-5e81-4f92-bfe7-23c971079724}</Project>
+      <Name>FacultySystem.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastrcture\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

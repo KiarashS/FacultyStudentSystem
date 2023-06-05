@@ -1,0 +1,160 @@
+﻿
+@{
+    Layout = null;
+    var showCopyright = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowCopyright"]);
+}
+
+<!DOCTYPE html>
+<!--[if lte IE 9]> <html class="lte-ie9" lang="fa" dir="rtl"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="fa" dir="rtl"> <!--<![endif]--> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no"/>
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <title>@ViewBag.Title</title>
+
+    @*<!-- fonts -->
+    <link rel="stylesheet" href="~/content/admin/fonts.css" media="all">
+  
+    <link rel="stylesheet" href="~/Content/admin/skins/jquery-ui/material/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/Content/admin/skins/jtable/jtable.min.css">
+
+    <!-- uikit rtl -->
+    <link rel="stylesheet" href="~/content/admin/css/uikit.rtl.css" media="all">
+
+    <!-- home admin -->
+    <link rel="stylesheet" href="~/content/admin/css/main.min.css" media="all">
+
+    <!-- themes -->
+    <link rel="stylesheet" href="~/content/admin/css/themes/themes_combined.min.css" media="all">
+
+    <!-- colors -->
+    <link rel="stylesheet" href="~/content/admin/css/colors.css" media="all">
+
+    <!-- modal -->
+    <link rel="stylesheet" href="~/content/admin/iziModal.css" media="all">
+
+    <!-- custom styles -->
+    <link rel="stylesheet" href="~/content/admin/custom.css" media="all">*@
+    <link rel="stylesheet" href="~/build/styles/styles.min.css" />
+    <!-- matchMedia polyfill for testing media queries in JS -->
+    <!--[if lte IE 9]>
+        <script type="text/javascript" src="/Scripts/admin/matchMedia/matchMedia.js"></script>
+        <script type="text/javascript" src="/Scripts/admin/matchMedia/matchMedia.addListener.js"></script>
+        <link rel="stylesheet" href="/Content/admin/ie.css" media="all">
+    <![endif]-->
+
+</head>
+<body class="sidebar_main_open sidebar_main_swipe" style="position:relative;">
+    <!-- main header -->
+    <header id="header_main">
+        <div class="header_main_content">
+            <nav class="uk-navbar">
+                <!-- main sidebar switch -->
+                <a href="#" id="sidebar_main_toggle" class="sSwitch sSwitch_left" data-uk-tooltip="{pos:'bottom'}" title="مخفی کردن منو">
+                    <span class="sSwitchIcon"></span>
+                </a>
+                @{ Html.RenderAction(MVC.Dashboard.Home.TopMenu());}                
+            </nav>
+        </div>
+    </header><!-- main header end -->
+    <!-- main sidebar -->
+    <aside id="sidebar_main">
+        <div class="sidebar_main_header">
+            <div class="sidebar_logo">
+                <a href="@Url.Action(MVC.Dashboard.Home.Index())" style="color: black;">
+                    <img class="logo_regular" src="~/Content/admin/img/logo.png" alt="@ConfigurationManager.AppSettings["UniversityNameFa"]" title="@ConfigurationManager.AppSettings["UniversityNameFa"]" height="60" width="60" style="padding: 4px;" />
+                    <span>@ConfigurationManager.AppSettings["SystemNameFa"]</span>
+                </a>
+                @*<a href="@Url.Action(MVC.Dashboard.Home.Index())" class="sSidebar_hide sidebar_logo_large">
+                    <img class="logo_regular" src="~/Content/admin/img/logo_main.png" alt="" height="15" width="71"/>
+                    <img class="logo_light" src="~/Content/admin/img/logo_main_white.png" alt="" height="15" width="71"/>
+                </a>
+                <a href="@Url.Action(MVC.Dashboard.Home.Index())" class="sSidebar_show sidebar_logo_small">
+                    <img class="logo_regular" src="~/Content/admin/img/logo_main_small.png" alt="" height="32" width="32"/>
+                    <img class="logo_light" src="~/Content/admin/img/logo_main_small_light.png" alt="" height="32" width="32"/>
+                </a>*@
+            </div>
+        </div>
+        
+        @Html.Partial(MVC.Dashboard.Home.Views._SideMenu)
+    </aside><!-- main sidebar end -->
+    @RenderBody()
+    <div id="modal-alert"></div>
+    <div id="load-waiting">شکیبا باشید، در حال استخراج اطلاعات شما ...</div>
+    <footer id="footer" style="z-index: 10;">
+        @*© @DateTime.Now.Year | Designed and Developed with <i class="material-icons red">favorites</i> by <a href="http://www.kiarash.pro" target="_blank" data-uk-tooltip="{pos:'top', cls: 'font-arial'}" title="kiarash.s@hotmail.com">Kiarash Soleimanzadeh</a>*@
+        کلیه حقوق مادی و معنوی این سامانه متعلق به @ConfigurationManager.AppSettings["UniversityNameFa"].ToString() می باشد.
+        @if (showCopyright) { <div style="float: left;">طراحی و پیاده سازی توسط <a href="http://www.ppk.co.ir" target="_blank"><strong>شرکت پویا پرداز کارکیا</strong></a></div> }
+    </footer>
+    @*<script>
+        <!-- google web fonts -->
+        WebFontConfig = {
+            google: {
+                families: [
+                    'Source+Code+Pro:400,700:latin',
+                    'Roboto:400,300,500,700,400italic:latin'
+                ]
+            }
+        };
+        (function() {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+            '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    </script>*@
+    <script src="~/build/scripts/scripts.min.js"></script>
+    @*<!-- common functions -->
+    <script src="~/Content/admin/js/common.js"></script>
+    <!-- uikit functions -->
+    <script src="~/Content/admin/js/uikit_custom.min.js"></script>
+    <!-- Home common functions/helpers -->
+    <script src="~/Content/admin/js/altair_admin_common.js"></script>
+
+    <!--  dashbord functions -->
+    <script src="~/Content/admin/js/pages/dashboard.min.js"></script>
+    <!--  parsley -->
+    <script src="~/scripts/admin/parsleyjs/dist/parsley.min.js"></script>
+    <!--  modal -->
+    <script src="~/scripts/admin/iziModal.js"></script>
+    <!--  jquery form -->
+    <script src="~/scripts/admin/jquery.form.min.js"></script>
+
+    <script src="~/Scripts/admin/jquery-ui.min.js"></script>
+    <script src="~/Scripts/admin/jquery.jtable.min.js"></script>
+    <script src="~/Scripts/admin/plugins_crud_table.js"></script>
+
+    <!--  customs -->
+    <script src="~/scripts/admin/custom.js"></script>*@
+
+    @RenderSection("Scripts", required: false)
+    @*<script>
+        $(function() {
+            if(isHighDensity()) {
+                $.getScript( "bower_components/dense/src/dense.html", function() {
+                    // enable hires images
+                    altair_helpers.retina_images();
+                });
+            }
+            if(Modernizr.touch) {
+                // fastClick (touch devices)
+                FastClick.attach(document.body);
+            }
+        });
+        $window.load(function() {
+            // ie fixes
+            altair_helpers.ie_fix();
+        });
+    </script>*@
+</body>
+</html>

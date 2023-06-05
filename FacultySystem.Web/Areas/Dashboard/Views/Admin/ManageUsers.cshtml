@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "مدیریت کاربران";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+}
+
+
+<div id="page_content">
+    <div id="page_content_inner">
+
+        <h3 class="heading_b uk-margin-bottom">مدیریت کاربران</h3>
+
+        <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+            <div style="width: 100%;">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <ul class="md-list md-list-addon md-list-right">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">توجه</span>
+                                    <span class="uk-text-medium uk-text-muted">با کلیلک راست بر روی عناوین جدول زیر می توانید ستون های انتخابی خود را جهت نمایش در جدول تعیین نمائید.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">نقش های کاربر</span>
+                                    <ul class="uk-text-medium uk-text-muted">
+                                        <li>
+                                            <span class="font-arial uk-text-bold uk-text-warning">Professor: </span>
+                                            این نقش شامل کاربرانی می باشد که فقط نیاز به دسترسی به پنل مدیریتی رزومه و اساتید را دارند. اکثر کاربران حداقل این نقش را دارا می باشند. <span class="uk-text-warning">(در صورتی که کاربری این نقش را داشته باشد و کاربر را از داشتن این نقش سلب نمائید، کاربر حذف منطقی شده و تمامی اطلاعات شخصی و فایل های آن کاربر در سیستم باقی می مانند. در صورت نیاز با اعطای مجدد نقش پروفسور به کاربر می توان اطلاعات کاربر را به او بازگرداند.)</span>
+                                        </li>
+                                        <li>
+                                            <span class="font-arial uk-text-bold uk-text-danger">Admin: </span>
+                                            در انتخاب این نقش دقت بسیاری فرمائید، در صورتی که به کاربری این نقش را اعطا نمائید، توسط سامانه به عنوان مدیر کل شناخته شده و تمامی اختیارات را در دست خواهد گرفت.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-small-1-1 uk-width-medium-1-10 uk-width-large-1-10 uk-width-xLarge-1-10">
+                        <div class="md-input-wrapper"><label>نام</label><input type="text" data-parsley-required="true" class="md-input" id="filter-firstname" name="filter-firstname"><span class="md-input-bar "></span></div>
+                    </div>
+                    <div class="uk-width-small-1-1 uk-width-medium-2-10 uk-width-large-1-10 uk-width-xLarge-1-10">
+                        <div class="md-input-wrapper"><label>نام خانوادگی</label><input type="text" data-parsley-required="true" class="md-input" id="filter-lastname" name="filter-lastname"><span class="md-input-bar "></span></div>
+                    </div>
+                    <div class="uk-width-small-1-1 uk-width-medium-2-10 uk-width-large-2-10 uk-width-xLarge-2-10">
+                        <div class="md-input-wrapper"><label>ایمیل</label><input type="text" data-parsley-required="true" class="md-input uk-text-right" dir="ltr" id="filter-email" name="filter-email"><span class="md-input-bar "></span></div>
+                    </div>
+                    <div class="uk-width-small-1-1 uk-width-medium-1-10 uk-width-large-1-10 uk-width-xLarge-1-10">
+                        <div class="md-input-wrapper"><label>شناسه پروفایل</label><input type="text" data-parsley-required="true" class="md-input uk-text-right" dir="ltr" id="filter-pageid" name="filter-pageid"><span class="md-input-bar "></span></div>
+                    </div>
+                    <div class="uk-width-small-1-1 uk-width-medium-1-10 uk-width-large-1-10 uk-width-xLarge-1-10">
+                        <select id="filter-role" name="filter-role" data-md-selectize="data-md-selectize">
+                            <option value="notdefined">--</option>
+                            <option value="professor">Professor</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="uk-width-small-1-1 uk-width-medium-1-10 uk-width-large-1-10 uk-width-xLarge-1-10">
+                        <label for="filter-isbanned">مسدود شده؟</label><br />
+                        <input type="checkbox" data-switchery="true" id="filter-isbanned" name="filter-isbanned" data-switchery-color="#1e88e5" />
+                    </div>
+                    <div class="uk-width-small-1-1 uk-width-medium-1-10 uk-width-large-1-10 uk-width-xLarge-1-10">
+                        <label for="filter-issoftdelete">حذف منطقی؟</label><br />
+                        <input type="checkbox" data-switchery="true" id="filter-issoftdelete" name="filter-issoftdelete" data-switchery-color="#1e88e5" />
+                    </div>
+                    <div class="uk-width-small-1-1 uk-width-medium-1-10 uk-width-large-2-10 uk-width-xLarge-2-10">
+                        <div class="md-btn-group">
+                            <button type="button" id="admin-users-search" class="md-btn md-btn-primary md-btn-large waves-effect waves-button waves-light" ><i class="material-icons" style="font-size:24px; vertical-align: -10px;">search</i> جستجو</button>
+                            <button type="button" id="admin-users-refresh" class="md-btn md-btn-large waves-effect waves-button waves-default" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="بارگذاری مجدد"><i class="material-icons" style="font-size:24px; vertical-align: -10px;">refresh</i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card">
+            <div class="md-card-content">
+                <div id="users_crud">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="md-fab-wrapper mb-30">
+    <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="#" id="recordAdd" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="اضافه کردن کاربر جدید">
+        <i class="material-icons"></i>
+    </a>
+</div>
+
+@if (ViewBag.ShowDisableUsers != null && (bool)ViewBag.ShowDisableUsers)
+{
+    <span id="showpendingregistration" class="uk-hidden"></span>
+}
+
+<span id="variables" class="display-hidden" data-list-url="@Url.Action(MVC.Dashboard.User.List())"
+      data-create-url="@Url.Action(MVC.Dashboard.User.Create())"
+      data-update-url="@Url.Action(MVC.Dashboard.User.Update())"
+      data-delete-url="@Url.Action(MVC.Dashboard.User.Delete())"
+      data-check-email-url="@Url.Action(MVC.Dashboard.User.CheckEmail())"
+      data-check-pageid-url="@Url.Action(MVC.Dashboard.User.CheckPageId())"></span>

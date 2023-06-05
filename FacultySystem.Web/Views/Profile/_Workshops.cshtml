@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.WorkshopViewModel>
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="دوره ها و کارگاه ها">
+            <i class="fa fa-group fa-35" style="padding-top: 25%;color:#7c4dff;"></i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">دوره های آموزشی و کارگاه ها</h3>
+                <div class="uk-overflow-container pb-15 pt-30">
+                    <ul class="professor-details-list">
+                        @foreach (var workshop in Model)
+                        {
+                            <li>
+                                @if (!string.IsNullOrEmpty(workshop.Link))
+                                {
+                                    if (workshop.FullTime != null)
+                                    {
+                                        <a href="@workshop.Link" target="_blank" rel="nofollow"><strong class="persian-number">@workshop.Title</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@workshop.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@workshop.Link" target="_blank" rel="nofollow"><strong class="persian-number">@workshop.Title</strong></a>
+                                    }
+                                }
+                                else
+                                {
+                                    if (workshop.FullTime != null)
+                                    {
+                                        <strong class="persian-number">@(workshop.Title)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@workshop.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <strong class="persian-number">@(workshop.Title)</strong>
+                                    }
+                                }
+                                @if (!string.IsNullOrEmpty(workshop.Host))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">میزبان:</span>&nbsp;<span class="persian-number">@workshop.Host</span></div>
+                                }
+                                @if (!string.IsNullOrEmpty(workshop.Place))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">مکان:</span>&nbsp;<span class="persian-number">@workshop.Place</span></div>
+                                }
+                                @if (!string.IsNullOrEmpty(workshop.Description))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">توضیحات:</span>&nbsp;<span class="persian-number">@workshop.Description</span></div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@{
+    var adminEmailForHome = ConfigurationManager.AppSettings["AdminEmailForHome"].Trim().Length > 0 ? ConfigurationManager.AppSettings["AdminEmailForHome"] : null;
+    var showAdminEmailInHome = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowAdminEmailInHome"]);
+    var showCopyright = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowCopyright"]);
+}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="nofollow" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/build/styles/styles.min.css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link title="فيد اخبار @ConfigurationManager.AppSettings["SystemNameFa"]" href="/feed" type="application/rss+xml" rel="alternate" />
+    @*<base href="@(Request.Url.Scheme + "://" + Request.Url.Authority + "/")" />*@
+    @RenderSection("heads", required: false)
+</head>
+<body class="pt-0">
+    @RenderBody()
+
+    <footer class="page-footer">
+        <div class="uk-grid" style="padding-left:20px;">
+            <div class="uk-width-1-1 uk-text-center" style="margin-right: 10px;">
+                @*<h5 class="white">پروفایل</h5>*@
+                @*<p class="md-color-grey-100" style="padding-top:20px;padding-bottom:20px;">Developed and Designed With <i class="material-icons red">favorite</i> by <a href="http://www.kiarash.pro" title="kiarash.s@hotmail.com" data-uk-tooltip="{pos:'top', cls: 'font-arial'}" class="md-color-grey-300" target="_blank">Kiarash Soleimanzadeh</a></p>*@
+                <p class="md-color-grey-100" style="padding-top:20px;">کلیه حقوق مادی و معنوی این سامانه متعلق به @ConfigurationManager.AppSettings["UniversityNameFa"].ToString() می باشد.</p>
+                @if (showAdminEmailInHome && adminEmailForHome != null)
+                {
+                    <p class="md-color-grey-100">تماس با مدیر سامانه: <a class="white" href="mailto:@adminEmailForHome">@adminEmailForHome</a></p>
+                }
+                <p class="md-color-grey-300">جهت استفاده مناسب از سامانه از مرورگر کروم یا فایرفاکس استفاده نمائید.</p>
+                @*https://dl.google.com/chrome/install/standalonesetup64.exe
+                https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US*@
+                <p style="padding-bottom:20px;"><a href="https://dl.google.com/chrome/install/standalonesetup.exe" target="_blank" rel="nofollow" class="yellow"><i title="دریافت مرورگر کروم" data-uk-tooltip="{pos:'top', cls: 'fs-16p'}" class="fa fa-chrome fa-2x"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://download.mozilla.org/?product=firefox-latest&os=win&lang=en-US" target="_blank" rel="nofollow" class="orange"><i title="دریافت مرورگر فایرفاکس" data-uk-tooltip="{pos:'top', cls: 'fs-16p'}" class="fa fa-firefox fa-2x"></i></a></p>
+            </div>
+        </div>
+        <div class="footer-copyright" style="padding-left:20px;">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 uk-text-center" dir="ltr">
+                    @if (showCopyright)
+                    {
+                        <span class="md-color-grey-300">طراحی و پیاده سازی توسط <a href="http://www.ppk.co.ir" style="color: #fffc00;" target="_blank"><strong>شرکت پویا پرداز کارکیا</strong></a></span>
+                    }
+                    else
+                    {
+                        <span class="font-arial md-color-grey-200" dir="ltr">
+                            &copy; Copyright @ConfigurationManager.AppSettings["YearOfInstall"] - @DateTime.Now.Year, @ConfigurationManager.AppSettings["UniversityNameEn"]
+                        </span>
+                    }
+                    @*<a class="grey-text text-lighten-4 right" href="#!">Terms</a>*@
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="material-scrolltop-btn" class="material-scrolltop" type="button" data-uk-tooltip="{pos:'top', cls: 'fs-16p'}" title="برو بالا!"><i class="small material-icons white md-36" style="margin-bottom: 7px;">keyboard_arrow_up</i></button>
+
+    <script src="~/build/scripts/scripts.min.js"></script>
+    @RenderSection("scripts", required: false)    
+    <script>
+        //$('body').materialScrollTop();
+
+        //$(window).scroll(function() {
+        //    if ($(this).scrollTop() > 83){  
+        //        $('#sticky-nav').addClass("sticky");
+        //    }
+        //    else{
+        //        $('#sticky-nav').removeClass("sticky");
+        //    }
+        //});
+    </script>
+
+</body>
+</html>

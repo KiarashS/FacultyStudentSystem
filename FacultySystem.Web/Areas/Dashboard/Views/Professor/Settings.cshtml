@@ -1,0 +1,64 @@
+﻿@model ContentManagementSystem.Models.ViewModels.UserSettingsViewModel
+@{
+    ViewBag.Title = "تنظیمات";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+}
+
+<div id="page_content">
+    <div id="page_content_inner">
+
+        <h3 class="heading_b uk-margin-bottom">تنظیمات</h3>
+
+        <div class="uk-grid">
+            <div class="uk-width-medium-1-1">
+                <form action="@Url.Action(MVC.Dashboard.Professor.Settings())" method="post" class="ajaxsubmit">
+                    @Html.AntiForgeryToken()
+                    <div class="md-card" data-uk-grid-margin>
+                        <div class="md-card-content">
+                            <ul class="uk-tab" data-uk-tab="{connect:'#tabs', animation:'slide-vertical'}">
+                                <li class="uk-active"><a href="#" class="fs-16p">عمومی</a></li>
+                                <li><a href="#" class="fs-16p">شاخص ها و ارجاعات مقالات</a></li>
+                            </ul>
+                            <ul id="tabs" class="uk-switcher uk-margin">
+                                <li>
+                                    <div class="mb-15">
+                                        @Html.CheckBoxFor(s => s.IsActiveBio, new { data_md_icheck = "data-md-icheck" })
+                                        @Html.LabelFor(s => s.IsActiveBio, "بیوگرافی من را در صفحه شخصی نمایش بده", new { @class = "cursor-pointer" })
+                                    </div>
+                                    <div class="mb-15">
+                                        @Html.CheckBoxFor(s => s.IsActiveFreePage, new { data_md_icheck = "data-md-icheck" })
+                                        @Html.LabelFor(s => s.IsActiveFreePage, "صفحه آزاد من را فعال کن", new { @class = "cursor-pointer" })
+                                    </div>
+                                    <div class="mb-15">
+                                        @Html.CheckBoxFor(s => s.IsActiveWeeklyProgram, new { data_md_icheck = "data-md-icheck" })
+                                        @Html.LabelFor(s => s.IsActiveWeeklyProgram, "برنامه هفتگی من را فعال کن", new { @class = "cursor-pointer" })
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="mb-15">
+                                        @Html.CheckBoxFor(s => s.ShowHIndexSection, new { data_md_icheck = "data-md-icheck" })
+                                        @Html.LabelFor(s => s.ShowHIndexSection, "اطلاعات H-Index من را نمایش بده", new { @class = "cursor-pointer" })
+                                    </div>
+                                    <div class="mb-15">
+                                        @Html.CheckBoxFor(s => s.ShowScopusDocumentsCitationChart, new { data_md_icheck = "data-md-icheck" })
+                                        @Html.LabelFor(s => s.ShowScopusDocumentsCitationChart, "نمودار تعداد مقالات و ارجاعات من در سال های مختلف را از Scopus نمایش بده", new { @class = "cursor-pointer" })
+                                    </div>
+                                    <div class="mb-15">
+                                        @Html.CheckBoxFor(s => s.ShowGoogleDocumentsCitationChart, new { data_md_icheck = "data-md-icheck" })
+                                        @Html.LabelFor(s => s.ShowGoogleDocumentsCitationChart, "نمودار تعداد ارجاعات من در سال های مختلف را از Google نمایش بده", new { @class = "cursor-pointer" })
+                                    </div>
+                                </li>
+                            </ul>
+                            <hr class="uk-margin" />
+                            <button type="submit" class="md-btn md-btn-success waves-button waves-effect waves-light"><i class="material-icons">save</i> ذخیره تنظیمات</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<span id="variables" class="display-hidden" data-list-url="@Url.Action(MVC.Dashboard.AdminMessage.ActionNames.List, MVC.Dashboard.AdminMessage.Name)"
+                             data-create-url="@Url.Action(MVC.Dashboard.AdminMessage.Create())"
+                             data-delete-url="@Url.Action(MVC.Dashboard.AdminMessage.Delete())"></span>

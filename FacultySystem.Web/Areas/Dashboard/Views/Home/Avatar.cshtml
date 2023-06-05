@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "آواتار (عکس شخصی)";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+
+    var minifier = new Microsoft.Ajax.Utilities.Minifier();
+    var previewUrl = "";
+    var autoCropArea = 0.5;
+    if (ViewBag.HasPreview != null && (bool)ViewBag.HasPreview)
+    {
+        previewUrl = Url.Action(MVC.Dashboard.Home.MyAvatar(withDefault: false));
+        autoCropArea = 1;
+    }
+}
+
+<link href="~/Content/jcrop/cropper.min.css" rel="stylesheet" />
+<div id="page_content">
+    <div id="page_content_inner">
+        <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+            <div style="width: 100%;">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <ul class="md-list md-list-addon md-list-right">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">توجه</span>
+                                    <span class="uk-text-medium uk-text-muted">پسوند تصویر می بایست یکی از پسوندهای png، jpg یا jpeg باشد.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">توجه</span>
+                                    <span class="uk-text-medium uk-text-muted">حجم تصویر نباید از 5 مگابایت بیشتر باشد.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-card">
+            <div class="md-card-toolbar">
+                <div class="md-card-toolbar-actions">
+                    <label class="btn btn-primary btn-upload" for="inputImage">
+                        <input type="file" class="sr-only" id="inputImage" name="file" accept=".jpg,.jpeg,.png">
+                        <span class="docs-tooltip cursor-pointer" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="انتخاب تصویر جدید">
+                            <span class="fa fa-upload green" style="font-size: 25px;"></span>
+                        </span>
+                    </label>
+                </div>
+                <h3 class="md-card-toolbar-heading-text uk-text-primary" style="padding-right: 10px;">
+                    جهت انتخاب تصویر جدید بر روی آیکون مقابل کلیک نمائید.
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="mGraph-wrapper">
+                    <div id="cropcontainer" class="direction-ltr" dir="ltr" style="border: 1px dotted #eee;">
+                        <img id="cropimage" src="@previewUrl">
+                    </div>
+                    <div style="padding-top: 40px; margin: 0 auto;">
+                        <ol>
+                            <li>ابتدا تصویر خود را با کلیلک بر روی آیکون سبز رنگ( <span class="fa fa-upload green"></span> ) در بالا انتخاب نمائید.</li>
+                            <li>با حرکت و تغییر سایز قسمت مشخص شده در تصویر، ناحیه ای از تصویر که مایلید به عنوان تصویر شما ذخیره شود را انتخاب نمائید.</li>
+                            <li>در نهایت بر روی دکمه ذخیره تصویر کلیک نمائید تا تصویر شما ذخیره شود.</li>
+                            <li>در صورت نیاز با کلیک بر روی دکمه دریافت تصویر پروفایل می توانید تصویر فعلی خود را دریافت نمائید.</li>
+                            <li>در صورت نیاز با کلیک بر روی دکمه حذف تصویر پروفایل می توانید تصویر فعلی خود را حذف نمائید.</li>
+                        </ol>
+                        <button id="btn-save" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light">ذخیره تصویر</button><a href="@previewUrl" id="btn-download" class="md-btn md-btn-warning md-btn-wave-light waves-effect waves-button waves-light">دریافت تصویر پروفایل</a><button id="btn-delete" class="md-btn md-btn-danger md-btn-wave-light waves-effect waves-button waves-light">حذف تصویر پروفایل</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<span id="avatar-link" data-link="@Url.Action(MVC.Dashboard.Home.Avatar())" class="uk-hidden"></span>
+
+@section Scripts{
+    <script src="~/Scripts/jcrop/cropper.min.js"></script>
+    <script>
+        @Html.Raw(minifier.MinifyJavaScript(@"
+        $(document).ready(function () {
+            var URL = window.URL || window.webkitURL;
+            var $image = $('#cropimage');
+            var $inputImage = $('#inputImage');
+            var uploadedImageURL;
+            var originalImageURL = $image.attr('src');
+            var cropOptions = {
+                aspectRatio: 1,
+                viewMode: 1,
+                responsive: true,
+                rotatable: false,
+                scalable: true,
+                zoomable: true,
+                zoomOnTouch: true,
+                zoomOnWheel: true,
+                autoCropArea: ###autoCropArea###,
+            };
+
+            // Cropper
+            $image.cropper(cropOptions);
+
+            if (uploadedImageURL) {
+                URL.revokeObjectURL(uploadedImageURL);
+                uploadedImageURL = '';
+                $image.attr('src', originalImageURL);
+            }
+
+            if (URL) {
+                $inputImage.change(function () {
+                    var files = this.files;
+                    var file;
+
+                    if (!$image.data('cropper')) {
+                        return;
+                    }
+
+                    if (files && files.length) {
+                        file = files[0];
+
+                        if (/^image\/\w+$/.test(file.type)) {
+                            if (uploadedImageURL) {
+                                URL.revokeObjectURL(uploadedImageURL);
+                            }
+
+                            uploadedImageURL = URL.createObjectURL(file);
+                            cropOptions.autoCropArea = 0.5;
+                            $image.cropper('destroy').attr('src', uploadedImageURL).cropper(cropOptions);
+                            $inputImage.val('');
+                        } else {
+                            UIkit.notify('فایل انتخاب شده تصویر معتبری نمی باشد.', { status: 'info' });
+                        }
+                    }
+                });
+            } else {
+                $inputImage.prop('disabled', true).parent().addClass('disabled');
+            }
+
+            $(document).on('click', '#btn-download', function (e) {
+                var avatarLink = $(this).attr('href');
+
+                if (!avatarLink)
+                {
+                    UIkit.notify('هیچ تصویری جهت دریافت یافت نشد.', { status: 'info' });
+                    e.preventDefault();
+                    return false;
+                }
+
+                return true;
+            });
+
+            $(document).on('click', '#btn-delete', function (e) {
+                UIkit.modal.confirm('آیا مطمئنید که می خواهید تصویر پروفایل خود را حذف نمائید؟', function () {
+                    var avatarLink = $('#avatar-link').data('link');
+
+                    $.post(avatarLink, function (data, textStatus, jqXHR) {
+                        if (jqXHR.status !== 200) {
+                            UIkit.notify('در حال حاضر سرور قادر به پاسخگویی نمی باشد ...', { status: 'danger' });
+                            return;
+                        }
+
+                        UIkit.notify(data.title, { status: data.type });
+
+                        if (data.type == 'success') {
+                            $('#cropimage').cropper('destroy').attr('src', '').cropper(cropOptions);
+                            $('#btn-download').attr('href', '');
+                            $('#top-my-avatar').attr('src', data.link + '&t=' + ((new Date().getTime() * 10000) + 621355968000000000));
+                        }
+                    });
+                }, { labels: { Cancel: 'انصراف', Ok: 'تائید' } });
+            });
+
+            $(document).on('click', '#btn-save', function (e) {
+                if (!$image.cropper('getCroppedCanvas'))
+                {
+                    UIkit.notify('ابتدا یک تصویر را انتخاب نمائید.', { status: 'info' });
+                    return;
+                }
+
+                var avatarLink = $('#avatar-link').data('link');
+                $image.cropper('getCroppedCanvas').toBlob(function (blob) {
+                    var formData = new FormData();
+
+                    formData.append('image', blob);
+
+                    $.ajax(avatarLink, {
+                        method: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (data, textStatus, jqXHR) {
+                            if (!data.type) {
+                                UIkit.notify('در حال حاضر سرور قادر به پاسخگویی نمی باشد ...', { status: 'danger' });
+                                return;
+                            }
+
+                            UIkit.notify(data.title, { status: data.type });
+
+                            if (data.type == 'success') {
+                                $('#btn-download').attr('href', data.link + '?withDefault=false');
+                                $('#top-my-avatar').attr('src', data.link + '?withDefault=true' + '&t=' + ((new Date().getTime() * 10000) + 621355968000000000));
+                            }
+                        },
+                        error: function () {
+                            UIkit.notify('در حال حاضر سرور قادر به پاسخگویی نمی باشد ...', { status: 'danger' });
+                            return;
+                        }
+                    });
+                });
+            });
+        });".Replace("###autoCropArea###", autoCropArea.ToString()), new Microsoft.Ajax.Utilities.CodeSettings { PreserveImportantComments = false }));
+    </script>
+}

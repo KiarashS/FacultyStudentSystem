@@ -1,0 +1,86 @@
+﻿using ContentManagementSystem.DomainClasses;
+using ContentManagementSystem.Models.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace ContentManagementSystem.ServiceLayer.Contracts
+{
+    public interface IProfessorService
+    {
+        BioViewModel GetBio(int userId);
+        void UpdateBio(int userId, string bio);
+        void UpdateAvatar(int userId, string imageFileName);
+        string GetAvatar(int userId);
+        string GetAvatar(string pageId);
+        DetailsViewModel GetProfessorDashboardDetails(int userId);
+        void UpdateDetails(int userId, DetailsViewModel info);
+        void UpdateLastUpdateTime(int userId, bool updateHIndexAndCitationDate = false, bool updateExternalArticlesDate = false);
+        BanInfoViewModel GetBanInfo(int userId);
+        ProfileValidationViewModel IsValidPageId(string pageId);
+        ProfileIntroViewModel GetProfileIntroInfos(string pageId);
+        IEnumerable<AddressListViewModel> GetListAddresses(string pageId);
+        void DeleteProfessor(int userId);
+        void CreateProfessor(UserListViewModel user, bool updateSoftDeleteDate = true);
+        bool IsUniquePageId(int userId, string pageId);
+        bool ExistProfessor(int userId);
+        int TotalCount(Expression<Func<Professor, bool>> predicate);
+        IList<IndexUsersListViewModel> GetProfessorsList(Expression<Func<Professor, bool>> predicate, int pageIndex = 0, int pageSize = 20);
+        IList<IndexUsersListViewModel> GetPagedProfessorsList(string firstname, string lastname, string email, int college, int educationalGroup, int pageIndex = 0, int pageSize = 20);
+        IEnumerable<FreeFieldListViewModel> GetFreeFields(string pageId);
+        string GetPageId(int userId);
+        IEnumerable<ResearchViewModel> GetListResearchs(string pageId);
+        IEnumerable<HonorViewModel> GetListHonors(string pageId);
+        IEnumerable<PublicationViewModel> GetListPublications(string pageId);
+        IEnumerable<ThesisViewModel> GetListTheses(string pageId);
+        IEnumerable<WorkshopViewModel> GetListWorkshops(string pageId);
+        IEnumerable<TrainingViewModel> GetListTrainings(string pageId);
+        IEnumerable<StudingViewModel> GetListStudings(string pageId);
+        IEnumerable<AdministrationViewModel> GetListAdministrations(string pageId);
+        IEnumerable<ProfessorMembershipViewModel> GetListMemberships(string pageId);
+        IEnumerable<LanguageViewModel> GetListLanguages(string pageId);
+        void UpdateEducationalDegreeToDefault(int currentDegreeId, int newDegreeId);
+        void UpdateEducationalGroupToDefault(int currentGroupId, int newGroupId);
+        void UpdateCollegeToDefault(int currentCollegeId, int newCollegeId);
+        void UpdateAcademicRankToDefault(int currentAcademinRankId, int newAcademicRankId);
+        IList<int> GetAllUsersIds();
+        int GetUserIdByPageId(string pageId);
+        string GetResumeFilename(int userId);
+        void UpdateResumeFilename(int userId, string resumeFilename);
+        int LessonsCount(string pageId);
+        ProfileTopMenuViewModel ProfileTopMenu(string pageId);
+        LessonsIndexViewModel LessonsIndex(string pageId);
+        ProfessorNameAndIdViewModel NameAndId(string pageId);
+        void AddScopusDetails(int userId, int hIndex, int documents, string otherNamesFormat);
+        void AddGoogleDetails(int userId, int hIndex, int citations);
+        FreePageViewModel GetFreePage(string pageId);
+        FreePageViewModel GetFreePage(int userId);
+        void UpdateFreePage(int userId, string freePage);
+        GalleriesIndexViewModel GalleriesIndex(string pageId);
+        UserSettingsViewModel GetSettings(int userId);
+        void UpdateSettings(int userId, UserSettingsViewModel settings);
+        IList<HIndexManagementViewModel> GetHIndexList(string lastname, string pageId, string email, int pageIndex = 0, int pageSize = 20);
+        int GetHIndexCount(string lastname, string pageId, string email);
+        void UpdateHIndex(int userId, HIndexManagementViewModel hIndex);
+        WeeklyProgramDetailsViewModel GetWeeklyProgramDetails(int userId);
+        void UpdateWeeklyProgramDetails(int userId, WeeklyProgramDetailsViewModel details);
+        WeeklyProgramIndexViewModel GetWeeklyProgramIndex(string pageId);
+        ProfessorDashboardStatisticViewModel GetDashboardStatistics(int userId);
+        DateTime? GetLastExternalResearchUpdateTime(string pageId);
+        void UpdateUserHIndexInfos(int userId, int? ScopusHIndex, int? ScopusDocuments, string OtherNamesFormat, int? GoogleHIndex, int? GoogleCitations, bool updateScopus, bool updateGoogle);
+        Tuple<string, string> GetOrcidAndResearcherId(int userId);
+        bool IsExistProfessor(string pageId);
+        bool ExistProfessor(string secondaryEmail);
+        int DisableUsersCount();
+        void SetSoftDelete(int userId, bool state);
+        bool IsSoftDeleted(int userId);
+        //IEnumerable<ExternalResearchRecordViewModel> GetProfessorExternalResearchs(string pageId, int pageIndex = 0, int pageSize = 20);
+        //IEnumerable<ExternalSeminarRecordViewModel> GetProfessorExternalSeminars(string pageId, int pageIndex = 0, int pageSize = 20);
+        //IEnumerable<InternalResearchRecordViewModel> GetProfessorInternalResearchs(string pageId, int pageIndex = 0, int pageSize = 20);
+        //IEnumerable<InternalSeminarRecordViewModel> GetProfessorInternalSeminars(string pageId, int pageIndex = 0, int pageSize = 20);
+    }
+}

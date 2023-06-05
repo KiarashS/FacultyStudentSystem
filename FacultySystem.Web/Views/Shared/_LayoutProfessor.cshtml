@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/build/styles/styles.min.css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link title="فيد اخبار @ConfigurationManager.AppSettings["SystemNameFa"]" href="/feed" type="application/rss+xml" rel="alternate" />
+</head>
+<body>
+    @RenderBody()
+
+    <script src="~/build/scripts/scripts.min.js"></script>
+    @RenderSection("scripts", required: false)
+    <button class="material-scrolltop" type="button"><i class="small material-icons white-text" style="margin-bottom: 7px;">keyboard_arrow_up</i></button>
+        
+    <hr />
+    <footer style="text-align: left;">
+        <p>&copy; @DateTime.Now.Year - Developed and Designed With <i class="material-icon">favorite</i> by <a href="http://www.kiarash.pro" target="_blank">Kiarash Soleimanzadeh</a></p>
+    </footer>
+
+<script>
+    $('body').materialScrollTop();
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 83){  
+            $('#sticky-nav').addClass("sticky");
+        }
+        else{
+            $('#sticky-nav').removeClass("sticky");
+        }
+    });
+    
+    $(document).ready(function(){
+        $('.scrollspy').scrollSpy({scrollOffset: 10});
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿/*RTL*/
+
+@font-face {
+  font-family: Vazir;
+  src: url('../fonts/Vazir.eot');
+  src: url('../fonts/Vazir.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Vazir.woff') format('woff'),
+       url('../fonts/Vazir.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: VazirBold;
+  src: url('../fonts/Vazir-Bold.eot');
+  src: url('../fonts/Vazir-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Vazir-Bold.woff') format('woff'),
+       url('../fonts/Vazir-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+html {
+    font-family: 'Vazir', Tahoma , sans-serif;
+}
+
+/*custom materialize RTLer*/
+.input-field .prefix {
+    width:2rem;
+}
+
+.valign-ticon {
+    position: relative;
+    top: 5px;
+}
+
+.valign-sicon {
+    position: relative;
+    top: 15px;
+}
+
+.valign-micon {
+    position:relative;
+    top: 20px;
+}
+
+.valign-licon {
+    position: relative;
+    top: 25px;
+}

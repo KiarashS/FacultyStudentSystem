@@ -1,0 +1,695 @@
+﻿@model ContentManagementSystem.Models.ViewModels.ProfileIntroViewModel
+@using ContentManagementSystem.DomainClasses
+@using ContentManagementSystem.Commons.Web;
+
+@{
+    ViewBag.Title = $"صفحه شخصی {Model.Fullname}";
+    Layout = MVC.Shared.Views._LayoutProfessorNew;
+
+    var avatarTop = "top: 40px;";
+    if (Model.EducationalDegree == "--" && Model.LastUpdateTime == null)
+    {
+        avatarTop = "top: 85px;";
+    }
+    else if (Model.EducationalDegree == "--" && Model.LastUpdateTime != null)
+    {
+        avatarTop = "top: 60px;";
+    }
+}
+
+<link href="~/build/chartstyles/chart.min.css" rel="stylesheet" />
+<div id="sticky-header" data-uk-sticky="{top:-600, animation: 'uk-animation-slide-top'}">
+    <div class="uk-grid">
+        <div class="uk-width-1-1">
+            <div class="uk-block uk-block-primary top-block" style="padding-top: 25px;">
+                @*<div class="top-right-actions">
+                        <div class="display-inlineblock">
+                            <a class="md-fab md-fab-success md-fab-wave-light waves-effect waves-button waves-light small-fab" href="mailto:kiarash.s@hotmail.com"><i class="material-icons"></i></a>
+                        </div>
+                        <div class="display-inlineblock mr-10">
+                            <a class="md-fab md-fab-danger md-fab-wave-light waves-effect waves-button waves-light small-fab" href="mailto:kiarash.s@hotmail.com"><i class="material-icons"></i></a>
+                        </div>
+                    </div>*@
+                <div id="top-spacer" style="max-height: 210px;">
+                    <div class="top-name">
+                        <div id="top-fullname" class="pb-35">
+                            @if (!string.IsNullOrEmpty(Model.Fullname))
+                            {
+                                <h2 class="white">@Model.Fullname</h2>
+                            }
+                            @if (Model.EducationalDegree != "--")
+                            {
+                                <span id="top-educational-degree" class="grey">@Model.EducationalDegree</span>
+                            }
+                        </div>
+                        @if (Model.LastUpdateTime != null)
+                        {
+                            <div id="last-update" class="silver persian-number" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="@Model.JalaiLastUpdateTime">آخرین بروز رسانی صفحه شخصی: @Model.GetRelativeLastUpdateTime</div>
+                        }
+                    </div>
+                    <div class="top-avatar" style="@avatarTop">
+                        <img src="@Url.RouteUrl(routeName: "Profile", routeValues: new { action = MVC.Profile.ActionNames.ProfessorAvatar, pageId = ViewContext.RouteData.Values["pageid"].ToString() })" alt="@ViewContext.RouteData.Values["pageid"].ToString()" data-uk-tooltip="{pos:'bottom', cls:'fs-16p'}" title="@Model.Fullname" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div>
+        <div class="md-fab-wrapper" style="left:auto; right: 20px;bottom: auto; top: 90px;z-index:100000;">
+            <div class="md-fab md-fab-toolbar">
+                <i class="material-icons">menu</i>
+                <div class="md-fab-toolbar-actions">
+                    <a href="javascript:void(0)" data-uk-tooltip="{pos:'top', cls: 'fs-16p'}" title="دروس ارائه شده"><i class="material-icons md-color-red-400"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@if (Model.HasLesson || Model.HasGallery || !string.IsNullOrEmpty(Model.PersianResumeFilename) || !string.IsNullOrEmpty(Model.PersonalWebPage) ||
+                                        (!string.IsNullOrEmpty(Model.FreePage) && Model.IsActiveFreePage) || (Model.IsActiveWeeklyProgram && Model.HasWeeklyProgram))
+{
+    <div class="uk-grid mt-0 section-in-mobile">
+        <div class="uk-width-1-1 uk-container uk-container-center">
+            <div class="uk-text-center" id="top-buttons">
+                @if (Model.IsActiveWeeklyProgram && Model.HasWeeklyProgram)
+                {
+                    <div class="display-inlineblock tb">
+                        <a class="md-fab md-fab-wave-light waves-effect waves-button waves-purple small-fab" href="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.WeeklyProgram })" data-uk-tooltip="{pos:'bottom', cls:'fs-16p'}" title="برنامه هفتگی"><i class="fa fa-calendar"></i></a>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.FreePage) && Model.IsActiveFreePage)
+                {
+                    <div class="display-inlineblock tb">
+                        <a class="md-fab md-fab-wave-light waves-effect waves-button waves-purple small-fab" href="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.FreePage })" data-uk-tooltip="{pos:'bottom', cls:'fs-16p'}" title="صفحه آزاد"><i class="material-icons">crop_free</i></a>
+                    </div>
+                }
+                @if (Model.HasLesson)
+                {
+                    <div class="display-inlineblock tb">
+                        <a class="md-fab md-fab-wave-light waves-effect waves-button waves-purple small-fab" href="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.Lessons })" data-uk-tooltip="{pos:'bottom', cls:'fs-16p'}" title="دروس ارائه شده"><i class="fa fa-object-group"></i></a>
+                    </div>
+                }
+                @if (Model.HasGallery)
+                {
+                    <div class="display-inlineblock tb">
+                        <a class="md-fab md-fab-wave-light waves-effect waves-button waves-purple small-fab" href="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.GalleryList })" data-uk-tooltip="{pos:'bottom', cls:'fs-16p'}" title="گالری"><i class="material-icons">perm_media</i></a>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.PersianResumeFilename))
+                {
+                    <div class="display-inlineblock tb">
+                        <a class="md-fab md-fab-success md-fab-wave-light waves-effect waves-button waves-light small-fab" href="@Url.Action(MVC.Home.GetFile(type: 4, fileText: RijndaelManagedEncryption.EncryptRijndael(Model.UserId.ToString() + ";#;" + Model.PersianResumeFilename)))" data-uk-tooltip="{pos:'bottom', cls:'fs-16p'}" title="رزومه"><i class="fa fa-id-card-o"></i></a>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.PersonalWebPage))
+                {
+                    <div class="display-inlineblock tb">
+                        <a class="md-fab md-fab-primary md-fab-wave-light waves-effect waves-button waves-light small-fab" href="@Model.PersonalWebPage" target="_blank" rel="nofollow" data-uk-tooltip="{pos:'bottom', cls:'fs-16p'}" title="سایت شخصی"><i class="material-icons">home</i></a>
+                    </div>
+                }
+                @*@if (!string.IsNullOrEmpty(Model.Mobile))
+                    {
+                        <div class="display-inlineblock tb">
+                            <a class="md-fab md-fab-warning md-fab-wave-light waves-effect waves-button waves-light small-fab" href="tel:@Model.Mobile" data-uk-tooltip="{pos:'bottom', cls:'fs-16p'}" title="شماره همراه"><i class="material-icons">phone_iphone</i></a>
+                        </div>
+                    }*@
+            </div>
+        </div>
+    </div>
+}
+
+    @*<div class="uk-grid mt-0">
+            <div class="uk-width-1-1 uk-container uk-container-center">
+                <div class="uk-text-center">
+                    <div class="display-inlineblock">
+                        <a class="md-fab md-fab-success md-fab-wave-light waves-effect waves-button waves-light small-fab" href="mailto:kiarash.s@hotmail.com"><i class="material-icons"></i></a>
+                    </div>
+                    <div class="display-inlineblock mr-10">
+                        <a class="md-fab md-fab-danger md-fab-wave-light waves-effect waves-button waves-light small-fab" href="mailto:kiarash.s@hotmail.com"><i class="material-icons"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="uk-grid mb-60 section-in-mobile">
+        <div class="uk-width-1-1 uk-container uk-container-center">
+            <div class="icon-container" style="background-color: #2196F3 !important;" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="مشخصات">
+                <i class="material-icons md-48 white" style="margin-top: 25%;">details</i>
+            </div>
+            <div class="md-card">
+                <div class="md-card-content large-padding pt-70 bg-blue">
+                    <div class="uk-grid uk-grid-divider uk-grid-medium uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin="">
+                        <div class="uk-width-large-1-2 uk-width-medium-1-2">
+                            <ul class="md-list md-list-addon">
+                                @if (!string.IsNullOrEmpty(Model.Fullname))
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">face</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.Fullname</span>
+                                                <span class="uk-text-small silver">نام و نام خانوادگی</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (Model.BirthDate != null)
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">cake</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading persian-number white">@Model.JalaliBirthDate</span>
+                                                <span class="uk-text-small silver">تاریخ تولد</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.Location))
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">location_city</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.Location</span>
+                                                <span class="uk-text-small silver">محل سکونت</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (Model.Sex != Sex.NotDefined)
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">all_out</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.SexText</span>
+                                                <span class="uk-text-small silver">جنسیت</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (Model.EducationalDegree != "--")
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">stars</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.EducationalDegree</span>
+                                                <span class="uk-text-small silver">درجه تحصیلی</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">email</i>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading"><img src="~/ImageGenerator.ashx?Code=@RijndaelManagedEncryption.EncryptRijndael(Model.Email)&FontFamily=Calibri&FontSize=13&TextColor=White&BackgroundColor=Transparent&UsePng=True" class="cursor-pointer" alt="ایمیل @Model.Fullname" /></span>
+                                        <span class="uk-text-small silver">ایمیل اصلی</span>
+                                    </div>
+                                </li>
+                                @if (!string.IsNullOrEmpty(Model.PersonalWebPage))
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">home</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="@Model.PersonalWebPage" target="_blank" class="font-arial white yellowhover">@Model.PersonalWebPage</a></span>
+                                                <span class="uk-text-small silver">سایت شخصی</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                            </ul>
+                        </div>
+                        <div class="uk-width-large-1-2 uk-width-medium-1-2">
+                            <ul class="md-list md-list-addon">
+                                @if (!string.IsNullOrEmpty(Model.CommonAuthorPaperName))
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">assignment_ind</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.CommonAuthorPaperName</span>
+                                                <span class="uk-text-small silver">نام متعارف در مقالات</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (Model.College != "--")
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">school</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.College</span>
+                                                <span class="uk-text-small silver">دانشکده</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.BirthPlace))
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">location_on</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.BirthPlace</span>
+                                                <span class="uk-text-small silver">محل تولد</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (Model.MaritalStatus != MaritalStatus.NotDefined)
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">group</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.MaritalStatusText</span>
+                                                <span class="uk-text-small silver">وضعیت تاهل</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (Model.EducationalGroup != "--")
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">group_work</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.EducationalGroup</span>
+                                                <span class="uk-text-small silver">گروه آموزشی</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (Model.AcademicRank != "--")
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">check_circle</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading white heading_a">@Model.AcademicRank</span>
+                                                <span class="uk-text-small silver">مرتبه علمی</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.Mobile))
+                                {
+                                    <text>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <i class="md-list-addon-icon material-icons" style="color: #FFDC00 !important;">phone_iphone</i>
+                                            </div>
+                                            <div class="md-list-content">
+                                                @*<span class="md-list-heading"><a href="tel:@Model.Mobile" class="persian-number white yellowhover">@Model.Mobile</a></span>*@
+                                                <span class="md-list-heading"><img src="~/ImageGenerator.ashx?Code=@RijndaelManagedEncryption.EncryptRijndael(Model.Mobile)&FontFamily=Calibri&FontSize=13&TextColor=White&BackgroundColor=Transparent&UsePng=True" class="cursor-pointer" alt="موبایل @Model.Fullname" /></span>
+                                                <span class="uk-text-small silver">شماره همراه</span>
+                                            </div>
+                                        </li>
+                                    </text>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    @if (Model.HasFreeField)
+                    {
+                        Html.RenderAction(MVC.Profile.FreeFields());
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.SecondaryEmails) ||
+ !string.IsNullOrEmpty(Model.ResearchFields) ||
+ !string.IsNullOrEmpty(Model.Interests))
+                    {
+                        <text>
+                            <hr class="uk-grid-divider" />
+                            <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom uk-grid-divider" data-uk-grid-margin="">
+                                @if (!string.IsNullOrEmpty(Model.SecondaryEmails))
+                                {
+                                    <div class="uk-width-small-1-1 uk-width-medium-1-3 uk-width-large-1-3 uk-width-xLarge-1-3">
+                                        <h4 class="heading_c uk-margin-small-bottom silver">آدرس های ایمیل جایگزین</h4>
+                                        <ul>
+                                            @foreach (var item in Model.SecondaryEmailsList)
+                                            {
+                                                <li class="white"><img src="~/ImageGenerator.ashx?Code=@RijndaelManagedEncryption.EncryptRijndael(item)&FontFamily=Calibri&FontSize=13&TextColor=White&BackgroundColor=Transparent&UsePng=True" class="cursor-pointer" alt="ایمیل فرعی @Model.Fullname" /></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.ResearchFields))
+                                {
+                                    <div class="uk-width-small-1-1 uk-width-medium-1-3 uk-width-large-1-3 uk-width-xLarge-1-3">
+                                        <h4 class="heading_c uk-margin-small-bottom silver">فیلدهای مورد علاقه در پژوهش</h4>
+                                        @*<ul>
+                                                @foreach (var item in Model.ResearchFieldsList)
+                                                {
+                                                    <li class="white">@item</li>
+                                                }
+                                            </ul>*@
+                                        <div>
+                                            @foreach (var item in Model.ResearchFieldsList)
+                                            {
+                                                <span class="uk-badge uk-badge-success fs-15" style="white-space: initial; margin-top: 3px;">@item</span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.Interests))
+                                {
+                                    <div class="uk-width-small-1-1 uk-width-medium-1-3 uk-width-large-1-3 uk-width-xLarge-1-3">
+                                        <h4 class="heading_c uk-margin-small-bottom silver">علاقه مندی های شخصی</h4>
+                                        @*<ul>
+                                                @foreach (var item in Model.InterestsList)
+                                                {
+                                                    <li class="white">@item</li>
+                                                }
+                                            </ul>*@
+                                        <div>
+                                            @foreach (var item in Model.InterestsList)
+                                            {
+                                                <span class="uk-badge uk-badge-success fs-15" style="white-space: initial; margin-top: 3px;">@item</span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </text>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.ResearcherId) ||
+!string.IsNullOrEmpty(Model.OrcidId) ||
+!string.IsNullOrEmpty(Model.ScopusId) ||
+!string.IsNullOrEmpty(Model.GoogleScholarId) ||
+!string.IsNullOrEmpty(Model.ResearchGateId) ||
+!string.IsNullOrEmpty(Model.PubMedId) ||
+!string.IsNullOrEmpty(Model.MedLibId))
+                    {
+                        <text>
+                            <hr class="uk-grid-divider" />
+                            <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin="">
+                                <div class="uk-width-1-1 uk-text-center">
+                                    <div id="profile-links" class="md-btn-group mt-15">
+                                        @if (!string.IsNullOrEmpty(Model.ScopusId))
+                                        {
+                                            <a href="@Model.ScopusId" target="_blank" data-uk-tooltip="{pos:'top', cls:'font-arial'}" title="Scopus" class="md-btn md-btn-wave waves-effect waves-button">Scopus</a>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.GoogleScholarId))
+                                        {
+                                            <a href="@Model.GoogleScholarId" target="_blank" data-uk-tooltip="{pos:'top', cls:'font-arial'}" title="Google Scholar" class="md-btn md-btn-wave waves-effect waves-button">Google Scholar</a>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.ResearcherId))
+                                        {
+                                            <a href="@Model.ResearcherId" target="_blank" data-uk-tooltip="{pos:'top', cls:'font-arial'}" title="ResearcherID" class="md-btn md-btn-wave waves-effect waves-button">ResearcherID</a>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.ResearchGateId))
+                                        {
+                                            <a href="@Model.ResearchGateId" target="_blank" data-uk-tooltip="{pos:'top', cls:'font-arial'}" title="Research Gate" class="md-btn md-btn-wave waves-effect waves-button">Research Gate</a>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.OrcidId))
+                                        {
+                                            <a href="@Model.OrcidId" target="_blank" data-uk-tooltip="{pos:'top', cls:'font-arial'}" title="ORCID" class="md-btn md-btn-wave waves-effect waves-button">ORCID</a>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.PubMedId))
+                                        {
+                                            <a href="@Model.PubMedId" target="_blank" data-uk-tooltip="{pos:'top', cls:'font-arial'}" title="PubMed" class="md-btn md-btn-wave waves-effect waves-button">PubMed</a>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.MedLibId))
+                                        {
+                                            <a href="@Model.MedLibId" target="_blank" data-uk-tooltip="{pos:'top', cls:'font-arial'}" title="LibMed" class="md-btn md-btn-wave waves-effect waves-button">LibMed</a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </text>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @foreach (var section in Model.SectionsOrder)
+    {
+        if (section.SectionName == SectionName.Bio && Model.IsActiveBio && !string.IsNullOrEmpty(Model.Bio))
+        {
+            <div class="uk-grid section-in-mobile">
+                <div class="uk-width-1-1 uk-container uk-container-center">
+                    <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="بیوگرافی">
+                        <i class="material-icons md-48 blue" style="padding-top: 25%;">person</i>
+                    </div>
+                    <div class="md-card">
+                        <div class="md-card-content bg-white black pt-70 bio">
+                            @Html.Raw(Model.Bio)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (section.SectionName == SectionName.IndexAndCharts &&
+                ((Model.HasHIndexInformations && Model.ShowHIndexSection) ||
+                (Model.HasScopusChart && Model.ShowScopusDocumentsCitationChart) ||
+                (Model.HasGoogleChart && Model.ShowGoogleDocumentsCitationChart)))
+        {
+            <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+                <div class="uk-width-1-1 uk-container uk-container-center">
+                    <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="شاخص ها، ارجاعات و مقالات">
+                        <i class="material-icons md-48" style="padding-top: 25%; color:#ff006e;">insert_chart</i>
+                    </div>
+                    <div class="md-card">
+                        <div class="md-card-content pt-70">
+                            @if (Model.HasHIndexInformations && Model.ShowHIndexSection)
+                            {
+                                if (Model.HIndexAndDocumentCitationLastUpdateTime != null)
+                                {
+                                    <div class="uk-text-center mb-15">
+                                        <span class="uk-badge persian-number" style="font-size: 1em; padding:5px 8px;">آخرین بروز رسانی: @Model.GetRelativeHIndexAndCitationLastUpdateTime</span>
+                                    </div>
+                                }
+                                <div class="uk-grid uk-grid-width-large-1-2 uk-grid-width-medium-1-2 uk-grid-divider uk-grid-medium">
+                                    @*<div>*@
+                                    @if (Model.ScopusHIndex != null)
+                                    {
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">H-Index در اسکاپوس:</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                <span class="uk-text-large uk-text-middle persian-number">@Model.ScopusHIndex</span>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (Model.ScopusDocuments != null)
+                                    {
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">تعداد مقالات در اسکاپوس:</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                <span class="uk-text-large uk-text-middle persian-number">@Model.ScopusDocuments</span>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (Model.GoogleCitations != null)
+                                    {
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">تعداد ارجاعات در گوگل:</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                <span class="uk-text-large uk-text-middle persian-number">@Model.GoogleCitations</span>
+                                            </div>
+                                        </div>
+                                    }
+                                    @*</div>
+                                        <div>*@
+                                    @*@if (Model.ScopusCitations != null)
+                                    {
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">تعداد ارجاعات در اسکاپوس:</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                @if (Model.ScopusTotalDocumentsCited != null)
+                                                {
+                                                    <span class="uk-text-large uk-text-middle persian-number">@Model.ScopusCitations</span> @:(ارجاع شده توسط <span class="uk-text-large uk-text-middle persian-number">@Model.ScopusTotalDocumentsCited</span> مقاله)
+                                                    }
+                                                else
+                                                {
+                                                    <span class="uk-text-large uk-text-middle persian-number">@Model.ScopusCitations</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    }*@
+                                    @if (Model.GoogleHIndex != null)
+                                    {
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">H-Index در گوگل:</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                <span class="uk-text-large uk-text-middle persian-number">@Model.GoogleHIndex</span>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.OtherNamesFormat))
+                                    {
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">اسامی دیگر:</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                <span dir="ltr" class="uk-text-large uk-text-middle uk-text-left font-arial">@Model.OtherNamesFormat</span>
+                                            </div>
+                                        </div>
+                                    }
+                                    @*</div>*@
+                                </div>
+                                if ((Model.HasScopusChart && Model.ShowScopusDocumentsCitationChart) ||
+                                    (Model.HasGoogleChart && Model.ShowGoogleDocumentsCitationChart))
+                                {
+                                    <hr class="uk-grid-divider" />
+                                }
+                            }
+
+                            @if (Model.HasScopusChart && Model.ShowScopusDocumentsCitationChart)
+                            {
+                                <div id="scopuschartcontext"><div id="scopuschart" style="height: 400px !important;" data-draw-chart data-url="@Url.RouteUrl(routeName: "Profile", routeValues: new { action = MVC.Profile.ActionNames.ScopusChartData, pageId = ViewContext.RouteData.Values["pageid"].ToString() })"><div class="chart-loading"></div></div></div>
+                                if (Model.HasGoogleChart && Model.ShowGoogleDocumentsCitationChart)
+                                {
+                                    <hr class="uk-grid-divider" />
+                                }
+                            }
+
+                            @if (Model.HasGoogleChart && Model.ShowGoogleDocumentsCitationChart)
+                            {
+                                <div id="googlechartcontext"><div id="googlechart" style="height: 400px !important;" data-draw-chart data-url="@Url.RouteUrl(routeName: "Profile", routeValues: new { action = MVC.Profile.ActionNames.GoogleChartData, pageId = ViewContext.RouteData.Values["pageid"].ToString() })"><div class="chart-loading"></div></div></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (section.SectionName == SectionName.Addresses && Model.HasAddress)
+        {
+            Html.RenderAction(MVC.Profile.Addresses());
+        }
+        else if (section.SectionName == SectionName.TrainingRecords && Model.HasTrainingRecord)
+        {
+            Html.RenderAction(MVC.Profile.Trainings());
+        }
+        else if (section.SectionName == SectionName.Memberships && Model.HasMembership)
+        {
+            Html.RenderAction(MVC.Profile.Memberships());
+        }
+        else if (section.SectionName == SectionName.ResearchRecords && Model.HasResearchRecord)
+        {
+            Html.RenderAction(MVC.Profile.Researchs());
+        }
+        else if (section.SectionName == SectionName.StudingRecords && Model.HasStudingRecord)
+        {
+            Html.RenderAction(MVC.Profile.Studings());
+        }
+        else if (section.SectionName == SectionName.AdministrationRecords && Model.HasAdministrationRecord)
+        {
+            Html.RenderAction(MVC.Profile.Administrations());
+        }
+        else if (section.SectionName == SectionName.Theses && Model.HasThesis)
+        {
+            Html.RenderAction(MVC.Profile.Theses());
+        }
+        else if (section.SectionName == SectionName.Publications && Model.HasPublication)
+        {
+            Html.RenderAction(MVC.Profile.Publications());
+        }
+        else if (section.SectionName == SectionName.Honors && Model.HasHonor)
+        {
+            Html.RenderAction(MVC.Profile.Honors());
+        }
+        else if (section.SectionName == SectionName.Workshops && Model.HasCourseAndWorkshop)
+        {
+            Html.RenderAction(MVC.Profile.Workshops());
+        }
+        else if (section.SectionName == SectionName.ExternalResearchRecords && Model.HasExternalResearchRecord)
+        {
+            Html.RenderAction(MVC.Profile.ExternalResearchs());
+        }
+        else if (section.SectionName == SectionName.InternalResearchRecords && Model.HasInternalResearchRecord)
+        {
+            Html.RenderAction(MVC.Profile.InternalResearchs());
+        }
+        else if (section.SectionName == SectionName.ExternalSeminarRecords && Model.HasExternalSeminarRecord)
+        {
+            Html.RenderAction(MVC.Profile.ExternalSeminars());
+        }
+        else if (section.SectionName == SectionName.InternalSeminarRecords && Model.HasInternalSeminarRecord)
+        {
+            Html.RenderAction(MVC.Profile.InternalSeminars());
+        }
+        else if (section.SectionName == SectionName.Languages && Model.HasLanguage)
+        {
+            Html.RenderAction(MVC.Profile.Languages());
+        }
+        //else
+        //{
+
+        //}
+    }
+
+
+    @*@if (Model.HasAddress)
+        {
+            <text>
+                <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin="">
+                    <div class="uk-width-1-1 uk-container uk-container-center">
+                        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="بیوگرافی">
+                            <i class="material-icons md-48 yellow" style="padding-top: 25%;">person</i>
+                        </div>
+                        <div class="md-card">
+                            <div class="md-card-content pt-70">
+                                asd asd asd
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </text>
+        }*@
+
+    <div class="back-btn" style="z-index: 10000;">
+        <div class="display-inlineblock mr-10">
+            <a class="md-fab md-fab-wave-light waves-effect waves-button small-fab" href="/" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="بازگشت به صفحه اصلی"><i class="material-icons">arrow_back</i></a>
+        </div>
+    </div>
+
+    @section scripts {
+        <script src="~/build/chartscripts/chart.min.js"></script>
+    }

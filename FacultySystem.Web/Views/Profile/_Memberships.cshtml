@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.ProfessorMembershipViewModel>
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="عضویت ها">
+            <i class="fa fa-handshake-o fa-35" style="padding-top: 25%;color:#ff00cb;"></i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">عضویت ها</h3>
+                <div class="uk-overflow-container pb-15 pt-30">
+                    <ul class="professor-details-list">
+                        @foreach (var membership in Model)
+                        {
+                            <li>
+                                @if (!string.IsNullOrEmpty(membership.Link))
+                                {
+                                    if (membership.FullTime != null)
+                                    {
+                                        <a href="@membership.Link" target="_blank" rel="nofollow"><strong class="persian-number">@membership.CommitteeTitle</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@membership.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@membership.Link" target="_blank" rel="nofollow">
+                                            <strong class="persian-number">
+                                                @membership.CommitteeTitle
+                                            </strong>
+                                        </a>
+                                    }
+                                }
+                                else
+                                {
+                                    if (membership.FullTime != null)
+                                    {
+                                        <strong class="persian-number">@(membership.CommitteeTitle)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@membership.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <strong class="persian-number">@(membership.CommitteeTitle)</strong>
+                                    }
+                                }
+                                @if (!string.IsNullOrEmpty(membership.Post))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail">
+                                        <span class="black" style="border-bottom: 1px dotted #000;">سمت:</span>&nbsp;<span class="persian-number">@membership.Post</span>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(membership.Description))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">توضیحات:</span>&nbsp;<span class="persian-number">@membership.Description</span></div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

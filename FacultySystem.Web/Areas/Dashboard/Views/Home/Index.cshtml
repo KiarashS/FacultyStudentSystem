@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "داشبورد";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+}
+
+<div id="page_content">
+    <div id="page_content_inner">
+        @{Html.RenderAction(MVC.Dashboard.Home.AdminStatistics());}
+        @{Html.RenderAction(MVC.Dashboard.Home.ProfessorStatistics());}
+        @Html.Partial(MVC.Dashboard.Home.Views._ProfessorDashboardNotifications)
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                @{Html.RenderAction(MVC.Dashboard.Home.Note());}
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Convert.ToBoolean(ViewBag.IsFirstLogin))
+{
+    <span style="display: none;" id="first-login-display">راهنما</span>
+}
+<button id="first-login-btn" class="md-btn" style="display: none;" data-uk-modal="{target:'#modal_first_login'}">باز کردن راهنما</button>
+<div class="uk-modal" id="modal_first_login" aria-hidden="true" style="display: none; overflow-y: auto;">
+    <div class="uk-modal-dialog" style="top: 96px;">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title">به @ConfigurationManager.AppSettings["SystemNameFa"]، خوش آمدید ...</h3>
+        </div>
+        <p>کاربر گرامی،<br />لطفاً حتماً به بخش "مشخصات اصلی > مشخصات پایه" مراجعه کرده و تمامی اطلاعات خود را به صورت کامل و دقیق وارد نمائید. همچنین با کلیک بر روی لینک زیر نیز می توانید اطلاعات خود را تکمیل نمائید:<br /><br /><div style="text-align: center;"><a class="md-btn md-btn-flat md-btn-flat-success" href="/Dashboard/Home/Details">تکمیل مشخصات پایه</a></div><br /><br />در صورت بروز هر گونه مشکل و یا داشتن هر گونه سوال می توانید از بخش "تماس با مدیر" با مدیر سامانه ارتباط برقرار نمائید.</span>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-flat uk-modal-close">بستن</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                if ($('#first-login-display').length > 0) {
+                    $('#first-login-btn').trigger('click');
+                }
+            }, 1500);
+        });
+    </script>
+}

@@ -1,0 +1,16 @@
+﻿-- SQL Server Job From Delete ActivityLogs Where Older Than 93 Days Ago (Must be Run at Every Midnight)
+
+Use ProfessorsDB;
+Go
+
+Delete From ActivityLogs Where ActivityLogs.ActionDate < DATEADD(day, -93, GETUTCDATE())
+
+
+
+-- SQL Server Job From Delete Admin Messages Where (Older Than 31 Days Ago And State Is Not Equal to 1 (Posted)) Or (Older Than 93 Days Ago) (Must be Run at Every Midnight)
+
+Use ProfessorsDB;
+Go
+
+Delete From AdminMessages Where (AdminMessages.CreateDate < DATEADD(day, -31, GETUTCDATE()) And AdminMessages.State <> 1) Or
+								(AdminMessages.CreateDate < DATEADD(day, -93, GETUTCDATE()))

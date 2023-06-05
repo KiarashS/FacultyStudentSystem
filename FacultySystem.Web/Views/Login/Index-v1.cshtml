@@ -1,0 +1,117 @@
+﻿@using ContentManagementSystem.Commons.Web.Helpers
+@using ContentManagementSystem.Commons
+
+@{
+    Layout = null;
+    var isEnableFacultyRegistration = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableFacultyRegistration"]);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ورود به سامانه</title>
+    <link rel="stylesheet" href="~/build/loginstyles/styles.min.css" type="text/css" media="all" />
+    <link rel="icon" type="image/png" href="~/favicon.png" sizes="32x32">
+    <link title="فيد اخبار @ConfigurationManager.AppSettings["SystemNameFa"]" href="/feed" type="application/rss+xml" rel="alternate" />
+    @*<link href='http://fonts.googleapis.com/css?family=Roboto:900,900italic,500,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>*@
+</head>
+<body style="height: 100%; overflow: hidden; width: 100% !important;">
+    <div id="fback"><div class="girisback"></div><div class="kayitback"></div></div>
+    <div id="textbox">
+        <div class="toplam">
+            <div class="left">
+                <div id="ic">
+                    <h2>فراموشی رمز عبور</h2>
+                    <p>در صورت فراموشی رمز عبور خود، با وارد کردن آدرس ایمیل خود می توانید نسبت به بازیابی آن اقدام نمائید.</p>
+                    
+                    @*@using (Html.BeginForm(MVC.Login.ForgottenPassword(), FormMethod.Post, new { role = "form", id = "girisyap", name = "forgotten-form", autocomplete = "off" }))*@
+                    @using (Html.BeginForm(MVC.Login.Index(), FormMethod.Post, new { role = "form", id = "girisyap", name = "forgotten-form", autocomplete = "off" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*<div class="yarim form-group">
+                                    <label class="control-label" for="inputNormal">نام کاربری</label>
+                                    <input type="text" name="signup_username" id="signup_username" class="bp-suggestions form-control" cols="50" rows="10" ></input>
+                            </div>
+                            <div class="yarim sn form-group">
+                                    <label class="control-label" for="inputNormal">نام کامل</label>
+                                    <input type="text" name="field_1" id="field_1" value="" class="bp-suggestions form-control" cols="50" rows="10"></input>
+                            </div>*@
+                        @:<div class="form-group">
+                            @:<label class="control-label" for="inputNormal">آدرس ایمیل</label>
+                            @:<input type="email" id="forgotten-email" name="email" class="bp-suggestions form-control" style="direction: ltr; text-align: left; font-family: Arial;" required=required />
+                            @:<div data-message="message" style="color: rgb(255, 0, 0);margin: 2px 2px;"></div>
+                        @:</div>
+                        @:<div class="form-group" style="margin-bottom: 140px !important;">
+                            @:<label class="control-label" for="CaptchaInputText">تصویر امنیتی</label>
+                            @:<input type="text" name="CaptchaInputText" class="bp-suggestions form-control" placeholder="کد امنیتی به عدد" style="direction: ltr; text-align: center;" required=required />
+                            @:<div data-message="message" style="color: rgb(255, 0, 0);margin: 5px 2px 0;"></div>
+                            @:<div><div data-forgot-captcha-container class="captcha-container" style="cursor:pointer;" title="جهت بارگذاری مجدد تصویر امنیتی بر روی این تصویر کلیک نمائید"></div><div class="captcha-refresh"><a href="#">بارگذاری مجدد تصویر امنیتی</a></div></div>
+                            @:<br />
+                        @:</div>
+                        @*<div class="form-group">
+                                    <label class="control-label" for="inputNormal">رمز عبور</label>
+                                    <input type="password" name="signup_password" id="signup_password" value="" class="bp-suggestions form-control" cols="50" rows="10" ></input>
+                            </div>
+                            <div class="form-group soninpt">
+                                    <label class="control-label" for="inputNormal">توضیحات</label>
+                                <input type="text" name="field_2" id="field_2" class="bp-suggestions form-control" cols="50" rows="10"></input>
+                            </div>*@
+                        @:<input type="submit" name="forgotten-submit" id="forgotten-submit" value="ارسال درخواست" class="girisbtn" />
+                    }
+                    <button id="moveleft">ورود به سامانه</button>
+                </div>
+            </div>
+            <div class="right">
+                <div id="ic">
+                    <h2>ورود به سامانه</h2>
+                    <p>ورود به @ConfigurationManager.AppSettings["SystemNameFa"]</p>
+                    @using (Html.BeginForm(MVC.Login.ActionNames.Logon, MVC.Login.Name, new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { role = "form", id = "girisyap", name = "logon-form", autocomplete = "off" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @:<div class="form-group">
+                            @:<label class="control-label" for="email">آدرس ایمیل</label>
+                            @:<input type="email" name="email" class="bp-suggestions form-control" style="direction: ltr; text-align: left; font-family: Arial;" required=required />
+                            @:<div data-message="message" style="color: rgb(255, 0, 0);margin: 5px 2px;"></div>
+                        @:</div>
+                        @:<div class="form-group soninpt" style="margin-top: 1px;">
+                            @:<label class="control-label" for="password">رمز عبور</label>
+                            @:<input type="password" id="password" name="password" class="bp-suggestions form-control" style="direction: ltr; text-align: left; font-family: Arial;" required=required />
+                            @:<div data-message="message" style="color: rgb(255, 0, 0);margin: 5px 2px;"></div>
+                        @:</div>
+                        @:<div class="form-group" style="margin-bottom: 140px !important;">
+                            
+                            @:<label class="control-label" for="CaptchaInputText">تصویر امنیتی</label>
+                            @:<input type="text" name="CaptchaInputText" class="bp-suggestions form-control" placeholder="کد امنیتی به عدد" style="direction: ltr; text-align: center;" required=required />
+                            @:<div data-message="message" style="color: rgb(255, 0, 0);margin: 5px 2px 0;"></div>
+                            @:<div><div data-login-captcha-container class="captcha-container" style="cursor:pointer;" title="جهت بارگذاری مجدد تصویر امنیتی بر روی این تصویر کلیک نمائید"></div><div class="captcha-refresh"><a href="#">بارگذاری مجدد تصویر امنیتی</a></div></div>
+                            @:<br />
+                        @:</div>
+                        @:<input type="submit" data-style="expand-left" id="logon-submit" name="logon-submit" value="ورود" class="girisbtn" tabindex="100" />
+                    }
+                    <button id="moveright">فراموشی رمز عبور</button>
+                </div>
+            </div>
+            <div id="back-home">
+                <a href="/" title="جهت بازگشت به صفحه اصلی کلیک نمائید">بازگشت به صفحه اصلی</a>
+            </div>
+            @if (isEnableFacultyRegistration)
+            {
+                <div id="login-registration">
+                    <a href="/registration" title="عضویت در سامانه">عضویت در سامانه</a>
+                </div>
+            }
+        </div>
+    </div>
+    <div id="modal-alert"></div>
+    @if (ViewBag.Type == "info")
+    {
+        @:<div id="forgotten-password-alert" class="display-hidden" data-type="@ViewBag.Type" data-title="@ViewBag.Title" data-message="@ViewBag.Message"></div>
+    }
+    else if (ViewBag.Type == "success")
+    {
+        @:<div id="forgotten-password-alert" class="display-hidden" data-type="@ViewBag.Type" data-title="@ViewBag.Title"></div>
+    }
+    <span id="captcha-url" style="display:none;" data-captcha-url="@Url.Action(MVC.Captcha.ActionNames.CaptchaImage, MVC.Captcha.Name, routeValues: new{ seed = DateTime.Now.Ticks })"></span>
+    <script src="~/build/loginscripts/scripts.min.js"></script>
+</body>
+</html>

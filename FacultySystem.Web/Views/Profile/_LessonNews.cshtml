@@ -1,0 +1,37 @@
+﻿@model IList<ContentManagementSystem.Models.ViewModels.LessonNewsViewModel>
+
+<div class="heading_a uk-text-center"><span class="uk-badge uk-badge-success heading_a">اخبار</span></div>
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <div class="timeline">
+            @foreach (var item in Model)
+            {
+                <div class="timeline_item">
+                    <div class="timeline_icon timeline_icon_@item.NewsColor.ToString().ToLowerInvariant()"><i class="material-icons">notifications_active</i></div>
+                    <div class="timeline_date">
+                        @*21 <span>Oct</span>*@
+                        <span class="persian-number fs-15">@item.CreateDateText</span>
+                    </div>
+                    <div class="timeline_content">
+                        @if (!string.IsNullOrEmpty(item.Link))
+                        {
+                            <a href="@item.Link" target="_blank" rel="nofollow"><span class="persian-number">@item.Title</span></a>
+                        }
+                        else
+                        {
+                            <span class="persian-number">@item.Title</span>
+                        }
+                        @if (!string.IsNullOrEmpty(item.Content))
+                        {
+                        <div class="timeline_content_addon">
+                            <blockquote>
+                                @Html.Raw(item.Content.Replace("\n", "<br />").Replace("\r\n", "<br />"))
+                            </blockquote>
+                        </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "بارگذاری رزومه";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+}
+
+<div id="page_content">
+    <div id="page_content_inner">
+        <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+            <div style="width: 100%;">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <ul class="md-list md-list-addon md-list-right">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">توجه</span>
+                                    <span class="uk-text-medium uk-text-muted">پسوند فایل رزومه حتماً می بایست pdf باشد.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (ViewBag.HasInfo != null && (bool)ViewBag.HasInfo)
+        {
+            <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+                <div style="width: 100%;">
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <span class="uk-text-success uk-text-bold"><i class="material-icons uk-text-success">info</i> @ViewBag.Message</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="md-card">
+            <form method="post" action="@Url.Action(MVC.Dashboard.Professor.Resume())" enctype="multipart/form-data" id="resume-form">
+                <div class="md-card-toolbar" style="padding-bottom: 7px;">
+                    <div class="md-card-toolbar-actions">
+                        <button type="submit" class="md-btn md-btn-success"><i class="material-icons">save</i> ذخیره</button>
+                    </div>
+                    <h3 class="md-card-toolbar-heading-text uk-text-primary" style="padding-right: 10px;">
+                        در این بخش می توانید رزومه خود را بارگذاری نمائید تا در دسترس کاربران و بازدید کنندگان قرار گیرد.
+                    </h3>
+                </div>
+                <div class="md-card-content">
+                    <div class="mGraph-wrapper mb-15">
+                        @Html.CheckBox("DeleteResume", false, new { data_md_icheck = "data-md-icheck" })
+                        @Html.Label("DeleteResume", "حذف رزومه (در صورت موجود بودن)", new { @class = "cursor-pointer" })
+                    </div>
+                    <div class="mGraph-wrapper">
+                        <div class="uk-form-file md-btn md-btn-primary"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;انتخاب رزومه <input type="file" id="resume" name="resume" accept=".pdf" /> </div>
+                    </div>
+                </div>
+            </form>
+            @if (ViewBag.ResumeUrl != null)
+            {
+            <div class="uk-text-success" style="padding:10px;padding-right:18px;">
+                جهت دریافت رزومه خود بر روی <a href="@ViewBag.ResumeUrl">این لینک</a> کلیک نمائید.
+            </div>
+            }
+            <div style="padding-bottom: 5px;">
+                <ol>
+                    <li>ابتدا تصویر خود را با کلیلک بر روی دکمه انتخاب رزومه در بالا انتخاب نمائید.</li>
+                    <li>در نهایت بر روی دکمه ذخیره (دکمه سبز رنگ در بالا) کلیک نمائید تا تصویر شما ذخیره شود.</li>
+                    <li>توجه: جهت حذف رزومه خود، گزینه حذف رزومه را انتخاب کرده و سپس بر روی دکمه ذخیره (دکمه سبز رنگ در بالا) کلیک نمائید.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('#DeleteResume').iCheck('uncheck');
+    </script>
+}

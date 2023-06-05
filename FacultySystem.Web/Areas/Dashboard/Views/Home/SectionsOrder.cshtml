@@ -1,0 +1,47 @@
+﻿@model IList<ContentManagementSystem.Models.ViewModels.SectionsOrderViewModel>
+@{
+    ViewBag.Title = "مدیریت ترتیب قرارگیری بخش ها در صفحه شخصی";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+}
+
+<div id="page_content">
+    <div id="page_content_inner">
+
+        <h3 class="heading_b uk-margin-bottom">ترتیب قرارگیری بخش ها</h3>
+
+        <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+            <div style="width: 100%;">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <ul class="md-list md-list-addon md-list-right">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">توجه</span>
+                                    <span class="uk-text-medium uk-text-muted">جهت تغییر ترتیب نمایش بخش ها در صفحه شخصی خود، می توانید بخش مورد نظر در لیست زیر را کشیده و در جای مناسب رها نمائید.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card">
+            <div class="md-card-content">
+                <div id="sections-order">
+                    <ul id="sections-order-list">
+                        @foreach (var item in Model)
+                        {
+                            <li data-item-name="@((int)item.SectionName)" data-uk-tooltip="{pos:'top-left', cls: 'fs-16p'}" title="@item.SectionNameText"><i class="material-icons fuchsia">sort</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@item.SectionNameText</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<span id="variables" class="display-hidden" data-update-url="@Url.Action(MVC.Dashboard.Home.SectionsOrder())"></span>

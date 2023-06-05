@@ -1,0 +1,43 @@
+{
+  "name": "ContentManagementSystem.Web",
+  "description": "Content Management System",
+  "main": "",
+  "authors": [
+    "Kiarash Soleimanzadeh"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0",
+    "jquery-validation": "^1.15.1",
+    "jquery-validation-unobtrusive": "^3.2.6",
+    "modernizr": "^3.3.1",
+    "respond": "^1.4.2",
+    "font-awesome": "fontawesome#^4.6.3",
+    "parsleyjs": "^2.6.0",
+    "persian-rex": "^2.2.2",
+    "vazir-font": "^6.3.4",
+    "material-design-icons": "^3.0.1",
+    "persian-datepicker": "^0.4.5",
+    "matchHeight": "^0.7.0",
+    "jquery.inputmask": "^3.3.4",
+    "highcharts": "^5.0.7",
+    "waypoints": "^4.0.1"
+  },
+  "devDependencies": {
+    "vazir-font": "^4.0.1",
+    "material-design-lite": "^1.2.0"
+  },
+  "resolutions": {
+    "jquery": "~2",
+    "vazir-font": "^4.0.1"
+  }
+}

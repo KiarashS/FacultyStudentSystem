@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "درجه های تحصیلی";
+    Layout = MVC.Dashboard.Shared.Views._ProfessorMasterLayout;
+}
+
+
+<div id="page_content">
+    <div id="page_content_inner">
+
+        <h3 class="heading_b uk-margin-bottom">درجه های تحصیلی</h3>
+
+        <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium" data-uk-grid-margin>
+            <div style="width: 100%;">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <ul class="md-list md-list-addon md-list-right">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-primary">notifications</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">توجه</span>
+                                    <span class="uk-text-medium uk-text-muted">جهت تغییر ترتیب قرارگیری آیتم ها در لیست می توانید اولویت قرار گیری آن ها را تغییر دهید. با افزایش اولویت قرارگیری، آیتم مورد نظر اولویت بیشتری پیدا کرده و در لیست بالاتر از بقیه آیتم ها قرار می گیرد.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card">
+            <div class="md-card-content">
+                <div id="educationaldegree_crud">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="md-fab-wrapper mb-30">
+    <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="#" id="recordAdd" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="اضافه کردن درجه تحصیلی">
+        <i class="material-icons"></i>
+    </a>
+</div>
+
+<span id="variables" class="display-hidden" data-list-url="@Url.Action(MVC.Dashboard.EducationalDegree.List())"
+      data-create-url="@Url.Action(MVC.Dashboard.EducationalDegree.Create())"
+      data-update-url="@Url.Action(MVC.Dashboard.EducationalDegree.Update())"
+      data-delete-url="@Url.Action(MVC.Dashboard.EducationalDegree.Delete())"
+      data-check-name-url="@Url.Action(MVC.Dashboard.EducationalDegree.CheckName())"></span>

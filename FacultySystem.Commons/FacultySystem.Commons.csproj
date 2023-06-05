@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B35B1089-FA87-4298-9179-C4FCF7D5813A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FacultySystem.Commons</RootNamespace>
+    <AssemblyName>FacultySystem.Commons</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DNT.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DNT.Extensions.1.0.0\lib\DNT.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NReco.VideoConverter, Version=1.1.2.0, Culture=neutral, PublicKeyToken=395ccb334978a0cd, processorArchitecture=MSIL">
+      <HintPath>..\packages\NReco.VideoConverter.1.1.2\lib\net20\NReco.VideoConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="Persia, Version=3.0.4727.38582, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Persia.NET.3.0.4727\lib\Persia.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Exceptional, Version=1.0.130.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Exceptional.1.0.130\lib\net40\StackExchange.Exceptional.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StructureMap.4.5.1\lib\net45\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Z.ExtensionMethods, Version=2.0.12.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.ExtensionMethods.2.0.12\lib\net45\Z.ExtensionMethods.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\Constants.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\ActionResults\CamelCaseJsonResult.cs" />
+    <Compile Include="Web\ActionResults\ResumingFile\ByteRange.cs" />
+    <Compile Include="Web\ActionResults\ResumingFile\ResumingActionResultBase.cs" />
+    <Compile Include="Web\ActionResults\ResumingFile\ResumingFileContentResult.cs" />
+    <Compile Include="Web\ActionResults\ResumingFile\ResumingFilePathResult.cs" />
+    <Compile Include="Web\ActionResults\ResumingFile\ResumingFileStreamResult.cs" />
+    <Compile Include="Web\ActionResults\ResumingFile\ResumingRequest.cs" />
+    <Compile Include="Web\AreaRegistrationContextExtensions.cs" />
+    <Compile Include="Web\Attributes\ChildActionAjaxOnlyAttribute.cs" />
+    <Compile Include="Web\Attributes\DemoAttribute.cs" />
+    <Compile Include="Web\Attributes\AjaxOnlyAttribute.cs" />
+    <Compile Include="Web\Attributes\AllowUploadSpecialFilesOnlyAttribute.cs" />
+    <Compile Include="Web\Attributes\AreaRemoteAttribute.cs" />
+    <Compile Include="Web\Attributes\BasicAuthenticationAttribute.cs" />
+    <Compile Include="Web\Attributes\ClientIpRestrictionAttribute.cs" />
+    <Compile Include="Web\Attributes\GroupActionHandlerAttribute.cs" />
+    <Compile Include="Web\Attributes\NoCachingAttribute.cs" />
+    <Compile Include="Web\Attributes\OnlyGuest.cs" />
+    <Compile Include="Web\Attributes\SiteAuthorizeAttribute.cs" />
+    <Compile Include="Web\Attributes\ValidateAjaxAttribute.cs" />
+    <Compile Include="Web\Attributes\ValidateJsonAntiForgeryTokenAttribute.cs" />
+    <Compile Include="Web\Attributes\ValidateNonAjaxAttribute.cs" />
+    <Compile Include="Web\CacheManager.cs" />
+    <Compile Include="Web\Captcha\CaptchaHelpers.cs" />
+    <Compile Include="Web\Captcha\CaptchaImageResult.cs" />
+    <Compile Include="Web\Captcha\HumanReadableInteger.cs" />
+    <Compile Include="Web\Captcha\SecurityExtensions.cs" />
+    <Compile Include="Web\Captcha\ValidateCaptchaAttribute.cs" />
+    <Compile Include="Web\Cookies.cs" />
+    <Compile Include="Web\CustomRoleProvider.cs" />
+    <Compile Include="Web\CustomRouting\CustomControllerFactory.cs" />
+    <Compile Include="Web\CustomRouting\CustomMvcHandler.cs" />
+    <Compile Include="Web\CustomRouting\CustomMvcRouteHandler.cs" />
+    <Compile Include="Web\CustomRouting\CustomRoute.cs" />
+    <Compile Include="Web\CustomRouting\CustomRouteCollectionExtensions.cs" />
+    <Compile Include="Web\CustomRouting\IRouteValueLookupService.cs" />
+    <Compile Include="Web\EmailVerify.cs" />
+    <Compile Include="Web\Extensions.cs" />
+    <Compile Include="Web\ExWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Web\Filters\ElmahHandledErrorLoggerFilter.cs" />
+    <Compile Include="Web\Filters\ElmahRequestValidationErrorFilter.cs" />
+    <Compile Include="Web\Filters\ExceptionHandlerAttribute.cs" />
+    <Compile Include="Web\Filters\ForceWww.cs" />
+    <Compile Include="Web\Filters\NoBrowserCacheAttribute.cs" />
+    <Compile Include="Web\Helpers\BundleConfigUtil.cs" />
+    <Compile Include="Web\Helpers\HtmlHelpers.cs" />
+    <Compile Include="Web\Helpers\PdfHelpers.cs" />
+    <Compile Include="Web\Helpers\UtilityFunctions.cs" />
+    <Compile Include="Web\HttpCompress\CompressingFilter.cs" />
+    <Compile Include="Web\HttpCompress\DeflateFilter.cs" />
+    <Compile Include="Web\HttpCompress\Enums.cs" />
+    <Compile Include="Web\HttpCompress\GZipFilter.cs" />
+    <Compile Include="Web\HttpCompress\HttpModule.cs" />
+    <Compile Include="Web\HttpCompress\HttpOutputFilter.cs" />
+    <Compile Include="Web\HttpCompress\SectionHandler.cs" />
+    <Compile Include="Web\HttpCompress\Settings.cs" />
+    <Compile Include="Web\LowercaseRoute.cs" />
+    <Compile Include="Web\ModelBinder\PersianDateModelBinder.cs" />
+    <Compile Include="Web\ModelBinder\PersianEndDateModelBinder.cs" />
+    <Compile Include="Web\Modules\IpRestrictAccess.cs" />
+    <Compile Include="Web\MvcRss\CryptoUtils.cs" />
+    <Compile Include="Web\MvcRss\FeedItem.cs" />
+    <Compile Include="Web\MvcRss\FeedResult.cs" />
+    <Compile Include="Web\MvcRss\RtlHelper.cs" />
+    <Compile Include="Web\OptimizationExtensions.cs" />
+    <Compile Include="Web\PasswordHash.cs" />
+    <Compile Include="Web\Providers\CookieTempData\AppStart.cs" />
+    <Compile Include="Web\Providers\CookieTempData\CookieTempDataControllerFactory.cs" />
+    <Compile Include="Web\Providers\CookieTempData\CookieTempDataProvider.cs" />
+    <Compile Include="Web\RegexUtils.cs" />
+    <Compile Include="Web\Report\TransparentTemplate.cs" />
+    <Compile Include="Web\RijndaelManagedEncryption.cs" />
+    <Compile Include="Web\RouteCollectionExtensions.cs" />
+    <Compile Include="Web\SafePassword.cs" />
+    <Compile Include="Web\SeoExtensions.cs" />
+    <Compile Include="Web\UrlNormalization.cs" />
+    <Compile Include="Web\Utility\AppPath.cs" />
+    <Compile Include="Web\Utility\UniqueKey.cs" />
+    <Compile Include="Web\VideoThumb.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FacultySystem.IocConfig\FacultySystem.IocConfig.csproj">
+      <Project>{A2C53082-36F0-4A31-96B5-C6D6B5C0D38D}</Project>
+      <Name>FacultySystem.IocConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacultySystem.ServiceLayer\FacultySystem.ServiceLayer.csproj">
+      <Project>{ad16ff82-4486-477d-82ed-9b3aed85a529}</Project>
+      <Name>FacultySystem.ServiceLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\Elmah.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

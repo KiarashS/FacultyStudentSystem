@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.ResearchViewModel>
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="سوابق پژوهشی">
+            <i class="fa fa-flask fa-35 orange" style="padding-top: 25%;"></i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">سوابق پژوهشی</h3>
+                <div class="uk-overflow-container pb-15 pt-30">
+                    <ul class="professor-details-list">
+                        @foreach (var research in Model)
+                        {
+                            <li>
+                                @if (!string.IsNullOrEmpty(research.Link))
+                                {
+                                    if (research.FullTime != null)
+                                    {
+                                        <a href="@research.Link" target="_blank" rel="nofollow"><strong class="persian-number">@research.Title</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@research.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@research.Link" target="_blank" rel="nofollow"><strong class="persian-number">@research.Title</strong></a>
+                                    }
+                                }
+                                else
+                                {
+                                    if (research.FullTime != null)
+                                    {
+                                        <strong class="persian-number">@(research.Title)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@research.FullTime)</span>
+                                    }
+                                    else
+                                    {
+                                        <strong class="persian-number">@(research.Title)</strong>
+                                    }
+                                }
+                                @if (!string.IsNullOrEmpty(research.Place))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">مکان:</span>&nbsp;<span class="persian-number">@research.Place</span></div>
+                                }
+                                @if (!string.IsNullOrEmpty(research.Description))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail"><span class="black" style="border-bottom: 1px dotted #000;">توضیحات:</span>&nbsp;<span class="persian-number">@research.Description</span></div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

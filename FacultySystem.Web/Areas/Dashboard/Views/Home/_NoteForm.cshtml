@@ -1,0 +1,23 @@
+﻿@using (Html.BeginForm(MVC.Dashboard.Home.UpdateNote(), FormMethod.Post, new { role = "form", id = "noteform", name = "noteform" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="md-card">
+        <div class="md-card-toolbar" style="padding-bottom: 7px;">
+            <div class="md-card-toolbar-actions">
+                <button type="submit" class="md-btn md-btn-success"><i class="material-icons">save</i> ذخیره</button>
+            </div>
+            <h3 class="md-card-toolbar-heading-text uk-text-primary">
+                یادداشت های خود را برای یادآوری امور می توانید در این قسمت وارد نمائید. برای درج یادداشت ها در یک خط جدید از دکمه Enter استفاده کنید. (تخته سفید)
+            </h3>
+        </div>
+        <div class="md-card-content">
+            <div class="mGraph-wrapper">
+                <div class="md-input-wrapper md-input-filled" style="margin-bottom: 8px;">
+                    <label>یادداشت های خود را در این قسمت وارد نمائید ...</label>
+                    @Html.TextArea("notetext", (string)ViewBag.Note, 8, 30, new { @class = "md-input selecize_init", style = "overflow-x: hidden; word-wrap: break-word; height: 193px; font-size= 16px !important;" })
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+        </div>
+    </div>
+}

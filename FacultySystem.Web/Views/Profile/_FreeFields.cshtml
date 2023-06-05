@@ -1,0 +1,37 @@
+﻿@model IList<ContentManagementSystem.Models.ViewModels.FreeFieldListViewModel>
+
+
+<div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-2 uk-width-xLarge-1-2">
+        <ul class="md-list pr-20">
+            @for (var index = 0; index < Model.Count(); index++)
+            {
+                if (index % 2 == 0 && !string.IsNullOrEmpty(Model[index].Name) && !string.IsNullOrEmpty(Model[index].Value))
+                {
+                <li>
+                    <div class="md-list-content">
+                        <span class="md-list-heading white persian-number">@Model[index].Value</span>
+                        <span class="uk-text-small silver persian-number">@Model[index].Name</span>
+                    </div>
+                </li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-2 uk-width-xLarge-1-2">
+        <ul class="md-list pr-20">
+            @for (var index = 0; index < Model.Count(); index++)
+            {
+                if (index % 2 != 0 && !string.IsNullOrEmpty(Model[index].Name) && !string.IsNullOrEmpty(Model[index].Value))
+                {
+                <li>
+                    <div class="md-list-content">
+                        <span class="md-list-heading white persian-number">@Model[index].Value</span>
+                        <span class="uk-text-small silver persian-number">@Model[index].Name</span>
+                    </div>
+                </li>
+                }
+            }
+        </ul>
+    </div>
+</div>

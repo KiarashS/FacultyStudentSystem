@@ -1,0 +1,36 @@
+﻿<div style="display: none; direction: rtl;">
+    From: @ViewBag.From
+    To: @ViewBag.To
+    Subject: @ViewBag.Subject
+</div>
+
+<tr style="font-family: Tahoma, Arial; box-sizing: border-box; font-size: 14px; margin: 0;">
+    <td class="content-block" style="font-family: Tahoma, Arial; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px; direction: rtl;" valign="top">
+        <strong>@ViewBag.Subject</strong>
+    </td>
+</tr>
+<tr style="font-family: Tahoma, Arial; box-sizing: border-box; font-size: 14px; margin: 0;">
+    <td class="content-block" style="font-family: Tahoma, Arial; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 10px; padding: 0 0 20px; direction: rtl;" valign="top">
+        سلام @ViewBag.Fullname عزیز،
+        <br />
+        مشخصات اکانت کاربری شما در @ConfigurationManager.AppSettings["SystemNameFa"] به شرح زیر می باشد:
+        <br />
+        <br />
+        نام کاربری: @ViewBag.To
+        <br />
+        رمز عبور: @ViewBag.Password
+        <br />
+        <br />
+        (لطفاً به کوچکی و بزرگی حروف دقت فرمائید.)
+        <br />
+        جهت ورود به پنل مدیریتی خود بر روی دکمه زیر کلیک نمائید. همچنین جهت افزایش امنیت اکانت مدیریتی خود، حتماً پس از اولین ورود به پنل مدیریتی خود از قسمت تغییر رمز عبور نسبت به تغییر رمز عبورتان به رمز عبور دلخواه خود اقدام نمائید.
+        <br />
+        <br />
+        <div style="text-align: center;"><a href="@ViewBag.LogonLink" class="material-button green" target="_blank">ورود به سامانه</a></div>
+    </td>
+</tr>
+<tr style="font-family: Tahoma, Arial; box-sizing: border-box; font-size: 14px; margin: 0;">
+    <td class="content-block" style="font-family: Tahoma, Arial; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px; direction: rtl;" valign="top">
+        &mdash; @ConfigurationManager.AppSettings["SystemNameFa"]
+    </td>
+</tr>

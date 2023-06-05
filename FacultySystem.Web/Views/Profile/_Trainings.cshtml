@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.TrainingViewModel>
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="سوابق آموزشی">
+            <i class="fa fa-leanpub fa-35 yellow" style="padding-top: 25%;"></i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">سوابق آموزشی</h3>
+                <div class="uk-overflow-container pb-15 pt-30">
+                    <ul class="professor-details-list">
+                        @foreach (var training in Model)
+                        {
+                            <li>
+                                @if (!string.IsNullOrEmpty(training.Link))
+                                {
+                                    if (training.FullTime != null)
+                                    {
+                                        <a href="@training.Link" target="_blank" rel="nofollow"><strong class="persian-number">@training.Title</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@training.FullTime) @(training.FullDetailedTime ?? string.Empty) </span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@training.Link" target="_blank" rel="nofollow"><strong class="persian-number">@training.Title</strong></a>@:&nbsp;&nbsp;<span class="persian-number">@training.FullDetailedTime</span>
+                                    }
+                                }
+                                else
+                                {
+                                    if (training.FullTime != null)
+                                    {
+                                        <strong class="persian-number">@(training.Title)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@training.FullTime) @training.FullDetailedTime</span>
+                                    }
+                                    else
+                                    {
+                                        <strong class="persian-number">@(training.Title)</strong>@:&nbsp;&nbsp;<span class="persian-number">@training.FullDetailedTime</span>
+                                    }
+                                }
+                                @if (!string.IsNullOrEmpty(training.Place))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail persian-number">@training.Place</div>
+                                }
+                                @if (!string.IsNullOrEmpty(training.Teacher))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail">مدرس: @training.Teacher</div>
+                                }
+                                @if (!string.IsNullOrEmpty(training.Participant))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail">شرکت کننده: @training.Participant</div>
+                                }
+                                @if (!string.IsNullOrEmpty(training.Secretary))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail">دبیر: @training.Secretary</div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+﻿@using ContentManagementSystem.Web.Utils
+@{
+    //var isProfessor = false;
+    //if (Request.IsAuthenticated)
+    //{
+    //    isProfessor = User.IsInRole(ConstantsUtil.ProfessorRole);
+    //}
+    var isEnableFacultyRegistration = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableFacultyRegistration"]);
+    var adminEmailForHome = ConfigurationManager.AppSettings["AdminEmailForHome"].Trim().Length > 0 ? ConfigurationManager.AppSettings["AdminEmailForHome"] : null;
+    var showAdminEmailInHome = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowAdminEmailInHome"]);
+    var showCopyright = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowCopyright"]);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/build/styles/styles.min.css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link title="فيد اخبار @ConfigurationManager.AppSettings["SystemNameFa"]" href="/feed" type="application/rss+xml" rel="alternate" />
+</head>
+<body class="pt-0">
+    <div class="uk-grid" data-uk-grid-margin id="users_index">
+        <div class="uk-width-1-1">
+            <div class="md-card">
+                <div class="user_heading">
+                    <div class="user_heading_menu hidden-print">
+                        @if (Request.IsAuthenticated)
+                        {
+                            <div class="uk-display-inline-block" data-uk-dropdown="{ mode:'click', pos:'right-top' }">
+                                <i class="md-icon material-icons md-icon-light">more_vert</i>
+                                <div class="uk-dropdown uk-dropdown-small">
+                                    <ul class="uk-nav">
+                                        <li><a href="@Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name)" class="fs-16p"><i class="material-icons purple">home</i> صفحه اصلی</a></li>
+                                        @*@if (isProfessor)
+                                        {
+                                            <li><a href="/@ViewBag.PageId" class="fs-16p"><i class="material-icons uk-text-success">assignment_ind</i> صفحه شخصی</a></li>
+                                        }*@
+                                        <li><a href="@Url.Action(MVC.Dashboard.Home.Index())" class="fs-16p"><i class="material-icons black">dashboard</i> داشبورد</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="javascript:void(0)" onclick="logout()" class="fs-16p"><i class="material-icons uk-text-danger">power_settings_new</i> خروج از سامانه</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                        @if (!Request.IsAuthenticated)
+                        {
+                            <div class="uk-display-inline-block"><a href="/" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="صفحه اصلی"><i class="md-icon md-icon-light material-icons">home</i></a></div>
+                            if (isEnableFacultyRegistration)
+                            {
+                                <div class="uk-display-inline-block"><a href="/registration" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="عضویت در سامانه"><i class="md-icon md-icon-light material-icons">perm_identity</i></a></div>
+                            }
+                            <div class="uk-display-inline-block"><a href="@Url.Action(MVC.Login.Index())" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="ورود به سامانه"><i class="md-icon md-icon-light material-icons">lock_open</i></a></div>
+                        }
+                    </div>
+                    <div class="user_heading_avatar">
+                        <div class="thumbnail">
+                            <a href="/"><img src="@ConfigurationManager.AppSettings["UniversityLogoPath"]" title="@ConfigurationManager.AppSettings["UniversityNameFa"]" alt="@ConfigurationManager.AppSettings["UniversityNameFa"]"></a>
+                        </div>
+                    </div>
+                    <div class="user_heading_content">
+                        <h2 class="heading_b uk-margin-bottom"><span class="uk-text-truncate">@ConfigurationManager.AppSettings["SystemNameFa"]</span><span class="sub-heading" style="font-family: WRoya, Tahoma !important;">@ConfigurationManager.AppSettings["UniversityNameFa"]</span></h2>
+                    </div>
+                </div>
+                <div class="user_content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer">
+        <div class="uk-grid" style="padding-left:20px;">
+            <div class="uk-width-1-1 uk-text-center" style="margin-right: 10px;">
+                @*<h5 class="white">پروفایل</h5>*@
+                @*<p class="md-color-grey-100" style="padding-top:20px;padding-bottom:20px;">Developed and Designed With <i class="material-icons red">favorite</i> by <a href="http://www.kiarash.pro" title="kiarash.s@hotmail.com" data-uk-tooltip="{pos:'top', cls: 'font-arial'}" class="md-color-grey-300" target="_blank">Kiarash Soleimanzadeh</a></p>*@
+                <p class="md-color-grey-100" style="padding-top:20px;">کلیه حقوق مادی و معنوی این سامانه متعلق به @ConfigurationManager.AppSettings["UniversityNameFa"].ToString() می باشد.</p>
+                @if (showAdminEmailInHome && adminEmailForHome != null)
+                {
+                    <p class="md-color-grey-100">تماس با مدیر سامانه: <a class="white" href="mailto:@adminEmailForHome">@adminEmailForHome</a></p>
+                }
+                <p class="md-color-grey-300">جهت استفاده مناسب از سامانه از مرورگر کروم یا فایرفاکس استفاده نمائید.</p>
+                @*https://dl.google.com/chrome/install/standalonesetup64.exe
+                    https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US*@
+                <p style="padding-bottom:20px;"><a href="https://dl.google.com/chrome/install/standalonesetup.exe" target="_blank" rel="nofollow" class="yellow"><i title="دریافت مرورگر کروم" data-uk-tooltip="{pos:'top', cls: 'fs-16p'}" class="fa fa-chrome fa-2x"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://download.mozilla.org/?product=firefox-latest&os=win&lang=en-US" target="_blank" rel="nofollow" class="orange"><i title="دریافت مرورگر فایرفاکس" data-uk-tooltip="{pos:'top', cls: 'fs-16p'}" class="fa fa-firefox fa-2x"></i></a></p>
+            </div>
+        </div>
+        <div class="footer-copyright" style="padding-left:20px;">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 uk-text-center" dir="ltr">
+                    @if (showCopyright)
+                    {
+                        <span class="md-color-grey-300">طراحی و پیاده سازی توسط <a href="http://www.ppk.co.ir" style="color: #fffc00;" target="_blank"><strong>شرکت پویا پرداز کارکیا</strong></a></span>
+                    }
+                    else
+                    {
+                        <span class="font-arial md-color-grey-200" dir="ltr">
+                            &copy; Copyright @ConfigurationManager.AppSettings["YearOfInstall"] - @DateTime.Now.Year, @ConfigurationManager.AppSettings["UniversityNameEn"]
+                        </span>
+                    }
+                    @*<a class="grey-text text-lighten-4 right" href="#!">Terms</a>*@
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="back-btn" style="z-index: 1000;">
+        <div class="display-inlineblock mr-10">
+            <a class="md-fab md-fab-wave-light waves-effect waves-button small-fab" href="/" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="بازگشت به صفحه اصلی"><i class="material-icons">arrow_back</i></a>
+        </div>
+    </div>
+    <button id="material-scrolltop-btn" class="material-scrolltop" type="button" data-uk-tooltip="{pos:'top', cls: 'fs-16p'}" title="برو بالا!"><i class="small material-icons white md-36" style="margin-bottom: 7px;">keyboard_arrow_up</i></button>
+    <script src="~/build/scripts/scripts.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.AddressListViewModel>
+@{ 
+    var notNullCount = 0;
+    var addressWidthClass = "uk-width-1-1";
+
+    if (Model.Any(a => a.PostalCode != null))
+    {
+        notNullCount++;
+    }
+    if (Model.Any(a => a.Tel != null))
+    {
+        notNullCount++;
+    }
+    if (Model.Any(a => a.Fax != null))
+    {
+        notNullCount++;
+    }
+
+    if (notNullCount == 1)
+    {
+        addressWidthClass = "uk-width-9-10";
+    }
+    else if (notNullCount == 2)
+    {
+        addressWidthClass = "uk-width-8-10";
+    }
+    else if (notNullCount == 3)
+    {
+        addressWidthClass = "uk-width-7-10";
+    }
+}
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="آدرس ها">
+            <i class="material-icons md-48 maroon" style="padding-top: 25%;">location_on</i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">آدرس ها</h3>
+                <div class="uk-overflow-container pb-15">
+                    <table class="uk-table">
+                        <thead>
+                        <tr>
+                            <th class="table-header heading_a">آدرس</th>
+                            @if (Model.Any(a => a.PostalCode != null))
+                            {
+                                <th class="uk-text-center table-header heading_a">کد پستی</th>
+                            }
+                            @if (Model.Any(a => a.Tel != null))
+                            {
+                                <th class="uk-text-center table-header heading_a">تلفن</th>
+                            }
+                            @if (Model.Any(a => a.Fax != null))
+                            {
+                                <th class="uk-text-center table-header heading_a">فکس</th>
+                            }
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var address in Model)
+                        {
+                            <text>
+                                <tr class="uk-table-middle">
+                                    <td class="@addressWidthClass">
+                                        @if (!string.IsNullOrEmpty(address.Link))
+                                        {
+                                            <a href="@address.Link" target="_blank" rel="nofollow"><span class="persian-number">@address.PostalAddress</span></a>
+                                        }
+                                        else
+                                        {
+                                            <span class="persian-number">@address.PostalAddress</span>
+                                        }
+                                    </td>
+                                    @if (Model.Any(a => a.PostalCode != null))
+                                    {
+                                        <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@address.PostalCode</td>
+                                    }
+                                    @if (Model.Any(a => a.Tel != null))
+                                    {
+                                        <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@address.Tel</td>
+                                    }
+                                    @if (Model.Any(a => a.Fax != null))
+                                    {
+                                        <td class="uk-width-1-10 uk-text-center persian-number fs-09e">@address.Fax</td>
+                                    }
+                                </tr>
+                            </text>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

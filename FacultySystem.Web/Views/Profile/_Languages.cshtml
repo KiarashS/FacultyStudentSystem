@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ContentManagementSystem.Models.ViewModels.LanguageViewModel>
+
+<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+    <div class="uk-width-1-1 uk-container uk-container-center">
+        <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="زبان ها">
+            <i class="fa fa-language fa-35" style="padding-top: 25%;color:#97457a;"></i>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content pt-70">
+                <h3 class="heading_c head uk-text-center uk-text-muted">زبان ها</h3>
+                <div class="uk-overflow-container pb-15 pt-30">
+                    <ul class="professor-details-list">
+                        @foreach (var language in Model)
+                        {
+                            <li>
+                                @if (!string.IsNullOrEmpty(language.Link))
+                                {
+                                    if (language.Level != ContentManagementSystem.DomainClasses.ProfessorLanguageLevel.NotDefined)
+                                    {
+                                        <a href="@language.Link" target="_blank" rel="nofollow"><i class="ml-4 @language.CssClassText"></i><strong>@language.NameText</strong></a>@:&nbsp;(@language.LevelText)
+                                    }
+                                    else
+                                    {
+                                        <a href="@language.Link" target="_blank" rel="nofollow"><i class="ml-4 @language.CssClassText"></i><strong>@language.NameText</strong></a>
+                                    }
+                                }
+                                else
+                                {
+                                    if (language.Level != ContentManagementSystem.DomainClasses.ProfessorLanguageLevel.NotDefined)
+                                    {
+                                        <i class="ml-4 @language.CssClassText"></i><strong>@language.NameText</strong>@:&nbsp;(@language.LevelText)
+                                    }
+                                    else
+                                    {
+                                        <i class="ml-4 @language.CssClassText"></i><strong>@language.NameText</strong>
+                                    }
+                                }
+                                @if (!string.IsNullOrEmpty(language.Description))
+                                {
+                                    <div class="uk-text-muted professor-sub-detail persian-number">@language.Description</div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

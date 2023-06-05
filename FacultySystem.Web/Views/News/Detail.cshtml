@@ -1,0 +1,29 @@
+﻿@model ContentManagementSystem.Models.ViewModels.NewsViewModel
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = MVC.Shared.Views._Layout;
+}
+
+<div class="uk-grid blog_article" data-uk-grid-margin="">
+    <div class="uk-width-medium-1-1">
+        <div class="md-card">
+            <div class="md-card-content large-padding">
+                <div class="uk-article">
+                    <h2 class="uk-article-title">@Model.Title</h2>
+                    <p class="uk-article-meta fs-14p">
+                        انتشار شده در: @Html.Raw(Model.CreateDateText)
+                    </p>
+                    <hr class="uk-article-divider" />
+                    <p></p>
+                    @Html.Raw(Html.Encode(Model.Content).Replace("\n", "<br />"))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="back-btn" style="top: 170px; z-index: 1000;">
+    <div class="display-inlineblock mr-10">
+        <a class="md-fab md-fab-success md-fab-wave-light waves-effect waves-button small-fab" href="/news" data-uk-tooltip="{pos:'right', cls:'fs-16p'}" title="بازگشت به لیست خبر ها"><i class="material-icons">arrow_back</i></a>
+    </div>
+</div>

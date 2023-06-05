@@ -1,0 +1,272 @@
+﻿@using ContentManagementSystem.Commons.Web.Helpers
+@using ContentManagementSystem.Web.Utils
+
+@{
+    var isAdmin = User.IsInRole(ConstantsUtil.AdminRole);
+    var isProfessor = User.IsInRole(ConstantsUtil.ProfessorRole);
+}
+<div class="menu_section">
+    <ul>
+        <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Index, controllers: MVC.Dashboard.Home.Name)" title="Dashboard">
+            <a href="@Url.Action(MVC.Dashboard.Home.Index())">
+                <span class="menu_icon"><i class="material-icons navy">&#xE871;</i></span>
+                <span class="menu_title">داشبورد</span>
+            </a>
+
+        </li>
+        @if (isAdmin)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.ManageUsers, controllers: MVC.Dashboard.Admin.Name)" title="Manage Users">
+                <a href="@Url.Action(MVC.Dashboard.Admin.ActionNames.ManageUsers, MVC.Dashboard.Admin.Name)">
+                    <span class="menu_icon"><i class="material-icons olive">people</i></span>
+                    <span class="menu_title">مدیریت کاربران</span>
+                </a>
+            </li>
+        }
+        @if (isAdmin)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.DefaultFreeField, controllers: MVC.Dashboard.Admin.Name)" title="System Settings">
+                <a href="#">
+                    <span class="menu_icon"><i class="material-icons red">settings_input_component</i></span>
+                    <span class="menu_title">مدیریت سامانه</span>
+                </a>
+                <ul>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.News, controllers: MVC.Dashboard.Admin.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Admin.News())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>اخبار</a></li>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.CitationManagement, controllers: MVC.Dashboard.Admin.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Admin.CitationManagement())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>ارجاعات و مقالات</a></li>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.DefaultFreeField, controllers: MVC.Dashboard.Admin.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Admin.DefaultFreeField())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>فیلدهای آزاد</a></li>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.ActivityLog, controllers: MVC.Dashboard.Admin.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Admin.ActivityLog())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>لاگ فعالیت ها</a></li>
+                </ul>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.Settings, controllers: MVC.Dashboard.Professor.Name)" title="Settings">
+                <a href="@Url.Action(MVC.Dashboard.Professor.Settings())">
+                    <span class="menu_icon"><i class="fa fa-cogs" style="padding-right: 3px; color: #929292;"></i></span>
+                    <span class="menu_title">تنظیمات</span>
+                </a>
+            </li>
+        }
+        @if (isAdmin)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.EducationalDegree + "," + MVC.Dashboard.Admin.ActionNames.College + "," + MVC.Dashboard.Admin.ActionNames.EducationalGroup + "," + MVC.Dashboard.Admin.ActionNames.AcademicRank, controllers: MVC.Dashboard.Admin.Name)" title="Lists">
+                <a href="#">
+                    <span class="menu_icon"><i class="material-icons green">list</i></span>
+                    <span class="menu_title">مدیریت لیست ها</span>
+                </a>
+                <ul>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.EducationalDegree, controllers: MVC.Dashboard.Admin.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Admin.EducationalDegree())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>درجه های تحصیلی</a></li>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.College, controllers: MVC.Dashboard.Admin.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Admin.College())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>دانشکده ها</a></li>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.EducationalGroup, controllers: MVC.Dashboard.Admin.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Admin.EducationalGroup())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>گروه های آموزشی</a></li>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.AcademicRank, controllers: MVC.Dashboard.Admin.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Admin.AcademicRank())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>مرتبه های علمی</a></li>
+                </ul>
+            </li>
+        }
+        @if (isAdmin)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.AdminMessage, controllers: MVC.Dashboard.Admin.Name)" title="Contacts">
+                <a href="@Url.Action(MVC.Dashboard.Admin.ActionNames.AdminMessage, MVC.Dashboard.Admin.Name)">
+                    <span class="menu_icon"><i class="material-icons" style="color: #ff7171;">contact_mail</i></span>
+                    <span class="menu_title">مدیریت تماس ها</span>
+                </a>
+            </li>
+        }
+        else if (!isAdmin && isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.AdminMessage, controllers: MVC.Dashboard.Professor.Name)" title="Contacts">
+                <a href="@Url.Action(MVC.Dashboard.Professor.AdminMessage())">
+                    <span class="menu_icon"><i class="material-icons" style="color: #ff7171;">contact_mail</i></span>
+                    <span class="menu_title">تماس با مدیر</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.SectionsOrder, controllers: MVC.Dashboard.Home.Name)" title="Sections Order">
+                <a href="@Url.Action(MVC.Dashboard.Home.SectionsOrder())">
+                    <span class="menu_icon"><i class="material-icons fuchsia">sort</i></span>
+                    <span class="menu_title">ترتیب بخش ها</span>
+                </a>
+            </li>
+        }
+        <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.ChangePassword, controllers: MVC.Dashboard.Home.Name)" title="Change Password">
+            <a href="@Url.Action(MVC.Dashboard.Home.ChangePassword())">
+                <span class="menu_icon"><i class="material-icons purple">vpn_key</i></span>
+                <span class="menu_title">تغییر رمز عبور</span>
+            </a>
+        </li>
+        <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Details + "," + MVC.Dashboard.Home.ActionNames.FreeField + "," + MVC.Dashboard.Professor.ActionNames.Resume, controllers: MVC.Dashboard.Home.Name + "," + MVC.Dashboard.Professor.Name + "," + MVC.Dashboard.Admin.Name)" title="Personal Informations">
+            <a href="#">
+                <span class="menu_icon"><i class="material-icons blue">&#xE87C;</i></span>
+                <span class="menu_title">مشخصات اصلی</span>
+            </a>
+            <ul>
+                @if (isProfessor)
+                {
+                    <text>
+                        <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Details, controllers: MVC.Dashboard.Home.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Home.Details())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>مشخصات پایه</a></li>
+                        <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.FreeField, controllers: MVC.Dashboard.Home.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Home.FreeField())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>فیلدهای آزاد</a></li>
+                        <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.Resume, controllers: MVC.Dashboard.Professor.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Professor.Resume())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>بارگذاری رزومه</a></li>
+                    </text>
+                }
+                else if (isAdmin)
+                {
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Admin.ActionNames.Details, controllers: MVC.Dashboard.Admin.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Admin.Details())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>مشخصات پایه</a></li>
+                }
+            </ul>
+        </li>
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.FreePage, controllers: MVC.Dashboard.Home.Name)" title="Free Page">
+                <a href="@Url.Action(MVC.Dashboard.Home.FreePage())">
+                    <span class="menu_icon"><i class="material-icons yellow">crop_free</i></span>
+                    <span class="menu_title">صفحه آزاد</span>
+                </a>
+            </li>
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Avatar, controllers: MVC.Dashboard.Home.Name)" title="Avatar">
+                <a href="@Url.Action(MVC.Dashboard.Home.Avatar())">
+                    <span class="menu_icon"><i class="material-icons aqua">add_a_photo</i></span>
+                    <span class="menu_title">تصویر پروفایل</span>
+                </a>
+            </li>
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.WeeklyProgram, controllers: MVC.Dashboard.Professor.Name)" title="Weekly Program">
+                <a href="@Url.Action(MVC.Dashboard.Professor.WeeklyProgram())">
+                    <span class="menu_icon"><i class="fa fa-calendar" style="padding-right: 3px;color:#359df8;font-size:20px;"></i></span>
+                    <span class="menu_title">برنامه هفتگی</span>
+                </a>
+            </li>
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.Gallery, controllers: MVC.Dashboard.Professor.Name)" title="Gallery">
+                <a href="@Url.Action(MVC.Dashboard.Professor.Gallery())">
+                    <span class="menu_icon"><i class="material-icons fuchsia">perm_media</i></span>
+                    <span class="menu_title">گالری</span>
+                </a>
+            </li>
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Lesson, controllers: MVC.Dashboard.Home.Name)" title="Lessons">
+                <a href="@Url.Action(MVC.Dashboard.Home.Lesson())">
+                    <span class="menu_icon"><i class="fa fa-object-group orange" style="padding-right: 3px;"></i></span>
+                    <span class="menu_title">دروس ارائه شده</span>
+                </a>
+            </li>
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Bio, controllers: MVC.Dashboard.Home.Name)" title="Bio">
+                <a href="@Url.Action(MVC.Dashboard.Home.Bio())">
+                    <span class="menu_icon"><i class="material-icons teal">description</i></span>
+                    <span class="menu_title">بیوگرافی</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.ExternalArticles + "," + MVC.Dashboard.Professor.ActionNames.ExternalSeminars + "," + MVC.Dashboard.Professor.ActionNames.InternalArticles + "," + MVC.Dashboard.Professor.ActionNames.InternalSeminars, controllers: MVC.Dashboard.Professor.Name)" title="Articles & Seminars">
+                <a href="#">
+                    <span class="menu_icon"><i class="fa fa-connectdevelop" style="padding-right: 3px; color: #000000;"></i></span>
+                    <span class="menu_title">مقالات و سمینارها</span>
+                </a>
+                <ul>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.ExternalArticles, controllers: MVC.Dashboard.Professor.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Professor.ExternalArticles())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>مقالات خارجی</a></li>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.InternalArticles, controllers: MVC.Dashboard.Professor.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Professor.InternalArticles())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>مقالات داخلی</a></li>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.ExternalSeminars, controllers: MVC.Dashboard.Professor.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Professor.ExternalSeminars())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>سمینارهای خارجی</a></li>
+                    <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.InternalSeminars, controllers: MVC.Dashboard.Professor.Name, cssClass: "act_item")"><a href="@Url.Action(MVC.Dashboard.Professor.InternalSeminars())"><i class="material-icons sidemenu-subicon">fiber_manual_record</i>سمینارهای داخلی</a></li>
+                </ul>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Address, controllers: MVC.Dashboard.Home.Name)" title="Addresses">
+                <a href="@Url.Action(MVC.Dashboard.Home.Address())">
+                    <span class="menu_icon"><i class="material-icons maroon">location_on</i></span>
+                    <span class="menu_title">آدرس ها</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Studing, controllers: MVC.Dashboard.Home.Name)" title="Studing Records">
+                <a href="@Url.Action(MVC.Dashboard.Home.Studing())">
+                    <span class="menu_icon"><i class="fa fa-bank lime" style="padding-right: 3px;"></i></span>
+                    <span class="menu_title">سوابق تحصیلی</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Training, controllers: MVC.Dashboard.Home.Name)" title="Training Records">
+                <a href="@Url.Action(MVC.Dashboard.Home.Training())">
+                    <span class="menu_icon"><i class="fa fa-leanpub yellow" style="padding-right: 3px;"></i></span>
+                    <span class="menu_title">سوابق آموزشی</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Professor.ActionNames.Membership, controllers: MVC.Dashboard.Professor.Name)" title="Memberships">
+                <a href="@Url.Action(MVC.Dashboard.Professor.Membership())">
+                    <span class="menu_icon"><i class="fa fa-handshake-o" style="color:#ff00cb;padding-right: 3px;"></i></span>
+                    <span class="menu_title">عضویت ها</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Research, controllers: MVC.Dashboard.Home.Name)" title="Research Records">
+                <a href="@Url.Action(MVC.Dashboard.Home.Research())">
+                    <span class="menu_icon"><i class="fa fa-flask orange" style="padding-right: 3px;"></i></span>
+                    <span class="menu_title">سوابق پژوهشی</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Administration, controllers: MVC.Dashboard.Home.Name)" title="Administration Records">
+                <a href="@Url.Action(MVC.Dashboard.Home.Administration())">
+                    <span class="menu_icon"><i class="material-icons red">functions</i></span>
+                    <span class="menu_title">سوابق اجرایی و مدیریتی</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Thesis, controllers: MVC.Dashboard.Home.Name)" title="Thesis">
+                <a href="@Url.Action(MVC.Dashboard.Home.Thesis())">
+                    <span class="menu_icon"><i class="material-icons" style="color:#76ff03;">school</i></span>
+                    <span class="menu_title">پایان نامه ها</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Publication, controllers: MVC.Dashboard.Home.Name)" title="Publications">
+                <a href="@Url.Action(MVC.Dashboard.Home.Publication())">
+                    <span class="menu_icon"><i class="fa fa-book" style="color:#ff6e40;padding-right: 3px;"></i></span>
+                    <span class="menu_title">تدوین ها و تالیفات</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Honor, controllers: MVC.Dashboard.Home.Name)" title="Honors">
+                <a href="@Url.Action(MVC.Dashboard.Home.Honor())">
+                    <span class="menu_icon"><i class="material-icons" style="color:#ff1744;">card_giftcard</i></span>
+                    <span class="menu_title">جوایز و افتخارات</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Workshop, controllers: MVC.Dashboard.Home.Name)" title="Courses and Workshops">
+                <a href="@Url.Action(MVC.Dashboard.Home.Workshop())">
+                    <span class="menu_icon"><i class="fa fa-group" style="color:#7c4dff;padding-right: 3px;"></i></span>
+                    <span class="menu_title">دوره ها و کارگاه ها</span>
+                </a>
+            </li>
+        }
+        @if (isProfessor)
+        {
+            <li class="@Html.IsSelected(actions: MVC.Dashboard.Home.ActionNames.Language, controllers: MVC.Dashboard.Home.Name)" title="Languages">
+                <a href="@Url.Action(MVC.Dashboard.Home.Language())">
+                    <span class="menu_icon"><i class="fa fa-language" style="color:#97457a;padding-right: 3px;"></i></span>
+                    <span class="menu_title">زبان ها</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

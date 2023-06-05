@@ -1,0 +1,133 @@
+﻿@using ContentManagementSystem.Commons.Web
+@model IList<ContentManagementSystem.Models.ViewModels.ExternalResearchRecordViewModel>
+@if ((!Request.IsAjaxRequest()) && ViewContext.Controller.ControllerContext.IsChildAction)
+{
+<text><div class="uk-grid uk-margin-medium-top uk-margin-large-bottom section-in-mobile" data-uk-grid-margin="">
+        <div class="uk-width-1-1 uk-container uk-container-center">
+            <div class="icon-container" data-uk-tooltip="{pos:'top', cls:'fs-16p'}" title="مقالات خارجی">
+                <i class="fa fa-connectdevelop fa-35 yellow" style="padding-top: 25%;"></i>
+            </div>
+            <div class="md-card">
+                <div class="md-card-content pt-70">
+                    <h3 class="heading_c head uk-text-center uk-text-muted">مقالات چاپ شده در مجلات معتبر خارجی</h3>
+                    @if (Model.First().ExternalResearchLastUpdateTime != null)
+                    {
+                        <div class="uk-text-center mt-15">
+                            <span class="uk-badge persian-number" style="font-size: 1em; padding:5px 8px;">آخرین بروز رسانی: @Model.First().GetRelativeExternalResearchLastUpdateTime</span>
+                        </div>
+                    }
+                    <div class="uk-overflow-container pb-15 pt-30" data-loadmore-container>
+                        <ul class="professor-details-list" data-loadmore-result>
+                    </text>
+}
+                    @foreach (var externalResearch in Model)
+                    {
+                        <li>
+                            @if (!string.IsNullOrEmpty(externalResearch.Link))
+                            {
+                                //if (externalResearch.Title.ContainsFarsi())
+                                //{
+                                @*<a href="@honor.Link" target="_blank" rel="nofollow"><strong>@honor.Title</strong></a>@:&nbsp;&nbsp;<span class="persian-number">(@honor.FullTime)</span>*@
+                                <a href="@externalResearch.Link" target="_blank" rel="nofollow" class="uk-display-block"><strong>@externalResearch.Title</strong></a>
+                                //}
+                                //else
+                                //{
+                                //    <a dir="ltr" class="uk-text-right" href="@externalResearch.Link" target="_blank" rel="nofollow"><strong>@externalResearch.Title</strong></a>
+                                //}
+                            }
+                            else
+                            {
+                                //if (externalResearch.Title.ContainsFarsi())
+                                //{
+                                @*<strong>@(honor.Title)</strong>@:&nbsp;&nbsp;<span class="persian-number">(@honor.FullTime)</span>*@
+                                <strong class="uk-display-block">@(externalResearch.Title)</strong>
+                                            @*}
+                            else
+                            {
+                                <strong dir="ltr" class="uk-text-right">@(externalResearch.Title)</strong>
+                            }*@
+                            }
+                            @if (!string.IsNullOrEmpty(externalResearch.Doi))
+                            {
+                                if (externalResearch.Doi.StartsWith("10."))
+                                {
+                                    @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">شناسه دیجیتال:</span> <span class="direction-ltr display-inlineblock"><a href="http://dx.doi.org/@externalResearch.Doi" target="_blank" rel="nofollow">@externalResearch.Doi</a></span>
+                                }
+                                else
+                                {
+                                    @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">شناسه:</span> <span class="direction-ltr display-inlineblock">@externalResearch.Doi</span>
+                                }
+                            }
+                            @if (!string.IsNullOrEmpty(externalResearch.Authors))
+                            {
+                                @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">نویسندگان:</span> <span class="direction-ltr display-inlineblock">@externalResearch.Authors</span>
+                            }
+                            @if (!string.IsNullOrEmpty(externalResearch.Journal))
+                            {
+                                @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">ژورنال:</span> <span class="direction-ltr display-inlineblock">@externalResearch.Journal</span>
+                            }
+                            @if (!string.IsNullOrEmpty(externalResearch.Volume))
+                            {
+                                @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">ولوم:</span> <span class="persian-number">@externalResearch.Volume</span>
+                            }
+                            @if (!string.IsNullOrEmpty(externalResearch.Issue))
+                            {
+                                @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">شماره:</span> <span class="persian-number">@externalResearch.Issue</span>
+                            }
+                            @if (!string.IsNullOrEmpty(externalResearch.Pages))
+                            {
+                                @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">صفحات:</span> <span class="persian-number">@externalResearch.Pages</span>
+                            }
+                            @if (externalResearch.Year != null)
+                            {
+                                @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">سال:</span> <span class="persian-number">@externalResearch.Year</span>
+                            }
+                            @if (externalResearch.TimesCited != null)
+                            {
+                                @:&nbsp;&nbsp;<span class="black" style="border-bottom: 1px dotted #000;">تعداد دفعات ارجاع:</span> <span class="persian-number">@externalResearch.TimesCited</span>
+                            }
+                            @if (!string.IsNullOrEmpty(externalResearch.Filename))
+                            {
+                                @:&nbsp;&nbsp;<a class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" href="@Url.Action(MVC.Home.GetFile(type: 6, fileText: externalResearch.FileText))"><i class="material-icons">file_download</i> دریافت</a>
+                            }
+                            @if (!string.IsNullOrEmpty(externalResearch.Abstract) || !string.IsNullOrEmpty(externalResearch.Description))
+                            {
+                                <div class="uk-accordion mt-15" data-uk-accordion="{ showfirst: false }">
+                                    @if (!string.IsNullOrEmpty(externalResearch.Abstract)){
+                                        <h3 class="uk-accordion-title uk-accordion-title">چکیده</h3>
+                                        <div data-wrapper="true" style="height: 0px; position: relative; overflow: hidden;" aria-expanded="false">
+                                            <div class="uk-accordion-content">
+                                                <p class="uk-text-right direction-ltr">@Html.Raw(externalResearch.Abstract.Replace("\n", "<br />").Replace("\r\n", "<br />"))</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(externalResearch.Description))
+                                    {
+                                        <h3 class="uk-accordion-title uk-accordion-title">توضیحات</h3>
+                                        <div data-wrapper="true" style="height: 0px; position: relative; overflow: hidden;" aria-expanded="false">
+                                            <div class="uk-accordion-content">
+                                                <p>@Html.Raw(externalResearch.Description.Replace("\n", "<br />").Replace("\r\n", "<br />"))</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            @*@if (!string.IsNullOrEmpty(externalResearch.Description))
+                            {
+                                <blockquote class="uk-text-muted" style="border-left: none;">
+                                    <p>@Html.Raw(externalResearch.Description.Replace("\n", "<br />").Replace("\r\n", "<br />"))</p>
+                                </blockquote>
+                            }*@
+                        </li>
+                    }
+                    @if ((!Request.IsAjaxRequest()) && ViewContext.Controller.ControllerContext.IsChildAction)
+                    {
+                        @:</ul>
+                        @:<div class="uk-text-center"><a href="javascript:void(0)" style="width:150px;" class="md-btn md-btn-success md-btn-large waves-effect waves-button waves-light" data-loadmore-button data-list-url="@Url.RouteUrl("Profile", new { action = MVC.Profile.ActionNames.ExternalResearchs, id = (UrlParameter)null })" data-current-page="1">بیشتر</a></div>
+                        @:<div data-loadmore-loading class="uk-text-center" style="display:none;"><span class="uk-badge uk-badge-warning fs-16p" style="padding: 5px !important;">در حال بارگذاری ...</span></div>
+                    @:</div>
+                @:</div>
+            @:</div>
+        @:</div>
+    @:</div>
+}
